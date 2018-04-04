@@ -9,7 +9,8 @@ const express = require('express'),
       port = process.env.PORT || 3000,
       env = app.get('env');
 
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'),
+      UserModel = require('./data/user');
 
 const config = require('./config'),
       routers = require('./routers/routers');
@@ -83,7 +84,6 @@ if (config.server.staticFile) {
 dbConnection.then((res) => {
     console.log('Database connected.');
 
-    mongoose.model('User', require('./data/user'));
     app.locals.db = mongoose;
 
     app.listen(port, () => {
