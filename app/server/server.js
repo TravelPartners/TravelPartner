@@ -1,7 +1,8 @@
 'use strict'
 
 const fs = require('fs'),
-      helmet = require('helmet');
+      helmet = require('helmet'),
+      bodyParser = require('body-parser');
 
 const express = require('express'),
       app = express(),
@@ -10,7 +11,12 @@ const express = require('express'),
 
 const mongoose = require('mongoose');
 
-const config = require('./config');
+const config = require('./config'),
+      routers = require('./routers/routers');
+
+/**
+ *  Load database configuration.
+ */
 
 const database = ((config) => {
     let c = config.database[env];
@@ -27,6 +33,10 @@ const database = ((config) => {
     };
 })(config);
 
+/**
+ *  Connect to database and return a promise.
+ */
+
 const dbConnection = ((db) => {
     let userString = '';
     if (db.user != '' && db.pwd != '')
@@ -40,15 +50,28 @@ const dbConnection = ((db) => {
     return mongoose.connect(connection);
 })(database);
 
+/**
+ *  Load data models.
+ */
+
+
+
 console.log("--------------");
 
 app.use(helmet());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.use((req, res, next) => {
     console.log(req.headers);
     console.log(`New connection. IP:${req.ip} ${req.method} ${req.path}`);
     next();
 });
+
+/**
+ *  Load custom routers.
+ */
+app.use('/v1', routers);
 
 if (config.server.staticFile) {
     let path = config.server.staticPath;
@@ -60,7 +83,9 @@ if (config.server.staticFile) {
 dbConnection.then((res) => {
     console.log('Database connected.');
 
+    mongoose.model('User', require('./data/user'));
     app.locals.db = mongoose;
+
     app.listen(port, () => {
         console.log('Server is running. Listening port ' + port);
     });
