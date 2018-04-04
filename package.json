@@ -4,6 +4,9 @@
   "description": "Your travel assistant",
   "main": "index.js",
   "scripts": {
+    "initdevdb": "NODE_ENV=development node ./app/server/migration/initdb.js",
+    "inittestdb": "NODE_ENV=test node ./app/server/migration/initdb.js",
+    "initproddb": "NODE_ENV=production node ./app/server/migration/initdb.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "PORT=4000 gulp dev",
     "windev": "set PORT=4000 && gulp dev"
@@ -40,6 +43,7 @@
     "vueify": "^9.4.1"
   },
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "express": "^4.16.3",
     "express-validator": "^5.0.3",
