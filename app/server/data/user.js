@@ -1,10 +1,16 @@
 'use strict'
 
+const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const saltRounds = 10;
+
 let UserSchema = new Schema({
-    _id: Schema.Types.ObjectId,
+    _id: {
+        type: Schema.Types.ObjectId,
+        default: new mongoose.Types.ObjectId
+    },
     name: {
         type: String,
         index: true,
@@ -57,4 +63,21 @@ let UserSchema = new Schema({
     }
 });
 
-module.exports.userSchema = UserSchema;
+UserSchema.pre('save', async function (next) {
+    if (this.isModified('pwd')) {
+        let self = this;
+
+        await bcrypt.hash(this.pwd, saltRounds).then((hash) => {
+            self.pwd = hash;
+            next();
+        }, (err) => {
+            next(err);
+        });
+    } else {
+        next();
+    }
+});
+
+//let f = async function(pwd) { return await bcrypt.compare(pwd, this.pwd); };
+
+module.exports = mongoose.model('User', UserSchema);
