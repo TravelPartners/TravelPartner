@@ -10,7 +10,14 @@ const express = require('express'),
       env = app.get('env');
 
 const mongoose = require('mongoose'),
-      UserModel = require('./data/user');
+      AccommodationModel = require('./data/accommodation'),    // Model 'Acco'
+      EntertainmentModel = require('./data/entertainment'),    // Model 'Spot'
+      GuideModel = require('./data/guide'),                    // Model 'Guide'
+      UserModel = require('./data/user'),                      // Model 'User'
+      FoodModel = require('./data/food'),                      // Model 'Food'
+      CommentModel = require('./data/comment'),                // Model 'Comment'
+      TransportationModel = require('./data/transportation');  // Model 'Trans'
+
 
 const config = require('./config'),
       routers = require('./routers/routers');
