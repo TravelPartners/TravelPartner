@@ -16,7 +16,7 @@ export default {
   },
   data () {
     return {
-      message: 'Home Page'
+      message: 'Home Pageaaa'
     }
   }
 }
