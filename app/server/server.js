@@ -13,7 +13,8 @@ const mongoose = require('mongoose'),
       UserModel = require('./data/user');
 
 const config = require('./config'),
-      routers = require('./routers/routers');
+      routers = require('./routers/routers'),
+      token = require('./lib/token');
 
 /**
  *  Load database configuration.
@@ -69,6 +70,27 @@ app.use((req, res, next) => {
     next();
 });
 
+// !!!!!!!! Cannot prevent replay !!!!!!!!!
+
+app.use((req, res, next) => {
+    let tokenGet = req.get('Authorization');
+    if (tokenGet != undefined && tokenGet.search('Bearer ') === 0) {
+        tokenGet = tokenGet.substr(7);
+        token.check(tokenGet, '').then((decoded) => {
+            let iat = decoded.iat;
+            let exp = decoded.exp;
+            if (Date.now() + 1800000 < exp) return next();
+
+            return token.get(decoded.u).then((t) => {
+                res.set('Authorization', 'Bearer ' + t);
+                next();
+            }, next);
+        }, (err) => { next(); });
+    } else {
+        next();
+    }
+});
+
 /**
  *  Load custom routers.
  */
@@ -92,5 +114,5 @@ dbConnection.then((res) => {
 
 }, (err) => {
     console.log('Cannot connect to the database.');
-})
+});
 
