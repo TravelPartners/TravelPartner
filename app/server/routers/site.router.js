@@ -3,6 +3,8 @@
 const bcrypt = require('bcrypt');
 const router = require('express').Router();
 
+const token = require('../lib/token');
+
 //router.use((req, res, next) => { next(); });
 
 router.get('/info', (req, res, next) => {
@@ -34,11 +36,19 @@ router.post('/signin', (req, res, next) => {
         })
         .then((result) => {
             if (result == true) {
-                res.json({ "data": { "status": "ok" }});
+                return token.get(content.username).then((token) => {
+                    let res = { "data": { "status": "ok", "token": token }};
+                    return res;
+                });
             } else {
-                res.json({ "data": { "status": "fail", "msg": "Invalid username or password."}});
+                let res = { "data": { "status": "fail", "msg": "Invalid username or password."}};
+                return res;
             }
-        }, (err) => {
+        })
+        .then((response) => {
+            res.json(response);
+        })
+        .catch((err) => {
             res.sendStatus(500);
             console.log(err);
         });
@@ -47,4 +57,5 @@ router.post('/signin', (req, res, next) => {
 router.post('/logout', (req, res, next) => {
     
 });
+
 module.exports = router;
