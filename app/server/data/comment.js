@@ -8,35 +8,51 @@ let CommentSchema = new Schema({
       type: Schema.Types.ObjectId,
       default: new mongoose.Types.ObjectId
   },
-  userName: {
+
+  author: {
       type: String
       index: true
-      unique: true
       required: true
   },
+
+  commentBody:{
+       type:String
+       required:true
+  },
+
+  reply:{
+    type: [Schema.Types.ObjectId],
+  },
+
+  keyword:{
+      type:[String]
+  },
+
   votes: {
-      type: Number
+      type: [String]
       required: true
       default: 0
   },
+
   views: {
       type:Number
       required: true
       default:0
  },
- commentBody:{
-      type:String
-      required:true
- },
+
  created_at: {
      type: Date
      required:true
      default: Date.now
  },
- keyword:{
-     type:String
+
+ modified_at:{
+   type: Date
+   required:true
 
  },
+
+
 
 });
 
