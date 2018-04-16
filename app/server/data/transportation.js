@@ -9,11 +9,11 @@ let TransportationSchema = new Schema({
       default: new mongoose.Types.ObjectId
   },
   name: {
-      type: String
-      required: true
+      type: String,
+      required:true
   },
   img:[String],
-  desc: String
+  desc:String
 });
 //4 types ,subway lines
 
