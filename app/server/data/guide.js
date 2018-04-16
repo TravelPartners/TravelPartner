@@ -34,7 +34,7 @@ let GuideSchema = new Schema({
         default: Date.now
     },
     votes: {
-        type: Number,
+        type: [String],
         required: true
     },
     
