@@ -6,6 +6,9 @@ const router = require('express').Router();
 const token = require('../lib/token');
 
 //router.use((req, res, next) => { next(); });
+router.get('/', (req, res, next) => {
+    res.render('site/home');
+});
 
 router.get('/info', (req, res, next) => {
     res.json({ data: 456 });
