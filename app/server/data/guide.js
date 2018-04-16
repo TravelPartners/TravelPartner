@@ -25,19 +25,18 @@ let GuideSchema = new Schema({
         index: true,
         required: true
     },
-     created_at: {
+    created_at: {
         type: Date,
         default: Date.now
     },
-     updated_at: {
+    updated_at: {
         type: Date,
         default: Date.now
     },
     votes: {
         type: [String],
         required: true
-    },
-    
+    }
 });
 
 module.exports = mongoose.model('Guide', GuideSchema);
