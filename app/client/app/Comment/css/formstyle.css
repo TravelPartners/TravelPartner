@@ -58,8 +58,8 @@ nav{
     color:#5c8cd5;
 }
 .Comcontainer {
-    padding-right: 10px;
-    padding-left: 10px;
+    padding-right: 40px;
+    padding-left: 40px;
 
 }
 .text-info
@@ -72,6 +72,7 @@ table {
 }
 table tbody td{
    vertical-align: top;
+  
 }
 
 legend {
