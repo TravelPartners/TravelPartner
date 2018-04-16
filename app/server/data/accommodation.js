@@ -15,7 +15,7 @@ name: {
   },
 email: {
       type: String,
-      required:true;
+      required:true
 
  },
 phone: {
