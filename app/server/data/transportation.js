@@ -10,6 +10,7 @@ let TransportationSchema = new Schema({
   },
   name: {
       type: String
+      required: true
   },
   img:[String],
   desc: String

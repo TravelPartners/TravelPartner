@@ -15,16 +15,18 @@ let AccommodationSchema = new Schema({
   },
   email: {
       type: String,
+      required: true
   },
   phone: {
       type: String,
+      required: true
   },
   votes: {
        type: [String],
        required: true
    }
   img:[String],
-  numbers: [Number],    //price
+  numbers: {Number},    //price
   tags: [String],
   locations: [String]
 });
