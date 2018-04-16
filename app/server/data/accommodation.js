@@ -24,11 +24,14 @@ let AccommodationSchema = new Schema({
   votes: {
        type: [String],
        required: true
-   }
-  img:[String],
-  numbers: {Number},    //price
+   },
+  price:{
+     type:String,
+     required:true
+   },
+  img:[String],  //price
   tags: [String],
-  locations: [String]
+  locations: {String}
 });
 
 module.exports = mongoose.model('Acco', AccommodationSchema);
