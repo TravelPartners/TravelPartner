@@ -2,18 +2,29 @@
 
 const fs = require('fs'),
       helmet = require('helmet'),
-      bodyParser = require('body-parser');
+      bodyParser = require('body-parser'),
+      hbs = require('express-handlebars'),
+      path = require('path');
 
 const express = require('express'),
       app = express(),
       port = process.env.PORT || 3000,
-      env = app.get('env');
+      env = app.get('env'),
+      viewPath = path.join(__dirname, '../client/app/');
 
 const mongoose = require('mongoose'),
-      UserModel = require('./data/user');
+      AccommodationModel = require('./data/accommodation'),    // Model 'Acco'
+      EntertainmentModel = require('./data/entertainment'),    // Model 'Spot'
+      GuideModel = require('./data/guide'),                    // Model 'Guide'
+      UserModel = require('./data/user'),                      // Model 'User'
+      FoodModel = require('./data/food'),                      // Model 'Food'
+      CommentModel = require('./data/comment'),                // Model 'Comment'
+      TransportationModel = require('./data/transportation');  // Model 'Trans'
+
 
 const config = require('./config'),
-      routers = require('./routers/routers');
+      routers = require('./routers/routers'),
+      token = require('./lib/token');
 
 /**
  *  Load database configuration.
@@ -55,13 +66,22 @@ const dbConnection = ((db) => {
  *  Load data models.
  */
 
-
-
 console.log("--------------");
 
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.engine(
+    '.hbs',
+    hbs({
+        defaultLayout: 'index',
+        extname: '.hbs',
+        layoutsDir: `${viewPath}../layouts`,
+        partialsDir: `${viewPath}../partials`
+    }));
+app.set('view engine', '.hbs');
+app.set('views', viewPath);
 
 app.use((req, res, next) => {
     console.log(req.headers);
@@ -69,10 +89,32 @@ app.use((req, res, next) => {
     next();
 });
 
+// !!!!!!!! Cannot prevent replay !!!!!!!!!
+
+app.use((req, res, next) => {
+    let tokenGet = req.get('Authorization');
+    if (tokenGet != undefined && tokenGet.search('Bearer ') === 0) {
+        tokenGet = tokenGet.substr(7);
+        token.check(tokenGet, '').then((decoded) => {
+            let iat = decoded.iat;
+            let exp = decoded.exp;
+            if (Date.now() + 1800000 < exp) return next();
+
+            return token.get(decoded.u).then((t) => {
+                res.set('Authorization', 'Bearer ' + t);
+                next();
+            }, next);
+        }, (err) => { next(); });
+    } else {
+        next();
+    }
+});
+
 /**
  *  Load custom routers.
  */
-app.use('/v1', routers);
+// app.use('/v1', routers);
+app.use(routers);
 
 if (config.server.staticFile) {
     let path = config.server.staticPath;
@@ -92,5 +134,5 @@ dbConnection.then((res) => {
 
 }, (err) => {
     console.log('Cannot connect to the database.');
-})
+});
 

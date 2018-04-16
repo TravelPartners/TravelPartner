@@ -41,14 +41,54 @@ dbConnection.then((res) => {
         email: 'siteadmin@siteadmin.com'
     });
 
-    admin.save().then((user) => {
-        console.log('User added.');
-        //console.log(user);
-        mongoose.disconnect();
-    }, (err) => {
-        console.log(err);
+    let Guide = require('../data/guide');
+    let init_guid = new Guide({
+        title: 'First guide',
+        user: 'hyperadmin',
+        content: 'Test guide',
+        votes: []
     });
 
+    let Trans = require('../data/transportation');
+    let init_trans = new Trans({
+        name: 'Scene1',
+        desc: 'Test trans'
+    });
+
+    let Acco = require('../data/accommodation');
+    let init_acco = new Acco({
+        name: 'TestHotel',
+        email: 'test@testhotel.com',
+        phone: '(315)418-6030',
+        votes: [],
+        price: 100
+    });
+
+/*
+    (async () => {
+        try {
+            let user = await admin.save();
+            let guide = await init_guid.save();
+            let trans = await init_trans.save();
+            let acco = await init_acco.save();
+
+            console.log('Initial records added');
+        } catch (err) {
+            console.log(err);
+        } finally {
+            mongoose.disconnect();
+        }
+    })();
+*/
+
+    Promise.all([admin.save(), init_guid.save(), init_trans.save(), init_acco.save()])
+        .then((res) => {
+            console.log('Records added.');
+            mongoose.disconnect(); })
+        .catch((err) => {
+            console.log(err);
+            mongoose.disconnect();
+        });
 }, (err) => {
     console.log('Cannot connect to the database...');
-})
+});

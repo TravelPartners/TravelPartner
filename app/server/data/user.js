@@ -48,6 +48,11 @@ let UserSchema = new Schema({
         type: Date,
         default: Date.now
     },
+    msg: {
+        from: String,
+        created_at: Date,
+        content: String
+    },
     token : {
         s: {
             type: String,
