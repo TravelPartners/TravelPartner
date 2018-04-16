@@ -66,13 +66,18 @@ nav{
 {
     font-size:3;
 }
+.date{
+    text-indent: 40px;
+}
+
 table {  
    width: 90%;
    margin: 0 auto;
+   border:1;
 }
 table tbody td{
    vertical-align: top;
-  
+  border:void;
 }
 
 legend {

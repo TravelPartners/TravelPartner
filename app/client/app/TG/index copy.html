@@ -9,6 +9,7 @@
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/    font-awesome.min.css">
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Material+Icons">
         <link rel="stylesheet" href="css/formstyle.css" />
+            
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js"></script>
         
         <script src="//unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
@@ -47,56 +48,38 @@
         </nav>
         <div id ="TG">
         </div>
-        
-        </div>
         <div class="container">
-            <div style="background-image: url(newBos4.jpg)"， class="jumbotron" >
-                <h2 class="headCenterText"> Ball, Beers, and Boston! </h2>
-                <h4 class="headCenterText"> by Mkilburn9, Cold Lake, Canada</h4>
-            </div>
-            <p><em>This guide will hope you navigate through the many things to do in a great city. This trip will guide you through things to do, places to see, and places to eat. By no means, am I a travelling guide expert, but these are some great recommendations.</em></p><br>
-            <div style="float: left;"> Good for </div><div class="user"><code>History Buff</code>, <code>Foodie</code></div>
-            <p>2017-02-06</p>
-            
-            <table>
-                    <tr>
-                        <td rowspan="2">
-                            <img class="img-rounded" src="NewBos1.jpg" alt="Lights" style="float: left;width:135%;"></td>
-                        <td> <img class="img-rounded" src="NewBos5.jpg" alt="Lights" style=" float: right;width:70%;"></td>
-                    </tr>
-                    <tr>
-                        <td> <img class="img-rounded" src="NewBos6.jpg" alt="Lights" style="float: right;width:65%;"></td>
-                    </tr>
-                    
-            </table>
-            
-            <div>
-                    <div>
-                        <img class="img-rounded" src="NewBos1.jpg" alt="Lights">
-                    </div>
-                    <div>
-                        <div>
-                            <img class="img-rounded" src="NewBos5.jpg" alt="Lights">
-                        </div>
-                        <div>
-                            <img class="img-rounded" src="NewBos5.jpg" alt="Lights">
-                        </div>
-                    </div>
+            <div class="jumbotron">
+                <h1> TravelGuide</h1> <!-- <i class="fa fa-camera-retro"></i> -->
+                <p>A bunch of travel guides give useful recommendations for you!</p>
             </div>
             
-            <br>
             
-            
-            
-            <p class=" text-info" style="color:black;"><font size="3">The MFA is one of the first encyclopedic museums in the US to fully integrate performance art into its collection, exhibitions, and programs. Since the opening of the Linde Family Wing for Contemporary Art in 2011, the MFA has commissioned and presented dozens of performance artworks by international, national and local artists, including live works that unfold in the Museum’s galleries and engage with its collection, performances that form part of cross-media contemporary art exhibitions, and interventions that appear in unexpected spaces inside the Museum or outdoors. These foundational, artist-driven projects question the role of performance art in a museum environment and reframed visitor’s experiences of the MFA.</font> </p>
-        <p class=" text-info" style="color:black;"><font size="3">
-        More information and a chronological archive of past presentations can be accessed in the<a style="color:#2c3e50;"href="http://www.mfa.org/programs/series/performance-art" target="_blank"> Performance Art Archive.</font><br><br><br><br><br></p>
+        <h1 class="headText">Boston</h1><br><br>
         
+        <div>
+            {{#each guide}}
+            <div class="row">
+                <div class="col-xs-6 ">
+                    <img src={{guideImg}} alt="Lights" style="width:80%;">
+                        </div>
+                <div class="col-xs-6 ">
+                    <br><br><p class="paragraph text-info">{{title}}</p>
+                    <div style="float: left;">by</div><div class="user">{{username}}</div>
+                    <p>{{date}}</p>
+                    <div style="float: left;" class="text-info">Feature:</div><div>{{feature}}</div><br>
+                    <p><em>{{LimitedContent}}<a class="text-info" href={{moreContent}} target="_blank">view more.</em></a></p>
+                </div>
+            </div>
+            {{/each}}
         </div>
         
         
+        
+        <button onclick="window.location='file:///Users/xiaohanzhang/Desktop/syr2018spring/686/TP/TravelPartner/app/client/app/TG/Write.html '"  class="btn btn-success" >Write a Guide!</button>
         <button onclick="topFunction()" id="myBtn" type="button" class="btn btn-primary" style="position: fixed; bottom: 20px;
             right: 30px;">Top</button>
+         </div>
         <script>
             window.onscroll = function() {scrollFunction()};
             
@@ -112,7 +95,6 @@
                 document.body.scrollTop = 0;
                 document.documentElement.scrollTop = 0;
             }
-        
         
         </script>
         
