@@ -10,7 +10,8 @@ _id: {
  },
 name: {
      type: String,
-     index: true,
+    index: true,
+    unique: true,
      required: true
   },
 email: {
