@@ -14,23 +14,29 @@ let GuideSchema = new Schema({
         unique: true,
         required: true
     },
-    userName: {
+    user: {
         type: String,
         index: true,
-        unique: true,
         required: true
     },
     tags: [String],
     content: {
         type: String,
         index: true,
-        unique: true,
         required: true
     },
-    date: {
+     created_at: {
         type: Date,
         default: Date.now
-    }
+    },
+     updated_at: {
+        type: Date,
+        default: Date.now
+    },
+    votes: {
+        type: Number,
+        required: true
+    },
     
 });
 
