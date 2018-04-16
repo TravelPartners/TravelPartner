@@ -49,6 +49,23 @@ dbConnection.then((res) => {
         console.log(err);
     });
 
+    let Guide = require('../data/guide');
+    let init_guid = new Guide({
+        title: 'First guide',
+        user: 'hyperadmin',
+        content: 'Test guide',
+        votes: []
+    });
+
+    init_guid.save().then((guide) => {
+        console.log('Guide added.');
+        //console.log(user);
+        mongoose.disconnect();
+    }, (err) => {
+        console.log(err);
+    });
+
+
 }, (err) => {
     console.log('Cannot connect to the database...');
-})
+});

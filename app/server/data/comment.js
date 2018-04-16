@@ -10,59 +10,54 @@ let CommentSchema = new Schema({
   },
 
   title: {
-      type: String
+      type: String,
       required: true
 
   },
   author: {
-      type: String
-      index: true
+      type: String,
+      index: true,
       required: true
   },
 
   commentBody:{
-       type:String
-       required:true
+      type:String,
+      required:true
   },
 
   reply:[
     {
-      replier: String
-      replyBody: String
+      replier: String,
+      replyBody: String,
       replyTime: Date
     }
-  ]
-
+  ],
   keyword:{
       type:[String]
   },
 
   votes: {
-      type: [String]
+      type: [String],
       required: true
 
   },
-
   views: {
-      type:Number
-      required: true
+      type:Number,
+      required: true,
       default:0
  },
 
  created_at: {
-     type: Date
-     required:true
+     type: Date,
+     required:true,
      default: Date.now
  },
 
  modified_at:{
-   type: Date
-   required:true
-   default: Date.now
- },
-
-
-
+     type: Date,
+     required:true,
+     default: Date.now
+ }
 });
 
 module.exports = mongoose.model('Comment', CommentSchema);

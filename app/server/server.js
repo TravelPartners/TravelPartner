@@ -101,7 +101,8 @@ app.use((req, res, next) => {
 /**
  *  Load custom routers.
  */
-app.use('/v1', routers);
+// app.use('/v1', routers);
+app.use(routers);
 
 if (config.server.staticFile) {
     let path = config.server.staticPath;
