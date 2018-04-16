@@ -9,6 +9,11 @@ let CommentSchema = new Schema({
       default: new mongoose.Types.ObjectId
   },
 
+  title: {
+      type: String
+      required: true
+
+  },
   author: {
       type: String
       index: true
@@ -20,9 +25,13 @@ let CommentSchema = new Schema({
        required:true
   },
 
-  reply:{
-    type: [Schema.Types.ObjectId],
-  },
+  reply:[
+    {
+      replier: String
+      replyBody: String
+      replyTime: Date
+    }
+  ]
 
   keyword:{
       type:[String]
@@ -31,7 +40,7 @@ let CommentSchema = new Schema({
   votes: {
       type: [String]
       required: true
-      default: 0
+
   },
 
   views: {
@@ -49,7 +58,7 @@ let CommentSchema = new Schema({
  modified_at:{
    type: Date
    required:true
-
+   default: Date.now
  },
 
 
