@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const fs = require('fs'),
       helmet = require('helmet'),
@@ -19,7 +19,9 @@ const mongoose = require('mongoose'),
       UserModel = require('./data/user'),                      // Model 'User'
       FoodModel = require('./data/food'),                      // Model 'Food'
       CommentModel = require('./data/comment'),                // Model 'Comment'
-      TransportationModel = require('./data/transportation');  // Model 'Trans'
+      TransportationModel = require('./data/transportation'),  // Model 'Trans'
+      SiteModel = require('./data/site'),                      // Model 'Site'
+      LocationModel = require('./data/location');              // Model 'Place'
 
 
 const config = require('./config'),

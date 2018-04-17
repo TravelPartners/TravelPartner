@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const mongoose = require('mongoose');
 
@@ -48,7 +48,6 @@ dbConnection.then((res) => {
         content: 'Test guide',
         votes: []
     });
-
     let Trans = require('../data/transportation');
     let init_trans = new Trans({
         name: 'Scene1',
@@ -62,6 +61,31 @@ dbConnection.then((res) => {
         phone: '(315)418-6030',
         votes: [],
         price: 100
+    });
+
+    let Site = require('../data/site');
+    let init_site = new Site({
+        title: 'Travel Advisor',
+        keyword: 'travel advisor panorama'
+    });
+
+    let Location = require('../data/location');
+    let init_location = new Location({
+        name: 'Boston',
+        desc: '',
+        geo: {
+            text: 'MA USA',
+            lat: 42.358,
+            lng: -71.061
+        }
+    });
+
+    let Comment = require('../data/comment');
+    let init_comment = new Comment({
+        title: 'Test comment',
+        author: 'hyperadmin',
+        commentBody: 'Test comment content',
+        votes: []
     });
 
 /*
@@ -81,13 +105,13 @@ dbConnection.then((res) => {
     })();
 */
 
-    Promise.all([admin.save(), init_guid.save(), init_trans.save(), init_acco.save()])
+    Promise.all([admin.save(), init_guid.save(), init_trans.save(), init_acco.save(), init_site.save(), init_location.save(), init_comment.save()])
         .then((res) => {
             console.log('Records added.');
             mongoose.disconnect(); })
         .catch((err) => {
             console.log(err);
-            mongoose.disconnect();
+            //mongoose.disconnect();
         });
 }, (err) => {
     console.log('Cannot connect to the database...');

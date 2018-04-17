@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        
+        <meta charset="utf-8">
+        <title>TravelPartner</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/    font-awesome.min.css">
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Material+Icons">
+        <link rel="stylesheet" href="css/formstyle.css" />
+            
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js"></script>
+        
+        <script src="//unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
+        <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+        <script type="text/javascript" src="js/ErrorProcess.js"></script>
+        
+    </head>
+
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <!-- The hamburger on the right -->
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-nav-demo" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="#############" class="navbar-brand">TravelPartner</a>
+                </div>
+                
+                <div class="collapse navbar-collapse" id="bs-nav-demo">
+                    <ul class="nav navbar-nav">
+                        <li><a href="############">Guide</a></li>
+                        <li><a href="############">Food</a></li>
+                        <li><a href="############">Accomodation</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="############">Sign Up</a></li>
+                        <li><a href="############">Login</a></li>
+                    </ul>
+                </div>
+                
+            </div>
+        </nav>
+        <div id ="TG">
+        </div>
+        
+        </div>
+        <div class="container">
+            <div style="background-image: url(Gasson.jpg)"， class="jumbotron" >
+                <h2 class="headCenterText"> Write your own guides! </h2>
+                <h3 class="headCenterText"> Express your ideas and impacts</h3>
+            </div>
+            <h1 class="headText">Boston</h1>
+            <h2 class="headText">Write a travel guide</h2><br><br>
+            
+            <form method="get" action="" onsubmit="return validateForm()">
+                <input id="title" type="text" class="form-control required" placeholder="Please Input Travel Guide Title"><br>
+                <input id="user" type="text" class="form-control required" placeholder="Please Input Your User Name"><br>
+                <input id="date" type="text" class="form-control required" placeholder="Please Input Today's Date such as (2017-01-01)"><br>
+                <textarea id="content" class="form-control required" rows="20" placeholder="Please Input Your Travel Guide!"></textarea><br>
+                
+                <button id="TryToSubmit" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Submit</button><br><br>
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title">Confirm to submit</h4>
+                            </div>
+                                        
+                            <div class="modal-footer">
+                                <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+                                <button id="ConfirmSubmit" class="btn btn-primary" type="submit" >Submit</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div>
+                <div style="height:100px"></div>
+            </form>
+        </div>
+        
+        
+        <button onclick="topFunction()" id="myBtn" type="button" class="btn btn-primary" style="position: fixed; bottom: 20px;
+            right: 30px;">Top</button>
+        <script>
+            window.onscroll = function() {scrollFunction()};
+            
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById("myBtn").style.display = "block";
+                } else {
+                    document.getElementById("myBtn").style.display = "none";
+                }
+            }
+        
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+        
+        
+        </script>
+        
+        <script  type="text/JavaScript" src="index.js"></script>
+        <script type="text/javascript" src="/dist/js/TG.js"></script>
+        
+        <script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+</html>

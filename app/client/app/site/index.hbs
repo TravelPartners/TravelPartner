@@ -1,0 +1,41 @@
+<div>
+    <h1>
+        Index for site
+    </h1>
+    <div id="google-map" style="width:80%;height:400px;">
+    </div>
+
+    <!-- <iframe src="https://www.google.com/maps/embed?pb=!4v1523932571025!6m8!1m7!1sCAoSLEFGMVFpcE5ibVVMa0FfSzhYWXlocGZSY282UjBvTVV4MlVGMUR1R1BJNG5B!2m2!1d42.3583044!2d-71.0598753!3f240.35!4f-10.400000000000006!5f1.1924812503605784" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe> -->
+</div>
+
+<script type="text/javascript">
+ function initMap() {
+     var places = [];
+     var placesNames = [];
+     var markers = [];
+
+     /**
+      * places : Object Array
+      * Object inside places:
+      *   { name: xxx, geo: { lat:xxx, lng:xxx }}
+      */
+     {{#each places}}
+
+     places.push({ lat: {{ geo.lat }}, lng: {{ geo.lng }} });
+     placesNames.push("{{ name }}");
+
+     {{/each}}
+
+     var googleMap = new google.maps.Map(document.getElementById('google-map'), {
+         zoom: 4,
+         center: places[0]
+     });
+
+     for (var i = 0; i < places.length; ++i) {
+         markers.push(new google.maps.Marker({ position: places[i], map: googleMap}));
+     }
+ }
+</script>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAsmrS2NY9Ld9Yn4LAdgdH0hRxIIfI7AeI&callback=initMap" type="text/javascript"></script>
+
