@@ -42,6 +42,17 @@ nav{
     text-align:center;
     color:white
 }
+.like
+{
+    font-size:66px;
+    color:#ccc;
+    cursor:pointer;
+    
+}
+.cs
+{
+    color:#f00;
+}
 .paragraph{
     text-indent:0px;
     font-size:180%;

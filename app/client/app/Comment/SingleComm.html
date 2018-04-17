@@ -69,7 +69,8 @@
                 </tr>
                 <tr>
                     <td rowspan="2" style="text-align:center">
-                        <span class="glyphicon glyphicon-heart" style="font-size: 40px"></span>
+                       <!--   <span class="glyphicon glyphicon-heart" style="font-size: 40px"></span> -->
+                       <span class="like">&#10084;</span>
                         <h4>0</h4>
                       
                     </td>
@@ -122,7 +123,16 @@
         
         <button onclick="topFunction()" id="myBtn" type="button" class="btn btn-primary" style="position: fixed; bottom: 20px;
             right: 30px;">Top</button>
+        
+        <script typet="text/javascript" src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+        
         <script>
+            $(function () {
+              $(".like").click(function () {
+                               $(this).toggleClass('cs');
+                               })
+              })
+              
             window.onscroll = function() {scrollFunction()};
             
             function scrollFunction() {
