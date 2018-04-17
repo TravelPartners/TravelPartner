@@ -36,7 +36,16 @@ let GuideSchema = new Schema({
     votes: {
         type: [String],
         required: true
+    },
+    image: {
+    type: [String],
+    required: true
+    },
+    banner: {
+        type: String,
+        required: true
     }
+    
 });
 
 module.exports = mongoose.model('Guide', GuideSchema);
