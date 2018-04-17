@@ -20,7 +20,8 @@ var del = require('del');
 gulp.task('build:vue', () => {
     const files = {
         "index.js" : "app/client/index.js",
-        "site.js": "app/client/app/site/index.js"
+        "site.js": "app/client/app/site/index.js",
+        "food.js": "app/client/app/food/index.js"
     };
 
     for (let [dest, src] of Object.entries(files)) {
