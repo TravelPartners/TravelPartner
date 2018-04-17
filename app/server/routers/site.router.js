@@ -7,7 +7,33 @@ const token = require('../lib/token');
 
 //router.use((req, res, next) => { next(); });
 router.get('/', (req, res, next) => {
-    res.render('site/home');
+    let Site = req.app.locals.db.model('Site');
+    let Place = req.app.locals.db.model('Place');
+
+    Site.findOne()
+        .exec()
+        .then((site) => {
+            let locations = site.locations;
+
+            return Place.find({ '_id': { $in: locations }})
+                .then((places) => {
+                    let ret = [];
+                    for (let place of places) {
+                        ret.push({
+                            name: place.name,
+                            geo: place.geo
+                        });
+                    }
+                    return ret;
+                });
+        }).then((places) => {
+            console.log(places);
+            res.render('site/index', { places: places });
+        })
+        .catch((err) => {
+            console.log(err);
+            res.sendStatus(500);
+        });
 });
 
 router.get('/info', (req, res, next) => {
