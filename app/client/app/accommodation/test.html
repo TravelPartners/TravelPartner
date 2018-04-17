@@ -72,54 +72,68 @@
 <!--top 4 hotel-->
 <div class="well">
         <div class="row">
+          {{#each TopHotel}}  怎么知道我是要哪些？位置正确？
                         <div class=" col-sm-3  headText">
                 <a href="http://127.0.0.1/xiximage/view/61" class="thumbnail">
-                    <img src="https://media-cdn.tripadvisor.com/media/photo-p/0b/c4/3a/75/fairmont-copley-plaza.jpg" style="height: 220px;">
+                    <!--<img src="https://media-cdn.tripadvisor.com/media/photo-p/0b/c4/3a/75/fairmont-copley-plaza.jpg" style="height: 220px;">-->
+                    <img src="{{image_source}}">
                     </a>
-                    <h5>Top 1!&nbsp;Fairmont Copley Plaza, Boston</h5>
+                    <!--<h5>Top 1!&nbsp;Fairmont Copley Plaza, Boston</h5>-->
+                    <h5>Top 1!&nbsp;{{name}}</h5>
+
                     <div class="text-muted">Boston, MA</div>
+                    <div class="text-muted">{{address}}</div>
                 </div>
+
                         <div class=" col-sm-3  headText">
                 <a href="http://127.0.0.1/xiximage/view/43" class="thumbnail">
-                    <img src="https://media-cdn.tripadvisor.com/media/photo-s/11/37/85/7e/seaport-boston-hotel.jpg"  style="height: 220px;">
+                    <!--<img src="https://media-cdn.tripadvisor.com/media/photo-s/11/37/85/7e/seaport-boston-hotel.jpg"  style="height: 220px;">-->
+										<img src="{{image_source}}">
                     </a>
-                    <h5>Top 2!&nbsp;Seaport Boston Hotel</h5>
-                    <div class="text-muted">Boston, MA</div>
+                    <!--<h5>Top 2!&nbsp;Seaport Boston Hotel</h5>-->
+										<h5>Top 2!&nbsp;{{name}}</h5>
+                    <!--<div class="text-muted">Boston, MA</div>-->
+										<div class="text-muted">{{address}}</div>
                 </div>
                         <div class=" col-sm-3  headText">
                 <a href="http://127.0.0.1/xiximage/view/27" class="thumbnail">
-                    <img src="https://media-cdn.tripadvisor.com/media/photo-s/0f/0d/1a/07/exterior.jpg"  style="height: 220px;">
+                    <img src="{{image_source}}">
                     </a>
-                    <h5>Top 3!&nbsp;The Boxer Boston</h5>
+                    <h5>Top 3!&nbsp;{{name}}</h5>
                     <div class="text-muted">Boston, MA</div>
                 </div>
                 <div class=" col-sm-3  headText">
                 <a href="http://127.0.0.1/xiximage/view/27" class="thumbnail">
-                    <img src="https://media-cdn.tripadvisor.com/media/photo-s/0a/d3/aa/48/executive-room.jpg"  style="height: 220px;">
+                    <img src="{{image_source}}">
                     </a>
-                    <h5>Top4!&nbsp;The Langham, Boston</h5>
-                    <div class="text-muted">Boston, MA</div>
+                    <h5>Top 4!&nbsp;{{name}}</h5>
+                    <div class="text-muted">{{address}}</div>
         </div>
+          {{/each}}
                 </div>
                     </div>
 </br>
 </br>
 	<!-- Cheap hotel-->
-
+我是需要价格低于xxx的酒店
 	<div>
 		<h2>&nbsp;&nbsp;&nbsp;Cheap Hotel</h2>
 	</div>
 </br>
 	<div class="container">
 	<div class="row">
+    {{#each CheapHotel}}
 	  <div class="col-xs-3" >
 	    <a href="#" class="thumbnail">
 	      <img src="https://media-cdn.tripadvisor.com/media/photo-s/0d/ce/95/dc/americas-best-value-inn.jpg" style="height: 180px" alt="Charles River Inn">
+        <img src="{{image_source}}">
 	    </a>
 
 	<div class="caption">
           <h5>Charles River Inn</h5>
+          <h5>{{name}}</h5>
 	        <div class="text-muted">Boston, MA</div>
+          <div class="text-muted">{{address}}</div>
 	        <br>
 	      </div>
 	  </div>
@@ -158,6 +172,7 @@
 
 	    </div>
 	  </div>
+    {{/each}}
 	</div>
 	</div>
 
