@@ -2,12 +2,15 @@
 
 const fs = require('fs'),
       helmet = require('helmet'),
-      bodyParser = require('body-parser');
+      bodyParser = require('body-parser'),
+      hbs = require('express-handlebars'),
+      path = require('path');
 
 const express = require('express'),
       app = express(),
       port = process.env.PORT || 3000,
-      env = app.get('env');
+      env = app.get('env'),
+      viewPath = path.join(__dirname, '../client/app/');
 
 const mongoose = require('mongoose'),
       AccommodationModel = require('./data/accommodation'),    // Model 'Acco'
@@ -63,13 +66,22 @@ const dbConnection = ((db) => {
  *  Load data models.
  */
 
-
-
 console.log("--------------");
 
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.engine(
+    '.hbs',
+    hbs({
+        defaultLayout: 'index',
+        extname: '.hbs',
+        layoutsDir: `${viewPath}../layouts`,
+        partialsDir: `${viewPath}../partials`
+    }));
+app.set('view engine', '.hbs');
+app.set('views', viewPath);
 
 app.use((req, res, next) => {
     console.log(req.headers);
