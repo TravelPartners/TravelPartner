@@ -11,4 +11,8 @@ router.use('/f', require('./food.router'));
 router.use('/g', require('./guide.router'));
 router.use('/t', require('./transportation.router'));
 
+router.all('/', (req, res) => {
+    res.redirect('/s');
+});
+
 module.exports = router;
