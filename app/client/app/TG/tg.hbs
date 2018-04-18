@@ -40,18 +40,18 @@
         {{#each guide}}
         <div class="row">
             <div class="col-xs-6 ">
-                <img src={{guideImg}} alt="Lights" style="width:80%;">
+                <img src="{{image}}" alt="Lights" style="width:80%;">
                     </div>
             <div class="col-xs-6 ">
                 <br><br><p class="paragraph text-info">{{title}}</p>
-                <div style="float: left;">by</div><div class="user">{{username}}</div>
-                <p>{{date}}</p>
+                <div style="float: left;">by</div><div class="user">{{user}}</div>
+                <p>{{updated_at}}</p>
                 <div style="float: left;" class="text-info">Feature:</div>
                 {{#each tags}}
-                <div>{{tag}}</div>
+                <div>{{this}}</div>
                 {{/each}}
                 <br>
-                <p><em>{{LimitedContent}}<a class="text-info" href={{moreContent}} target="_blank">view more.</em></a></p>
+                <p><em>{{summary}}<a class="text-info" href={{url}} target="_blank">view more.</em></a></p>
             </div>
         </div>
         {{/each}}
