@@ -34,8 +34,9 @@ let GuideSchema = new Schema({
         default: Date.now
     },
     votes: {
-        type: [String],
+        type: Number,
         required: true
+        // defalut: [0];
     },
     image: {
     type: [String],
@@ -43,7 +44,6 @@ let GuideSchema = new Schema({
     },
     banner: {
         type: String,
-        required: true
     }
     
 });
