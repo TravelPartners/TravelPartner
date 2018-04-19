@@ -29,7 +29,7 @@ router.get("/",function(req, res, next) {
      		}
 
             res.render("TG/tg", { guide: ret });
-            
+
         }
     })
 })
@@ -68,12 +68,15 @@ router.get('/:title', function(req, res, next) {
     let Guide = req.app.locals.db.model('Guide');
     let title = req.params.title.split("-").join(" ");
 
-    Guide.find({"title": title}, function(err, result){
+
+    Guide.find({"title": title}, function(err, results){
         if(err){
             console.log(err);
         }else{
             // res.render(title.handlebar);
-            console.log(result);
+            //console.log(result);
+            console.log(1237);
+            let result = results[0];
             let ret = {
                 title: result.title,
                 user: result.user,
@@ -81,9 +84,10 @@ router.get('/:title', function(req, res, next) {
                 content: result.content,
                 updated_at: result.updated_at,
                 image: result.image,
-                banner: result.image[0],
-                url: '/g/' + result.title.split(' ').join('-')
+                banner: result.image
+                //url: '/g/' + result.title.split(' ').join('-')
             }
+            //console.log(result.title);
             res.render("TG/specificGuide", {guide: ret});
         }
 

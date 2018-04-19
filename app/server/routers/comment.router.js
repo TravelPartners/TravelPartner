@@ -22,11 +22,11 @@ router.get("/",function(req, res, next) {
      				commentBody: result.commentBody,
      				//reply: result.reply,
      				keyword: result.keyword,
-     				url: '/c/' + result.title.split(' ').join('-'),
+     		//		url: '/c/' + result.title.split(' ').join('-'),
      				modified_at: result.modified_at,
             votes: result.votes.length,
             views: result.views
-     			}  
+     			}
         )
      		}
             res.render("Comment/comm", { comment: ret });
