@@ -86,7 +86,7 @@ app.set('view engine', '.hbs');
 app.set('views', viewPath);
 
 app.use((req, res, next) => {
-    //console.log(req.headers);
+    // console.log(req.headers);
     console.log(`New connection. IP:${req.ip} ${req.method} ${req.path}`);
     next();
 });
