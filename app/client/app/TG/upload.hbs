@@ -37,28 +37,13 @@
 <h1 class="headText">Boston</h1>
 <h2 class="headText">Write a travel guide</h2><br><br>
 
-<form method="get" action="" onsubmit="return validateForm()">
+<!--<form method="get" action="" onsubmit="return validateForm()",action 是submit之后跳转的页面的URL>-->
+<form method="post" action="" onsubmit="return validateForm()" id="guideForm">
 <input id="title" type="text" class="form-control required" placeholder="Please Input Travel Guide Title"><br>
-<input id="user" type="text" class="form-control required" placeholder="Please Input Your User Name"><br>
-<input id="date" type="text" class="form-control required" placeholder="Please Input Today's Date such as (2017-01-01)"><br>
 <textarea id="content" class="form-control required" rows="20" placeholder="Please Input Your Travel Guide!"></textarea><br>
 
-<button id="TryToSubmit" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Submit</button><br><br>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-<div class="modal-dialog">
-<div class="modal-content">
-<div class="modal-header">
-<button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-<h4 class="modal-title">Confirm to submit</h4>
-</div>
+<button id="TrySubmit" type="submit" class="btn btn-primary">Submit</button><br><br>
 
-<div class="modal-footer">
-<button data-dismiss="modal" class="btn btn-default" type="button">Cancle</button>
-<button id="ConfirmSubmit" class="btn btn-primary" type="submit" >Submit</button>
-</div>
-</div><!-- /.modal-content -->
-</div><!-- /.modal-dialog -->
-</div>
 <div style="height:100px"></div>
 </form>
 </div>
@@ -81,6 +66,32 @@ function topFunction() {
 document.body.scrollTop = 0;
 document.documentElement.scrollTop = 0;
 }
+
+$('#TrySubmit')
+.click(function(){
+if (!validateForm()) {
+return false;
+}
+
+var title = $('#guideForm #title').val();
+var content = $('#guideForm #content').val();
+axios.post('/g/new', {
+title: title,
+content: content
+}).then(function (response) {
+console.log(response);
+if (response.status == 'fail') {
+
+} else {
+location.href(response.xxxx);
+}
+})
+.catch(function (error) {
+console.log(error);
+});
+console.log(title);
+return false;
+});
 
 
 </script>

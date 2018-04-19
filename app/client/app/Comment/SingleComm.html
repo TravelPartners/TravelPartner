@@ -99,10 +99,12 @@
             </div>
         </div>
         <br><br><h4><em>Please write a comment!</em></h4>
-        <div class="row" style="background-color:white;">
-            <div class="col-sm-12" ><textarea id="content" class="form-control required" rows="2" placeholder="Please Input Your Travel Guide!"></textarea><br></div>
-            <div class="col-sm-1" ><button  id="post" type="button" class="btn btn-primary" >Post</button></div>
-        </div>
+        
+        <form method="post" action="" id="commentForm">
+            <div class="col-sm-12" ><textarea id="content" class="form-control" rows="2" placeholder="Please Input Your Comment!"></textarea><br></div>
+        </form>
+        <div class="col-sm-1" ><button  id="post" type="submit" class="btn btn-primary" >Post</button></div>
+        
         <br><br>
         </div><br><br>
         
@@ -135,7 +137,32 @@
                 document.documentElement.scrollTop = 0;
             }
         
-        
+        $('#post')
+        .click(function(){
+               if (!validateForm()) {
+               return false;
+               }
+               
+               
+               var content = $('#commentForm #content').val();
+               axios.post('/g/new', {
+                          title: title,
+                          content: content
+                          }).then(function (response) {
+                                  console.log(response);
+                                  if (response.status == 'fail') {
+                                  
+                                  } else {
+                                  location.href(response.xxxx);
+                                  }
+                                  })
+               .catch(function (error) {
+                      console.log(error);
+                      });
+               console.log(title);
+               return false;
+               });
+               
         </script>
         
         <script  type="text/JavaScript" src="index.js"></script>
