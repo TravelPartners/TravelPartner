@@ -1,8 +1,41 @@
 'use strict'
 
 const router = require('express').Router();
-//---------------------------------------------------------------------
-router.get("/comment/: title",function(req, res, next) {
+
+router.get("/",function(req, res, next) {
+    let COMMENT = req.app.locals.db.model('Comment');
+    let summary = [];
+    COMMENT.find({}, function(err, allResult){
+        if(err){
+            console.log(err);
+        }else{
+            // res.render(title.handlebar);
+            console.log(allResult);
+            // Store a brief summary in summary
+     		let ret = [];
+     		for (let result of allResult) {
+     			console.log(summary);
+     			ret.push(
+            {
+     				title: result.title,
+     				author: result.author,
+     				commentBody: result.commentBody,
+     				//reply: result.reply,
+     				keyword: result.keyword,
+     				url: '/c/' + result.title.split(' ').join('-'),
+     				modified_at: result.modified_at,
+            votes: result.votes.length,
+            views: result.views
+     			}
+        )
+     		}
+            res.render("Comment/comm", { comment: ret });
+        }
+    })
+});
+
+
+router.get("/: title",function(req, res, next) {
     let COMMENT = req.app.locals.db.model('Comment');
 
     let title = req.params.title.split('-');
@@ -44,7 +77,7 @@ router.post("/newComment", function(req, res, next){
 	let commentBody = req.body.commentBody;
 	let keyword = req.body.keyword;
   let votes = req.body.votes;
-  let view: req.body.views;
+  let view= req.body.views;
   let modified_at = req.body.modified_at;
 	let Comment1 = {title: title, author: author, commentBody: commentBody, keyword:keyword, votes:votes, view:view, modified_at:modified_at};
 	// Create a new Guide to the DB
