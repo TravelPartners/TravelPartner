@@ -34,9 +34,9 @@ let GuideSchema = new Schema({
         default: Date.now
     },
     votes: {
-        type: Number,
-        required: true
-        // defalut: [0];
+        type: [String],
+        required: true, 
+        default: []
     },
     image: {
     type: [String],
