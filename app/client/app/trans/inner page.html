@@ -2,11 +2,8 @@
 <html>
 <head>
 	<title>Entertainment Main Page</title>
-<!--
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/	font-awesome.min.css">
--->
-<link rel="stylesheet" href=food.css>
+
+<link rel="stylesheet" href=trans.css>
   	<style type="text/css">
     body { padding-top: 70px; }
     .jumbotron {
@@ -74,10 +71,9 @@
 
 			<br/>
 			<br/>
-			{{Charles River Inn}}<!--对象为具体酒店名字还是酒店对象？-->
-			<h2> &nbsp;&nbsp;&nbsp;{{name}}</h2>
-			<div class="text-muted ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Addr:{{address}}&nbsp;&nbsp;Tel:{{Tel}}
-				&nbsp;&nbsp;Price:{{price}}
+			<h2> &nbsp;&nbsp;&nbsp;Charles River Inn</h2>
+			<div class="text-muted ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Addr:Rowes Wharf, Boston, MA 02110-3300&nbsp;&nbsp;Tel:+1 617-783-1212
+				&nbsp;&nbsp;Price:$$$$
 				</div>
 			<br/>
 			<br/>
@@ -99,6 +95,7 @@
 				           margin: 1px;
 				           width: 400px;
 				           height: 218px;
+
 				         }
 
 				           .flex-container img:first-child
@@ -107,26 +104,97 @@
 										 width:800px;
 				           }
 				   </style>
-
+<!--
  <center>
 					 <div style="text-align: center">
 				   <section class="flex-container headText">
+						 <a href="#">
+				  	 <img src="A.jpg">
+</a>
 
-				  	 <img src="{{img_source_1}}">
-
-						 <img src="{{img_source_2}}">
+						 <img src="B.jpg">
 
 
-						 <img src="{{img_source_3}}" >
+						 <img src="C.jpg" >
 
 				   </section>
 				 </div>
  </center>
- </div>
-<h2>Description</h2>
- <p>{{description}}</p>
-{{/Charles River Inn}}
+-->
 
+<style>
+      .flex-container
+      {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+				height: 440px;
+				width: 660px;
+      }
+
+        .flex-container section
+        {
+          box-sizing: border-box;
+          padding: 1px;
+          margin: 1px;
+					width: 300px;
+					height: 218px;
+
+        }
+
+          .flex-container section:first-child
+          {
+						height: 438px;
+						width:860px;
+          }
+  </style>
+</head>
+<body>
+  <section class="flex-container">
+    <section style="background-image: url(A.jpg);background-size:100%,100%;" class="jumbotron "><a href="#">More</a></section>
+		<section style="background-image: url(B.jpg);background-size:100%,100%;" class="jumbotron "><a href="#">More</a></section>
+	  <section style="background-image: url(C.jpg);background-size:100%,100%;" class="jumbotron "><a href="#">More</a></section>
+
+
+  </section>
+
+</body>
+<!--
+<br/>
+<br/>
+<div class="row">
+  <div class="item col-1 row-2"><a href="#">
+	<img src="A.jpg">
+</a></div>
+
+  <div class="item col-1 row-1">C</div>
+</div>
+<div class="row">
+
+  <div class="item col-1 row-1">E</div>
+</div>
+
+
+
+<h2> &nbsp;&nbsp;&nbsp;Charles River Inn</h2>
+<div class="text-muted ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Addr:Rowes Wharf, Boston, MA 02110-3300&nbsp;&nbsp;Tel:+1 617-783-1212
+	&nbsp;&nbsp;Price:$$$$
+	</div>
+<br/>
+<br/>
+<img src = "images/charles river inn.jpg" class="img-thumbnail" >
+
+<table>
+										<tr>
+												<td rowspan="2">
+														<img class="img-rounded" src="A.jpg" alt="Lights" style="float: left;"></td>
+												<td> <img class="img-rounded" src="B.jpg" alt="Lights" style=" float: right;"></td>
+										</tr>
+										<tr>
+												<td> <img class="img-rounded" src="C.jpg" alt="Lights" style="float: right;"></td>
+										</tr>
+
+						</table>-->
 <!-- Top function-->
 <button onclick="topFunction()" id="myBtn" type="button" class="btn btn-primary" style="position: fixed; bottom: 20px;
             right: 30px;">Top</button>
