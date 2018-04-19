@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Entertainment Main Page</title>
+<link rel="stylesheet" href=food.css>
+
+
+  	<style type="text/css">
+    body { padding-top: 70px; }
+    .jumbotron {
+      color: #fffffe;
+      background: #ecf0f1;
+
+    }
+    .navbar-inverse {
+      background: #2c3e50;  /*darkblue:  ; light orange:rgb(220, 70, 0), #dc4600*/
+      color: white;
+    }
+    .navbar-inverse .navbar-brand, .navbar-inverse a{
+      color:white;
+    }
+    .navbar-inverse .navbar-nav>li>a {
+      color: white;
+    }
+
+    nav{
+    	border: none;
+    }
+
+  </style>
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<!-- The hamburger on the right -->
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-nav-demo" aria-expanded="false">
+	        	<span class="sr-only">Toggle navigation</span>
+	       		<span class="icon-bar"></span>
+	        	<span class="icon-bar"></span>
+	        	<span class="icon-bar"></span>
+	      		</button>
+	      		<a href="#############" class="navbar-brand">TravelPartner</a>
+			</div>
+
+			<div class="collapse navbar-collapse" id="bs-nav-demo">
+				<ul class="nav navbar-nav">
+					<li><a href="############">Guide</a></li>
+					<li><a href="############">Food</a></li>
+					<li><a href="############">Accomodation</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="############">Sign Up</a></li>
+					<li><a href="############">Login</a></li>
+				</ul>
+			</div>
+
+
+		</div>
+	</nav>
+	<div style="text-align:center" class="container">
+		 <div style="background-image: url(images/transportbackground.jpg)"， class="jumbotron" >
+   			<h2>   Finding the way to the right place! </h2> <!-- <i class="fa fa-camera-retro"></i> -->
+   			<p> Local Map Recommendation and the transportation!</p>
+  		 </div>
+
+
+<div style="text-align:center" >
+  <h2>Local Map</h2>
+   <img src="images/bostonmap2.jpg" >
+</div>
+
+
+<br/>
+<br/>
+<div style="text-align:center" class="container">
+   <div style="background-image: url(images/flightbackground2.jpg)"， class="jumbotron" >
+      <h2>   Want to know how to get to the attraction? </h2> <!-- <i class="fa fa-camera-retro"></i> -->
+     </div>
+</div>
+
+	<!-- Dinner-->
+
+	<div>
+		<h2>Ways to go to different attractions</h2>
+	</div>
+</br>
+
+
+	<div class="container">
+	<div class="row">
+		{{#each attraction}}
+	  <div class="col-xs-3 " >
+	    <a href="{{url}}" class="thumbnail">
+
+	      <img src="{{img_source}}" >
+	    </a>
+
+	<div class="caption">
+	        <h5>{{name}}</h5>
+						<div class="text-muted">{{address}}</div>
+	        <br>
+	      </div>
+	  </div>
+	  {{/each}}
+	</div>
+	</div>
+</br>
+</br>
+
+<h3>Airline Review</h3>
+</br>
+  <div class="container">
+  <div class="row">
+    <div class="col-xs-3 " >
+      <a href="#" class="thumbnail">
+
+        <img src="https://media-cdn.tripadvisor.com/media/photo-o/0e/cd/51/76/american-airlines.jpg" >
+      </a>
+
+  <div class="caption">
+          <h5>American Airline</h5>
+          <div class="item tags">Boston, America</div>
+          <br>
+
+        </div>
+    </div>
+    <div class="col-xs-3 ">
+      <a href="#" class="thumbnail">
+        <img src="https://media-cdn.tripadvisor.com/media/photo-o/0e/cd/51/aa/delta-air-lines.jpg">
+      </a>
+  <div class="caption">
+    <h5>Delta Air Lines</h5>
+  <div class="text-muted">Boston, America</div>
+  <br>
+      </div>
+    </div>
+    <div class="col-xs-3 ">
+      <a href="#" class="thumbnail">
+
+  <img src="https://media-cdn.tripadvisor.com/media/photo-o/0e/cd/52/6b/united-airlines.jpg" >
+      </a>
+  <div class="caption">
+  <h5>United Airlines</h5>
+  <div class="text-muted">Boston, America</div>
+  <br>
+
+      </div>
+    </div>
+    <div class="col-xs-3 ">
+      <a href="#" class="thumbnail">
+
+        <img src="https://media-cdn.tripadvisor.com/media/photo-o/0e/cd/51/e3/jetblue-airways.jpg">
+      </a>
+  <div class="caption">
+  <h5>JetBlue</h5>
+  <div class="text-muted">Boston, America</div>
+  <br>
+
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+<style>
+img{
+  width:300px;
+
+}
+div.col-xs-3{
+text-align:center;
+}
+</style>
+
+<!-- Top function-->
+<button onclick="topFunction()" id="myBtn" type="button" class="btn btn-primary" style="position: fixed; bottom: 20px;
+            right: 30px;">Top</button>
+
+<script>
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20)
+{
+		document.getElementById("myBtn").style.display = "block";
+}
+		else {
+		document.getElementById("myBtn").style.display = "none";
+				 }
+}
+
+function topFunction() {
+		 document.body.scrollTop = 0;
+		 document.documentElement.scrollTop = 0;
+						            }
+</script>
+
+<script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

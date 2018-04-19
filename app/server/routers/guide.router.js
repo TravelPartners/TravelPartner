@@ -23,7 +23,8 @@ router.get("/",function(req, res, next) {
      				tags: result.tags,
      				summary: result.content.substr(0,20),
      				url: '/g/' + result.title.split(' ').join('-'),
-     				updated_at: result.updated_at
+     				updated_at: result.updated_at,
+     				create: '/g/' + '/create'
      			})
 
      		}
@@ -47,9 +48,9 @@ router.post("/new", function(req, res, next){
 			console.log(err);
 			res.json({
 			    status: 'error',
-			 //   err: [
-			 //     { name: xxx, msg: xxx },    
-			 //   ]
+			    err: [
+			      { name: "repeat title", msg: "200" },    
+			    ]
 			});
 		}else{
 		    //let ret = {};
@@ -72,8 +73,19 @@ router.get('/:title', function(req, res, next) {
         }else{
             // res.render(title.handlebar);
             console.log(result);
+            let ret = {
+                title: result.title,
+                user: result.user,
+                tags: result.tags,
+                content: result.content,
+                updated_at: result.updated_at,
+                image: result.image,
+                banner: result.image[0],
+                url: '/g/' + result.title.split(' ').join('-')
+            }
+            res.render("TG/specificGuide", {guide: ret});
         }
-        res.render("TG/specificGuide", {result: result});
+        
     })
     
     // console.log(location);
