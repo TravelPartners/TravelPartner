@@ -32,22 +32,23 @@
 
 </div>
 <div class="container">
-  
-{{#each guide}}
-<div style="background-image: url(newBos4.jpg)"， class="jumbotron" >
-  <h2 class="headCenterText"> {{title}} </h2>
-  <h4 class="headCenterText"> by {{username}}</h4>
+
+
+{{#with guide}}
+<div class="jumbotron" >
+ <h2 class="headCenterText"> {{title}} </h2>
+  <h4 class="headCenterText"> by {{user}}</h4>
 </div>
 
 <div style="float: left;"> Feature</div>
 <div class="user">
   {{#each tags}}
-  <div>{{this}}</div>
+  <code style="color:#5c8cd5">{{this}}</code>
   {{/each}}
 </div>
-<p>{{date}}</p>
-<p>{{content}}</p>
-{{/each}}
+<p>{{updated_at}}</p>
+<p style="font-size:19px">{{content}}</p>
+{{/with}}
 
 </div>
 
@@ -72,8 +73,7 @@ document.documentElement.scrollTop = 0;
 
 </script>
 
-<script  type="text/JavaScript" src="index.js"></script>
-<script type="text/javascript" src="/dist/js/TG.js"></script>
+
 
 <script src="http://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
