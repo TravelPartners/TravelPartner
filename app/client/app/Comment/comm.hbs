@@ -30,42 +30,49 @@
 </div>
 <div class="container">
     <div class="jumbotron">
-        <h1> TravelGuide</h1> <!-- <i class="fa fa-camera-retro"></i> -->
+        <h1> Comments</h1> <!-- <i class="fa fa-camera-retro"></i> -->
         <p>A bunch of travel guides give useful recommendations for you!</p>
     </div>
 
 
-    <h1 class="headText">Boston</h1><br><br>
 
-    <div>
-        {{#each guide}}
-        <div class="row">
-            <div class="col-xs-6 ">
-                <img src="{{image}}" alt="Lights" style="width:80%;">
-                    </div>
-            <div class="col-xs-6 ">
-                <br><br><p class="paragraph text-info">{{title}}</p>
-                <div style="float: left;">by</div><div class="user">{{user}}</div>
-                <p>{{updated_at}}</p>
-                <div style="float: left;" class="text-info">Feature:</div>
-                {{#each tags}}
-                <div>{{this}}</div>
-                {{/each}}
-                <br>
-                <p><em>{{summary}}<a class="text-info" href={{url}} target="_blank">view more.</em></a></p>
-            </div>
-        </div>
+
+<table class="table table-hover">
+    <tbody>
+        {{#each comment}}
+        <tr>
+            <td>
+                <h4 style="color:#5c8cd5">{{commentTitle}}</h4>
+                <div >
+                    {{#each feature}}
+                    <code style="color:#5c8cd5">{{featu}}</code>
+                    {{/each}}
+                </div>
+            </td>
+            <td>
+                <img class="img-circle" src={{userImg}} height="50" width="50" >
+            </td>
+            <td>
+                <h4>{{userName}}</h4>
+                 <div style="float: left;">{{date}}</div>
+            </td>
+            <td>
+                <h4>{{vote}}</h4>
+                VOTES
+            </td>
+
+            <td>
+                <h4>{{view}}</h4>
+                VIEWS
+            </td>
+        </tr>
         {{/each}}
-    </div>
+    </tbody>
+</table>
 
-
-<p><a class="text-info" href={{create}} target="_blank">view more.</a></p>
-<!--    <button onClick="location.href='{{create}}'"  class="btn btn-success" >Write a Guide!</button>-->
-    <button onclick="topFunction()" id="myBtn" type="button" class="btn btn-primary" style="position: fixed; bottom: 20px;right: 30px;">Top</button>
-
-
-
-</div>
+<button onclick="window.location='file:///Users/xiaohanzhang/Desktop/syr2018spring/686/TP/TravelPartner/app/client/app/TG/Write.html '"  class="btn btn-success" >Write a Guide!</button>
+<button onclick="topFunction()" id="myBtn" type="button" class="btn btn-primary" style="position: fixed; bottom: 20px;right: 30px;">Top</button>
+ </div>
 <script>
     window.onscroll = function() {scrollFunction()};
 
@@ -77,12 +84,12 @@
         }
     }
 
-function topFunction() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-}
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
 
-    </script>
+</script>
 
 <script  type="text/JavaScript" src="index.js"></script>
 <script type="text/javascript" src="/dist/js/TG.js"></script>
