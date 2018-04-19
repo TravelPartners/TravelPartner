@@ -46,7 +46,7 @@ router.get("/", function(req, res, next){
                      		image: result.image,
                      		name: result.name,
                      		descript: result.descript,
-                     		url: "/f/" + name.split(" ").join("-")
+                     		url: "/f/" + result.name.split(" ").join("-")
                      	})
                      }
                      if(isLunch >= 0){
@@ -57,7 +57,7 @@ router.get("/", function(req, res, next){
                      		image: result.image,
                      		name: result.name,
                      		descript: result.descript,
-                     		url: "/f/" + name.split(" ").join("-")
+                     		url: "/f/" + result.name.split(" ").join("-")
                      	})
                      }
                      if(isBreak >= 0){
@@ -68,7 +68,7 @@ router.get("/", function(req, res, next){
                      		image: result.image,
                      		name: result.name,
                      		descript: result.descript,
-                     		url: "/f/" + name.split(" ").join("-")
+                     		url: "/f/" + result.name.split(" ").join("-")
                      	})
                      }
                      if(isCheap >= 0){
@@ -79,7 +79,7 @@ router.get("/", function(req, res, next){
                      		image: result.image,
                      		name: result.name,
                      		descript: result.descript,
-                     		url: "/f/" + name.split(" ").join("-")
+                     		url: "/f/" + result.name.split(" ").join("-")
                      	})
                      }
                      if(isMid >= 0){
@@ -90,7 +90,7 @@ router.get("/", function(req, res, next){
                      		image: result.image,
                      		name: result.name,
                      		descript: result.descript,
-                     		url: "/f/" + name.split(" ").join("-")
+                     		url: "/f/" + result.name.split(" ").join("-")
                      	})
                      }
                      if(isLuxury >= 0){
@@ -101,7 +101,7 @@ router.get("/", function(req, res, next){
                      		image: result.image,
                      		name: result.name,
                      		descript: result.descript,
-                     		url: "/f/" + name.split(" ").join("-")
+                     		url: "/f/" + result.name.split(" ").join("-")
                      	})
                      }
 
@@ -144,12 +144,12 @@ router.get("/f/:name", function(req, res, next){
 		}else{
 			let result = results[0];
 			let ret = {
-				name = result.name,
-				descript = result.descript,
-				image = result.image,
-				location = result.restaurant.location,
-				email = result.restaurant.email,
-				phone = result.restaurant.phone
+				name : result.name,
+				descript : result.descript,
+				image : result.image,
+				location : result.restaurant.location,
+				email : result.restaurant.email,
+				phone : result.restaurant.phone
 			}
 			res.render("food/??", {restaurant: ret})
 
