@@ -26,7 +26,7 @@ router.get("/",function(req, res, next) {
      				modified_at: result.modified_at,
             votes: result.votes.length,
             views: result.views
-     			}
+     			}  
         )
      		}
             res.render("Comment/comm", { comment: ret });
