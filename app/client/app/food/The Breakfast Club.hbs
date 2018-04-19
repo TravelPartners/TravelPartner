@@ -1,37 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Entertainment Main Page</title>
-<!--
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/	font-awesome.min.css">
--->
-<link rel="stylesheet" href=food.css>
-  	<style type="text/css">
-    body { padding-top: 70px; }
-    .jumbotron {
-      color: #fffffe;
-      background: #ecf0f1;
 
-    }
-    .navbar-inverse {
-      background: #2c3e50;  /*darkblue:  ; light orange:rgb(220, 70, 0), #dc4600*/
-      color: white;
-    }
-    .navbar-inverse .navbar-brand, .navbar-inverse a{
-      color:white;
-    }
-    .navbar-inverse .navbar-nav>li>a {
-      color: white;
-    }
+	<link rel="stylesheet" href=food.css>
+	  	<style type="text/css">
+	    body { padding-top: 70px; }
+	    .jumbotron {
+	      color: #fffffe;
+	      background: #ecf0f1;
 
-    nav{
-    	border: none;
-    }
+	    }
+	    .navbar-inverse {
+	      background: #2c3e50;  /*darkblue:  ; light orange:rgb(220, 70, 0), #dc4600*/
+	      color: white;
+	    }
+	    .navbar-inverse .navbar-brand, .navbar-inverse a{
+	      color:white;
+	    }
+	    .navbar-inverse .navbar-nav>li>a {
+	      color: white;
+	    }
 
-  </style>
-</head>
-<body>
+	    nav{
+	    	border: none;
+	    }
+
+	  </style>
 	<div style="text-align:center" class="container">
 		 <div style="background-image: url(images/foodbackground.jpg)"， class="jumbotron" >
 			 <h2>   Finding your perfect restaurant and popular foods </h2> <!-- <i class="fa fa-camera-retro"></i> -->
@@ -91,35 +82,6 @@
 <h2>Description</h2>
 <p>{{descrip}}</p>
 {{/restaurant}}
-<!-- Top function-->
-<button onclick="topFunction()" id="myBtn" type="button" class="btn btn-primary" style="position: fixed; bottom: 20px;
-            right: 30px;">Top</button>
-
-<script>
-window.onscroll = function() {scrollFunction()};
-
-function scrollFunction() {
-if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20)
-{
-		document.getElementById("myBtn").style.display = "block";
-}
-		else {
-		document.getElementById("myBtn").style.display = "none";
-				 }
-}
-
-function topFunction() {
-		 document.body.scrollTop = 0;
-		 document.documentElement.scrollTop = 0;
-						            }
-</script>
-
-<script src="http://code.jquery.com/jquery-3.3.1.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<body/>
-
-
-
 
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
@@ -149,4 +111,27 @@ function topFunction() {
 
 		</div>
 	</nav>
-<html/>
+	<!-- Top function-->
+	<button onclick="topFunction()" id="myBtn" type="button" class="btn btn-primary" style="position: fixed; bottom: 20px;
+	            right: 30px;">Top</button>
+
+	<script>
+	window.onscroll = function() {scrollFunction()};
+
+	function scrollFunction() {
+	if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20)
+	{
+			document.getElementById("myBtn").style.display = "block";
+	}
+			else {
+			document.getElementById("myBtn").style.display = "none";
+					 }
+	}
+
+	function topFunction() {
+			 document.body.scrollTop = 0;
+			 document.documentElement.scrollTop = 0;
+							            }
+	</script>
+	<script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
