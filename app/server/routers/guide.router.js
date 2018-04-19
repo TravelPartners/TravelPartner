@@ -23,17 +23,24 @@ router.get("/",function(req, res, next) {
      				tags: result.tags,
      				summary: result.content.substr(0,20),
      				url: '/g/' + result.title.split(' ').join('-'),
-     				updated_at: result.updated_at
+     				updated_at: result.updated_at,
+     				votes: result.votes.length
      			})
 
      		}
-            res.render("TG/tg", { guide: ret });
+     		let create= '/g/' + 'create'; 	
+            res.render("TG/tg", { guide: ret, create: create});
+
         }
     })
 })
 
+router.get("/create", function(req, res, next){
+	res.render("TG/upload", {});
+})
+
 router.post("/new", function(req, res, next){
-	let Guide = req.app.locals.db.model('Guide');	
+	let Guide = req.app.locals.db.model('Guide');
 	let title = req.body.title;
 	let user = req.body.user;
 	let tags = req.body.tags;
@@ -47,9 +54,9 @@ router.post("/new", function(req, res, next){
 			console.log(err);
 			res.json({
 			    status: 'error',
-			 //   err: [
-			 //     { name: xxx, msg: xxx },    
-			 //   ]
+			    err: [
+			      { name: "repeat title", msg: "200" },
+			    ]
 			});
 		}else{
 		    //let ret = {};
@@ -66,16 +73,31 @@ router.get('/:title', function(req, res, next) {
     let Guide = req.app.locals.db.model('Guide');
     let title = req.params.title.split("-").join(" ");
 
-    Guide.find({"title": title}, function(err, result){
+
+    Guide.find({"title": title}, function(err, results){
         if(err){
             console.log(err);
         }else{
             // res.render(title.handlebar);
+            let result = results[0];
             console.log(result);
+
+            let ret = {
+                title: result.title,
+                user: result.user,
+                tags: result.tags,
+                content: result.content,
+                updated_at: result.updated_at,
+                image: result.image,
+                banner: result.image
+                //url: '/g/' + result.title.split(' ').join('-')
+            }
+            //console.log(result.title);
+            res.render("TG/specificGuide", {guide: ret});
         }
-        res.render("TG/specificGuide", {result: result});
+
     })
-    
+
     // console.log(location);
     // res.json({location: location});
 });
