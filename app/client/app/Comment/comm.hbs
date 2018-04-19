@@ -42,10 +42,10 @@
         {{#each comment}}
         <tr>
             <td>
-                <h4 style="color:#5c8cd5">{{commentTitle}}</h4>
+                <h4 style="color:#5c8cd5">{{title}}</h4>
                 <div >
-                    {{#each feature}}
-                    <code style="color:#5c8cd5">{{featu}}</code>
+                    {{#each keyword}}
+                    <code style="color:#5c8cd5">{{this}}</code>
                     {{/each}}
                 </div>
             </td>
@@ -53,16 +53,16 @@
                 <img class="img-circle" src={{userImg}} height="50" width="50" >
             </td>
             <td>
-                <h4>{{userName}}</h4>
-                 <div style="float: left;">{{date}}</div>
+                <h4>{{author}}</h4>
+                 <div style="float: left;">{{modified_at}}</div>
             </td>
             <td>
-                <h4>{{vote}}</h4>
+                <h4>{{votes}}</h4>
                 VOTES
             </td>
 
             <td>
-                <h4>{{view}}</h4>
+                <h4>{{views}}</h4>
                 VIEWS
             </td>
         </tr>
@@ -70,7 +70,8 @@
     </tbody>
 </table>
 
-<button onclick="window.location='file:///Users/xiaohanzhang/Desktop/syr2018spring/686/TP/TravelPartner/app/client/app/TG/Write.html '"  class="btn btn-success" >Write a Guide!</button>
+<p><a class="text-info" href={{create}} target="_blank">view more.</a></p>
+<!--<button onclick="window.location='file:///Users/xiaohanzhang/Desktop/syr2018spring/686/TP/TravelPartner/app/client/app/TG/Write.html '"  class="btn btn-success" >Write a Guide!</button>-->
 <button onclick="topFunction()" id="myBtn" type="button" class="btn btn-primary" style="position: fixed; bottom: 20px;right: 30px;">Top</button>
  </div>
 <script>
