@@ -24,13 +24,18 @@ router.get("/",function(req, res, next) {
      				summary: result.content.substr(0,20),
      				url: '/g/' + result.title.split(' ').join('-'),
      				updated_at: result.updated_at,
-     				create: '/g/' + '/create'
+     				votes: result.votes.length
      			})
 
      		}
-            res.render("TG/tg", { guide: ret });
+     		let create= '/g/' + 'create'; 	
+            res.render("TG/tg", { guide: ret, create: create});
         }
     })
+})
+
+router.get("/create", function(req, res, next){
+	res.render("TG/upload", {});
 })
 
 router.post("/new", function(req, res, next){
@@ -80,8 +85,8 @@ router.get('/:title', function(req, res, next) {
                 content: result.content,
                 updated_at: result.updated_at,
                 image: result.image,
-                banner: result.image[0],
-                url: '/g/' + result.title.split(' ').join('-')
+                banner: result.image[0]
+                // url: '/g/' + result.title.split(' ').join('-')
             }
             res.render("TG/specificGuide", {guide: ret});
         }
