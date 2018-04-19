@@ -103,6 +103,11 @@ dbConnection.then((res) => {
         }
     });
 
+    let Food = require('../data/food');
+    let init_food = new Food({
+        
+    });
+
 /*
     (async () => {
         try {
