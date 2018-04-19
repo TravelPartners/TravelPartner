@@ -88,6 +88,21 @@ dbConnection.then((res) => {
         votes: []
     });
 
+    let Spot = require('../data/entertainment');
+    let init_spot = new Spot({
+        img: '',
+        title: 'Test scene',
+        details: {
+            descrip: 'Test',
+            when: '',
+            where: 'Syracuse'
+        },
+        ticketInfo: {
+            discount: '',
+            link: ''
+        }
+    });
+
 /*
     (async () => {
         try {
@@ -105,7 +120,7 @@ dbConnection.then((res) => {
     })();
 */
 
-    Promise.all([admin.save(), init_guid.save(), init_trans.save(), init_acco.save(), init_site.save(), init_location.save(), init_comment.save()])
+    Promise.all([admin.save(), init_guid.save(), init_trans.save(), init_acco.save(), init_site.save(), init_location.save(), init_comment.save(), init_spot.save()])
         .then((res) => {
             console.log('Records added.');
             mongoose.disconnect(); })

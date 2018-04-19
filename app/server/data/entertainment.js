@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
@@ -17,7 +17,7 @@ let EntertainmentSchema = new Schema({
   },
 
   details: {
-    decrip: String,
+    descrip: String,
     when: String,
     where: String
   },
@@ -25,9 +25,7 @@ let EntertainmentSchema = new Schema({
   ticketInfo:{
     discount: String,
     link: String
-  },
-
-
+  }
 });
 
 module.exports = mongoose.model('Spot', EntertainmentSchema);
