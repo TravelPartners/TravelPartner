@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="/TG/css/formstyle.css" />
+
 <nav class="navbar navbar-inverse navbar-fixed-top">
 <div class="container">
 <div class="navbar-header">
@@ -30,25 +32,27 @@
 
 </div>
 <div class="container">
+  
+{{#each guide}}
 <div style="background-image: url(newBos4.jpg)"， class="jumbotron" >
-<h2 class="headCenterText"> {{title}} </h2>
-<h4 class="headCenterText"> by {{username}}</h4>
+  <h2 class="headCenterText"> {{title}} </h2>
+  <h4 class="headCenterText"> by {{username}}</h4>
 </div>
 
 <div style="float: left;"> Feature</div>
 <div class="user">
-{{#each keywords}}
-<code>{{feature}}</code>
-{{/each}}
+  {{#each tags}}
+  <div>{{this}}</div>
+  {{/each}}
 </div>
 <p>{{date}}</p>
-
 <p>{{content}}</p>
+{{/each}}
+
 </div>
 
 
-<button onclick="topFunction()" id="myBtn" type="button" class="btn btn-primary" style="position: fixed; bottom: 20px;
-right: 30px;">Top</button>
+<button onclick="topFunction()" id="myBtn" type="button" class="btn btn-primary" style="position: fixed; bottom: 20px;right: 30px;">Top</button>
 <script>
 window.onscroll = function() {scrollFunction()};
 

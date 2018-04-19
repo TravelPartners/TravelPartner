@@ -62,7 +62,7 @@
 <div class="container">
   <h1 style="text-align:center">TRAVEL PARNTER</h1>
   <p class="paragraph" style="font-size:25px;">{{introduction}}</p>
-  
+
 <h3><em>Click on the cities in the map below</em></h3><br>
   <div id="google-map"  style="width:100%;height:500px; ">
   </div>
@@ -86,6 +86,25 @@
         </div>
     </div>
     {{/each}}
+</div>
+
+<div class="well">
+        <div class="row">
+          {{#each TopHotel}}
+            <div class=" col-sm-3  headText">
+                <a href="{{url}}" class="thumbnail">
+                    <!--<img src="https://media-cdn.tripadvisor.com/media/photo-p/0b/c4/3a/75/fairmont-copley-plaza.jpg" style="height: 220px;">-->
+                    <img src="{{image_source}}">
+                    </a>
+                    <!--<h5>Top 1!&nbsp;Fairmont Copley Plaza, Boston</h5>-->
+                    <h5>Top 1!&nbsp;{{name}}</h5>
+
+                    <div class="text-muted">Boston, MA</div>
+                    <div class="text-muted">{{address}}</div>
+              </div>
+
+          {{/each}}
+          </div>
 </div>
 
 </div>
