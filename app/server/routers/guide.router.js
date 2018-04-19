@@ -31,11 +31,6 @@ router.get("/",function(req, res, next) {
      		let create= '/g/' + 'create'; 	
             res.render("TG/tg", { guide: ret, create: create});
 
-<<<<<<< HEAD
-=======
-            res.render("TG/tg", { guide: ret });
-
->>>>>>> upstream/master
         }
     })
 })
@@ -78,23 +73,15 @@ router.get('/:title', function(req, res, next) {
     let Guide = req.app.locals.db.model('Guide');
     let title = req.params.title.split("-").join(" ");
 
-<<<<<<< HEAD
-=======
 
->>>>>>> upstream/master
     Guide.find({"title": title}, function(err, results){
         if(err){
             console.log(err);
         }else{
             // res.render(title.handlebar);
-<<<<<<< HEAD
             let result = results[0];
             console.log(result);
-=======
-            //console.log(result);
-            console.log(1237);
-            let result = results[0];
->>>>>>> upstream/master
+
             let ret = {
                 title: result.title,
                 user: result.user,
@@ -103,11 +90,7 @@ router.get('/:title', function(req, res, next) {
                 updated_at: result.updated_at,
                 image: result.image,
                 banner: result.image
-<<<<<<< HEAD
-                // url: '/g/' + result.title.split(' ').join('-')
-=======
                 //url: '/g/' + result.title.split(' ').join('-')
->>>>>>> upstream/master
             }
             //console.log(result.title);
             res.render("TG/specificGuide", {guide: ret});
