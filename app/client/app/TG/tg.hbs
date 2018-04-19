@@ -45,8 +45,9 @@
                     </div>
             <div class="col-xs-6 ">
                 <br><br><p class="paragraph text-info">{{title}}</p>
-                <div style="float: left;">by</div><div class="user">{{user}}</div>
+                <div style="float: left;">by</div><div class="user">{{user}} </div>
                 <p>{{updated_at}}</p>
+                <p>Votes:{{votes}}</p>
                 <div style="float: left;" class="text-info">Feature:</div>
                 {{#each tags}}
                 <div>{{this}}</div>
@@ -57,20 +58,14 @@
         </div>
         {{/each}}
     </div>
-<<<<<<< HEAD
 
 
-
-    <button onClick="location.href='{{create}}'"  class="btn btn-success" >Write a Guide!</button>
+<p><a class="text-info" href={{create}} target="_blank">view more.</a></p>
+<!--    <button onClick="location.href='{{create}}'"  class="btn btn-success" >Write a Guide!</button>-->
     <button onclick="topFunction()" id="myBtn" type="button" class="btn btn-primary" style="position: fixed; bottom: 20px;right: 30px;">Top</button>
-=======
-    
-    
-    
-    <button onclick="window.location='{{create}}'"  class="btn btn-success" >Write a Guide!</button>
-    <button onclick="topFunction()" id="myBtn" type="button" class="btn btn-primary" style="position: fixed; bottom: 20px;
-        right: 30px;">Top</button>
->>>>>>> upstream/master
+
+
+
 </div>
 <script>
     window.onscroll = function() {scrollFunction()};
@@ -89,9 +84,3 @@ function topFunction() {
 }
 
     </script>
-
-<script  type="text/JavaScript" src="index.js"></script>
-<script type="text/javascript" src="/dist/js/TG.js"></script>
-
-<script src="http://code.jquery.com/jquery-3.3.1.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

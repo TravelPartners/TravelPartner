@@ -24,17 +24,18 @@ router.get("/",function(req, res, next) {
      				summary: result.content.substr(0,20),
      				url: '/g/' + result.title.split(' ').join('-'),
      				updated_at: result.updated_at,
-     				create: '/g/' + '/create'
      			})
 
      		}
+
             res.render("TG/tg", { guide: ret });
+            
         }
     })
 })
 
 router.post("/new", function(req, res, next){
-	let Guide = req.app.locals.db.model('Guide');	
+	let Guide = req.app.locals.db.model('Guide');
 	let title = req.body.title;
 	let user = req.body.user;
 	let tags = req.body.tags;
@@ -49,7 +50,7 @@ router.post("/new", function(req, res, next){
 			res.json({
 			    status: 'error',
 			    err: [
-			      { name: "repeat title", msg: "200" },    
+			      { name: "repeat title", msg: "200" },
 			    ]
 			});
 		}else{
@@ -85,9 +86,9 @@ router.get('/:title', function(req, res, next) {
             }
             res.render("TG/specificGuide", {guide: ret});
         }
-        
+
     })
-    
+
     // console.log(location);
     // res.json({location: location});
 });
