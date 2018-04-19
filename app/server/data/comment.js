@@ -29,7 +29,10 @@ let CommentSchema = new Schema({
     {
       replier: String,
       replyBody: String,
-      replyTime: Date
+      replyTime: {
+        type: Date,
+        default: Date.now
+      }
     }
   ],
   keyword:{
