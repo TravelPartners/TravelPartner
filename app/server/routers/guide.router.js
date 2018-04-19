@@ -73,11 +73,12 @@ router.get('/:title', function(req, res, next) {
     let Guide = req.app.locals.db.model('Guide');
     let title = req.params.title.split("-").join(" ");
 
-    Guide.find({"title": title}, function(err, result){
+    Guide.find({"title": title}, function(err, results){
         if(err){
             console.log(err);
         }else{
             // res.render(title.handlebar);
+            let result = results[0];
             console.log(result);
             let ret = {
                 title: result.title,
@@ -86,7 +87,7 @@ router.get('/:title', function(req, res, next) {
                 content: result.content,
                 updated_at: result.updated_at,
                 image: result.image,
-                banner: result.image[0]
+                banner: result.image
                 // url: '/g/' + result.title.split(' ').join('-')
             }
             res.render("TG/specificGuide", {guide: ret});

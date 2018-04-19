@@ -4,6 +4,7 @@ const router = require('express').Router();
 
 router.get("/", function(req, res, next){
 	let Food = req.app.locals.db.model('Food');
+
 	Food.find({}, function(err, allResults){
 		if(err){
 			console.log(err);
@@ -44,7 +45,8 @@ router.get("/", function(req, res, next){
                      		phone: result.restaurant.phone,
                      		image: result.image,
                      		name: result.name,
-                     		descript: result.descript
+                     		descript: result.descript,
+                     		url: "/f/" + name.split(" ").join("-")
                      	})
                      }
                      if(isLunch >= 0){
@@ -54,7 +56,8 @@ router.get("/", function(req, res, next){
                      		phone: result.restaurant.phone,
                      		image: result.image,
                      		name: result.name,
-                     		descript: result.descript
+                     		descript: result.descript,
+                     		url: "/f/" + name.split(" ").join("-")
                      	})
                      }
                      if(isBreak >= 0){
@@ -64,7 +67,8 @@ router.get("/", function(req, res, next){
                      		phone: result.restaurant.phone,
                      		image: result.image,
                      		name: result.name,
-                     		descript: result.descript
+                     		descript: result.descript,
+                     		url: "/f/" + name.split(" ").join("-")
                      	})
                      }
                      if(isCheap >= 0){
@@ -74,7 +78,8 @@ router.get("/", function(req, res, next){
                      		phone: result.restaurant.phone,
                      		image: result.image,
                      		name: result.name,
-                     		descript: result.descript
+                     		descript: result.descript,
+                     		url: "/f/" + name.split(" ").join("-")
                      	})
                      }
                      if(isMid >= 0){
@@ -84,7 +89,8 @@ router.get("/", function(req, res, next){
                      		phone: result.restaurant.phone,
                      		image: result.image,
                      		name: result.name,
-                     		descript: result.descript
+                     		descript: result.descript,
+                     		url: "/f/" + name.split(" ").join("-")
                      	})
                      }
                      if(isLuxury >= 0){
@@ -94,7 +100,8 @@ router.get("/", function(req, res, next){
                      		phone: result.restaurant.phone,
                      		image: result.image,
                      		name: result.name,
-                     		descript: result.descript
+                     		descript: result.descript,
+                     		url: "/f/" + name.split(" ").join("-")
                      	})
                      }
 
@@ -126,3 +133,26 @@ router.get("/", function(req, res, next){
 } )
 
 module.exports = router;
+
+
+router.get("/f/:name", function(req, res, next){
+	let Food = req.app.locals.db.model('Food');
+	let name = req.params.name.split("-").join(" ");
+	Food.find({"name": name}, function(err, results){
+		if(err){
+			console.log(err);
+		}else{
+			let result = results[0];
+			let ret = {
+				name = result.name,
+				descript = result.descript,
+				image = result.image,
+				location = result.restaurant.location,
+				email = result.restaurant.email,
+				phone = result.restaurant.phone
+			}
+			res.render("food/??", {restaurant: ret})
+
+		}
+	})
+})
