@@ -42,7 +42,8 @@
         {{#each comment}}
         <tr>
             <td>
-                <h4 style="color:#5c8cd5">{{title}}</h4>
+                <h4><a class="text-info" href={{url}} target="_blank" style="color:#5c8cd5">{{title}}</h4></a>
+                
                 <div >
                     {{#each keyword}}
                     <code style="color:#5c8cd5">{{this}}</code>
