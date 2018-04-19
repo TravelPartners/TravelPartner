@@ -105,7 +105,16 @@ dbConnection.then((res) => {
 
     let Food = require('../data/food');
     let init_food = new Food({
-        
+        image: [],
+        name: 'Food1',
+        descript: 'Food123',
+        tags: [],
+        restaurant: {
+            isRes: false,
+            location: '',
+            email: '',
+            phone: ''
+        }
     });
 
 /*
@@ -125,7 +134,7 @@ dbConnection.then((res) => {
     })();
 */
 
-    Promise.all([admin.save(), init_guid.save(), init_trans.save(), init_acco.save(), init_site.save(), init_location.save(), init_comment.save(), init_spot.save()])
+    Promise.all([admin.save(), init_guid.save(), init_trans.save(), init_acco.save(), init_site.save(), init_location.save(), init_comment.save(), init_spot.save(), init_food.save()])
         .then((res) => {
             console.log('Records added.');
             mongoose.disconnect(); })
