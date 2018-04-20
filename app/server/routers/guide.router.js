@@ -80,6 +80,7 @@ router.get('/:title', function(req, res, next) {
             console.log(err);
         }else{
             // res.render(title.handlebar);
+
             let result = results[0];
             console.log(result);
 
