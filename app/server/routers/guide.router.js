@@ -3,44 +3,36 @@
 const router = require('express').Router();
 
 
-router.get("/",function(req, res, next) {
+router.get("/create", async function(req, res, next){
+	let user = req.body.user;
+	if(user == undefined || user == ""){
+		console.log(23445);
+		res.sendStatus(403);
+		return next;
+	}
+
+	try{
+		user = await req.app.locals.auth(req.app.locals.token, user);
+		res.render("TG/upload", {});
+	}catch(errs){
+		console.log(errs);
+		res.sendStatus(403); 
+
+	}
+
+})
+
+router.post("/new", async function(req, res, next){
+
+    let user = req.body.user;
+    if(user == undefined || user == ""){
+    	res.sendStatus(403);
+    	return next;
+    }
+    try{
+    	user = await req.app.locals.auth(req.app.locals.token, user);
+    	
     let Guide = req.app.locals.db.model('Guide');
-    let summary = [];
-    Guide.find({}, function(err, allResult){
-        if(err){
-            console.log(err);
-        }else{
-            // res.render(title.handlebar);
-            console.log(allResult);
-            // Store a brief summary in summary
-     		let ret = [];
-     		for (let result of allResult) {
-     			console.log(summary);
-     			ret.push({
-     				title: result.title,
-     				image: result.image[0],
-     				user: result.user,
-     				tags: result.tags,
-     				summary: result.content.substr(0,20),
-     				url: '/g/' + result.title.split(' ').join('-'),
-     				updated_at: result.updated_at,
-     				votes: result.votes.length
-     			})
-
-     		}
-     		let create= '/g/' + 'create'; 	
-            res.render("TG/tg", { guide: ret, create: create});
-
-        }
-    })
-})
-
-router.get("/create", function(req, res, next){
-	res.render("TG/upload", {});
-})
-
-router.post("/new", function(req, res, next){
-	let Guide = req.app.locals.db.model('Guide');
 	let title = req.body.title;
 	let user = req.body.user;
 	let tags = req.body.tags;
@@ -67,10 +59,70 @@ router.post("/new", function(req, res, next){
 
 		}
 	})
+
+    }catch(errs){
+    	console.log(errs);
+    	res.sendStatus(403);
+    }
+
+	
 });
 
+router.get("/:city",function(req, res, next) {
+    let Guide = req.app.locals.db.model('Guide'); 
+    let Place = req.app.locals.db.model('Place');
+    let cityParam = req.params.city;
+    let cityId = (req.params.city.split("-"))[1];
+    let cityName = (req.params.city.split("-"))[0];
 
-router.get('/:title', function(req, res, next) {
+    Place.findById(cityId, function(err, city){
+    	if(err){
+    		console.log(err); 
+    		next(err); 
+    	}else{
+    		console.log(city);
+    		if (city == undefined || city == null) {
+    			return next(new Error('Empty record'));
+    		}
+    		let guidesId = city.guides;
+    		console.log(guidesId);
+        Guide.find({_id: {$in: guidesId}}, function(err, allResult){
+        if(err){
+            console.log(err);
+        }else{
+            // res.render(title.handlebar);
+            console.log(allResult);
+            // Store a brief summary in summary
+     		let ret = [];
+     		for (let result of allResult) {
+     			ret.push({
+     				title: result.title,
+     				image: result.image[0],
+     				user: result.user,
+     				tags: result.tags,
+     				summary: result.content.substr(0,20),
+     				url: '/g/' + cityParam + "/" + result.title.split(' ').join('-'),
+     				updated_at: result.updated_at,
+     				votes: result.votes.length,
+     			})
+
+     		}
+     		let create= '/g/' + 'create'; 	
+            res.render("TG/tg", { guide: ret, create: create, place: cityName});
+
+        }
+    })
+
+    	}
+    })
+
+
+})
+
+
+
+
+router.get('/:city/:title', function(req, res, next) {
     let Guide = req.app.locals.db.model('Guide');
     let title = req.params.title.split("-").join(" ");
 
