@@ -38,6 +38,7 @@ dbConnection.then((res) => {
     let admin = new User({
         name: 'hyperadmin',
         pwd: 'hyperadmin123',
+        phone: '',
         email: 'siteadmin@siteadmin.com'
     });
 
@@ -85,6 +86,10 @@ dbConnection.then((res) => {
         title: 'Test comment',
         author: 'hyperadmin',
         commentBody: 'Test comment content',
+        reply: [{
+            replier: 'hyperadmin',
+            replyBody: 'testReply'
+        }],
         votes: []
     });
 

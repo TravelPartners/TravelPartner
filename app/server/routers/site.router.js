@@ -85,12 +85,14 @@ router.post('/signup', (req, res, next) => {
     //    user.save();
     user.save()
         .then((user) => {
-            //console.log(234456);
-
-            res.json({
-                status: 'success',
-                username: user.name,
-                url: referer
+            console.log(234456);
+            token.get(user.name).then((token) => {
+                res.json({
+                    status: 'success',
+                    username: user.name,
+                    token: token,
+                    url: referer
+                });
             });
         })
         .catch((err) => {
