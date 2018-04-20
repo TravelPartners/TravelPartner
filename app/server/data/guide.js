@@ -34,13 +34,11 @@ let GuideSchema = new Schema({
         default: Date.now
     },
     votes: {
-        type: [String],
-        required: true, 
+        type: [String], 
         default: [] 
     },
     image: {
-    type: [String],
-    required: true
+    type: [String]
     },
     banner: {
         type: String,
