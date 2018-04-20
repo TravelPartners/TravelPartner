@@ -29,7 +29,6 @@ let UserSchema = new Schema({
     },
     phone: {
         type: String,
-        unique: true,
         sparse: true
     },
     desc: String,    // Description
@@ -92,7 +91,7 @@ UserSchema.pre('save', async function (next) {
 UserSchema.pre('save', async function (next) {
     if (this.isModified('pwd')) {
         let self = this;
-
+        console.log(this.pwd);
         await bcrypt.hash(this.pwd, saltRounds).then((hash) => {
             self.pwd = hash;
             console.log(hash);
@@ -105,6 +104,27 @@ UserSchema.pre('save', async function (next) {
     }
 });
 
+UserSchema.pre('update', async function (next) {
+    //console.log(this);
+    //console.log(this.getUpdate().$set.email);
+
+    if (!this.getUpdate().$set.pwd) {
+        next();
+    } else {
+        let self = this;
+        await bcrypt.hash(this.getUpdate().$set.pwd, saltRounds).then((hash) => {
+            this.getUpdate().$set.pwd = hash;
+            console.log(hash);
+            next();
+        }, (err) => {
+            next(err);
+        });
+
+    }
+});
+
 //let f = async function(pwd) { return await bcrypt.compare(pwd, this.pwd); };
 
 module.exports = mongoose.model('User', UserSchema);
+
+
