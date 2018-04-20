@@ -71,13 +71,27 @@
     </tbody>
 </table>
 
-<p><a class="text-info" href={{create}} target="_blank">view more.</a></p>
+<div id="canWrite">{{create}}</div>
+<buttom id="write" class="btn btn-primary" >Write a comment!</button>
 <!--<button onclick="window.location='file:///Users/xiaohanzhang/Desktop/syr2018spring/686/TP/TravelPartner/app/client/app/TG/Write.html '"  class="btn btn-success" >Write a Guide!</button>-->
 <button onclick="topFunction()" id="myBtn" type="button" class="btn btn-primary" style="position: fixed; bottom: 20px;right: 30px;">Top</button>
  </div>
 <script>
     window.onscroll = function() {scrollFunction()};
 
+    $(document).ready(function() {
+      $('#write')
+        .click(function(){
+          if (localStorage.getItem('token')==null) {
+        $('#sign-in-modal').modal('show');
+            return false;
+          }
+          var url = $('#canwrite').val();
+          location.href(url);
+          return true;
+      });
+    });
+    
     function scrollFunction() {
         if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
             document.getElementById("myBtn").style.display = "block";
