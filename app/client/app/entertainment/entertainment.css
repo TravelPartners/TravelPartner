@@ -31,6 +31,8 @@ nav{
 
 .jumbotron {
       color: #2c3e50;
+      height: 10%;
+      width: 100%;
       /*background-image: url(boston.jpg);*/
     }
 
@@ -39,12 +41,12 @@ nav{
 	font-size: 50px;
 	padding-bottom: 20px;
 	text-transform: uppercase;
-	color: white;
+	color: #2c3e50;
 }
 
 .jumbotron p{
 	font-family: Indie Flower;
-	color: white;
+	color: #2c3e50;
 	
 }
 
@@ -82,7 +84,7 @@ nav{
             color: white;
         }
 
-#section0 {
+/*#section0 {
     background-image: url('./image/boston-jumbotron-600501-unsplash-2.jpg');
 
 }
@@ -93,4 +95,4 @@ nav{
 
 #section2 {
 	background-image: url('./image/Cirque du Soleil_Luzia.jpg');
-}
+}*/
