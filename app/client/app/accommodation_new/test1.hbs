@@ -4,13 +4,12 @@
 	<title>Entertainment Main Page</title>
 
 
-<link rel="stylesheet" href=accommodation.css>
+<link rel="stylesheet" href="accommodation_new/accommodation1.css">
   	<style type="text/css">
     body { padding-top: 70px; }
     .jumbotron {
       color: #fffffe;
       background: #ecf0f1;
-
     }
     .navbar-inverse {
       background: #2c3e50;  /*darkblue:  ; light orange:rgb(220, 70, 0), #dc4600*/
@@ -22,11 +21,9 @@
     .navbar-inverse .navbar-nav>li>a {
       color: white;
     }
-
     nav{
     	border: none;
     }
-
   </style>
 </head>
 <body>
@@ -65,33 +62,31 @@
   		 </div>
 	<!--</div>-->
 
-<br/>
-<br/>
-	<h2>&nbsp;&nbsp;&nbsp;Top 4 Hotels here!</h2>
 
-<!--top 4 hotel-->
-<div class="well">
-        <div class="row">
-          {{#each TopHotel}}
-            <div class=" col-sm-3  headText">
-                <a href="{{url}}" class="thumbnail">
-                    <!--<img src="https://media-cdn.tripadvisor.com/media/photo-p/0b/c4/3a/75/fairmont-copley-plaza.jpg" style="height: 220px;">-->
-                    <img src="{{image_source}}">
-                    </a>
-                    <!--<h5>Top 1!&nbsp;Fairmont Copley Plaza, Boston</h5>-->
-                    <h5>Top 1!&nbsp;{{name}}</h5>
-
-                    <div class="text-muted">Boston, MA</div>
-                    <div class="text-muted">{{address}}</div>
-              </div>
-
-          {{/each}}
-          </div>
-</div>
+	<!--top 4 hotel-->
+	<div>
+		<h2>&nbsp;&nbsp;&nbsp;Top Hotel</h2>
+	</div>
 </br>
-</br>
+	<div class="container">
+	<div class="row">
+		{{#each TopHotel}}
+		<div class="col-xs-3" >
+			<a href="{{url}}" class="thumbnail">
+				<img src="{{image_source}}" style="height: 180px" alt="Charles River Inn">
+			</a>
+	<div class="caption">
+					<h5>{{name}}</h5>
+					<div class="text-muted">{{address}}</div>
+					<br>
+				</div>
+		</div>
+
+		{{/each}}
+	</div>
+	</div>
+
 	<!-- Cheap hotel-->
-我是需要价格低于xxx的酒店
 	<div>
 		<h2>&nbsp;&nbsp;&nbsp;Cheap Hotel</h2>
 	</div>
@@ -116,11 +111,11 @@
 
 
 <!-- Family-friendly hotels -->
-	<h2>&nbsp;&nbsp;&nbsp;Mid-range Hotel</h2>
+	<h2>&nbsp;&nbsp;&nbsp;Family-friendly Hotel</h2>
 </br>
 	<div class="container">
 	<div class="row">
-		{{#each MidHotel}}
+		{{#each Family_friendlyHotel}}
 		<div class="col-xs-3" >
 			<a href="{{url}}" class="thumbnail">
 				<img src="{{image_source}}" style="height: 180px" alt="Charles River Inn">
@@ -159,12 +154,14 @@
 	</div>
 </br>
 </br>
+
+
 <!-- Romantic hotels-->
 <h2>&nbsp;&nbsp;&nbsp;Romantic Hotel</h2>
 </br>
 <div class="container">
 <div class="row">
-	{{#each RomanticHotel}}  //RomanticHotel{image_source,name,address}
+	{{#each RomanticHotel}}
 	<div class="col-xs-3" >
 		<a href="{{url}}" class="thumbnail">
 			<img src="{{image_source}}" style="height: 180px" alt="Charles River Inn">
@@ -187,7 +184,7 @@
 </br>
 <div class="container">
 <div class="row">
-	{{#BusinessHotel}}
+	{{#each BusinessHotel}}
 	<div class="col-xs-3" >
 		<a href="{{url}}" class="thumbnail">
 			<img src="{{image_source}}" style="height: 180px" alt="Charles River Inn">
@@ -211,7 +208,6 @@
 img{
 width:300px;
 }
-
 </style>
 
 
@@ -222,7 +218,6 @@ width:300px;
 
 <script>
 window.onscroll = function() {scrollFunction()};
-
 function scrollFunction() {
 if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20)
 {
@@ -232,7 +227,6 @@ if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20)
 		document.getElementById("myBtn").style.display = "none";
 				 }
 }
-
 function topFunction() {
 		 document.body.scrollTop = 0;
 		 document.documentElement.scrollTop = 0;

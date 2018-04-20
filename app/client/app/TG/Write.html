@@ -2,25 +2,25 @@
 
 <html>
     <head>
-        
+
         <meta charset="utf-8">
         <title>TravelPartner</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/    font-awesome.min.css">
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Material+Icons">
         <link rel="stylesheet" href="css/formstyle.css" />
-            
-        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js"></script>
-        
-        <script src="//unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
-        <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
-        <script type="text/javascript" src="js/ErrorProcess.js"></script>
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <script
-            src="https://code.jquery.com/jquery-3.3.1.min.js"
-            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-            crossorigin="anonymous"></script>
-        
+
+
+        <link href="bootstrap-combined.no-icons.min.css" rel="stylesheet">
+        <link href="bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" href="index.css" type="text/css"> </link>
+        <script src="jquery1.9.1.min.js" type="text/javascript"></script>
+        <script src="bootstrap.min.js"></script>
+        <script src="bootstrap-wysiwyg.js" type="text/javascript"></script>
+        <script src="external/jquery.hotkeys.js" type="text/javascript"></script>
+
+
     </head>
 
     <body>
@@ -36,7 +36,7 @@
                     </button>
                     <a href="#############" class="navbar-brand">TravelPartner</a>
                 </div>
-                
+
                 <div class="collapse navbar-collapse" id="bs-nav-demo">
                     <ul class="nav navbar-nav">
                         <li><a href="############">Guide</a></li>
@@ -48,12 +48,12 @@
                         <li><a href="############">Login</a></li>
                     </ul>
                 </div>
-                
+
             </div>
         </nav>
         <div id ="TG">
         </div>
-        
+
         </div>
         <div class="container">
             <div style="background-image: url(Gasson.jpg)"， class="jumbotron" >
@@ -62,24 +62,155 @@
             </div>
             <h1 class="headText">Boston</h1>
             <h2 class="headText">Write a travel guide</h2><br><br>
-            
+
+            <div class="alert alert-block hide" id="warning-block">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <h4>Warning!</h4>Best check yo self, you're not...
+            </div>
+
+
+            <div id="alertTest" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="myModalLabel">提示标题</h3>
+                </div>
+                <div class="modal-body">
+                    <p>提示内容！</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                </div>
+            </div>
+
+            <div class="alert alert-danger alert-dismissable hidden" id="warning">
+            	<button type="button" class="close" data-dismiss="alert"
+            			aria-hidden="true">
+            		&times;
+            	</button>
+            	错误！请进行一些更改。
+            </div>
+
             <!--<form method="get" action="" onsubmit="return validateForm()",action 是submit之后跳转的页面的URL>-->
-            <form method="post" action="" id="guideForm">
+  <!--          <form method="post" action="" id="guideForm">
                 <input id="title" type="text" class="form-control required" placeholder="Please Input Travel Guide Title"><br>
                 <textarea id="content" class="form-control required" rows="20" placeholder="Please Input Your Travel Guide!"></textarea><br>
-                
+
                 <button id="TrySubmit" type="submit" class="btn btn-primary">Submit</button><br><br>
-                
+
                 <div style="height:100px"></div>
-            </form>
+            </form>-->
+
+
+            <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
+             <div class="btn-group">
+             <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="icon-font"></i><b class="caret"></b></a>
+              <ul class="dropdown-menu">
+              </ul>
+             </div>
+             <div class="btn-group">
+             <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font Size"><i class="icon-text-height"></i> <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+              <li><a data-edit="fontSize 5"><font size="5">Huge</font></a></li>
+              <li><a data-edit="fontSize 3"><font size="3">Normal</font></a></li>
+              <li><a data-edit="fontSize 1"><font size="1">Small</font></a></li>
+              </ul>
+             </div>
+             <div class="btn-group">
+             <a class="btn" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="icon-bold"></i></a>
+             <a class="btn" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class="icon-italic"></i></a>
+             <a class="btn" data-edit="strikethrough" title="Strikethrough"><i class="icon-strikethrough"></i></a>
+             <a class="btn" data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i class="icon-underline"></i></a>
+             </div>
+             <div class="btn-group">
+             <a class="btn" data-edit="insertunorderedlist" title="Bullet list"><i class="icon-list-ul"></i></a>
+             <a class="btn" data-edit="insertorderedlist" title="Number list"><i class="icon-list-ol"></i></a>
+             <a class="btn" data-edit="outdent" title="Reduce indent (Shift+Tab)"><i class="icon-indent-left"></i></a>
+             <a class="btn" data-edit="indent" title="Indent (Tab)"><i class="icon-indent-right"></i></a>
+             </div>
+             <div class="btn-group">
+             <a class="btn" data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)"><i class="icon-align-left"></i></a>
+             <a class="btn" data-edit="justifycenter" title="Center (Ctrl/Cmd+E)"><i class="icon-align-center"></i></a>
+             <a class="btn" data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)"><i class="icon-align-right"></i></a>
+             <a class="btn" data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)"><i class="icon-align-justify"></i></a>
+             </div>
+             <div class="btn-group">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i class="icon-link"></i></a>
+             <div class="dropdown-menu input-append">
+             <input class="span2" placeholder="URL" type="text" data-edit="createLink"/>
+             <button class="btn" type="button">Add</button>
+             </div>
+             <a class="btn" data-edit="unlink" title="Remove Hyperlink"><i class="icon-cut"></i></a>
+             </div>
+
+             <div class="btn-group">
+             <a class="btn" title="Insert picture (or just drag & drop)" id="pictureBtn"><i class="icon-picture"></i></a>
+             <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
+             </div>
+             <div class="btn-group">
+             <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="icon-undo"></i></a>
+             <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="icon-repeat"></i></a>
+             </div>
+             <input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">
+            </div>
+
+            <div id="editor">
+             输入内容…
+            </div>
+
+
+
+
         </div>
-        
-        
-        <button onclick="topFunction()" id="myBtn" type="button" class="btn btn-primary" style="position: fixed; bottom: 20px;
-            right: 30px;">Top</button>
+
+
+        <button onclick="topFunction()" id="myBtn" type="button" class="btn btn-primary" style="position: fixed; bottom: 20px;right: 30px;">Top</button>
+
+
         <script>
+$("#warning").show();
+
+
+
+
+function initToolbarBootstrapBindings() {
+  var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier',
+   'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact', 'Lucida Grande', 'Lucida Sans', 'Tahoma', 'Times',
+   'Times New Roman', 'Verdana'],
+   fontTarget = $('[title=Font]').siblings('.dropdown-menu');
+  $.each(fonts, function (idx, fontName) {
+   fontTarget.append($('<li><a data-edit="fontName ' + fontName +'" style="font-family:\''+ fontName +'\'">'+fontName + '</a></li>'));
+  });
+  $('a[title]').tooltip({container:'body'});
+  $('.dropdown-menu input').click(function() {return false;})
+  .change(function () {$(this).parent('.dropdown-menu').siblings('.dropdown-toggle').dropdown('toggle');})
+  .keydown('esc', function () {this.value='';$(this).change();});
+
+  $('[data-role=magic-overlay]').each(function () {
+  var overlay = $(this), target = $(overlay.data('target'));
+  overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset()).width(target.outerWidth()).height(target.outerHeight());
+  });
+  if ("onwebkitspeechchange" in document.createElement("input")) {
+  var editorOffset = $('#editor').offset();
+  $('#voiceBtn').css('position','absolute').offset({top: editorOffset.top, left: editorOffset.left+$('#editor').innerWidth()-35});
+  } else {
+  $('#voiceBtn').hide();
+  }
+ };
+ function showErrorAlert (reason, detail) {
+ var msg='';
+ if (reason==='unsupported-file-type') { msg = "Unsupported format " +detail; }
+ else {
+ console.log("error uploading file", reason, detail);
+ }
+ $('<div class="alert"> <button type="button" class="close" data-dismiss="alert">×</button>'+
+ '<strong>File upload error</strong> '+msg+' </div>').prependTo('#alerts');
+ };
+ initToolbarBootstrapBindings();
+ $('#editor').wysiwyg({ fileUploadError: showErrorAlert} );
+
+
+
             window.onscroll = function() {scrollFunction()};
-            
             function scrollFunction() {
                 if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
                     document.getElementById("myBtn").style.display = "block";
@@ -87,18 +218,18 @@
                     document.getElementById("myBtn").style.display = "none";
                 }
             }
-        
+
             function topFunction() {
                 document.body.scrollTop = 0;
                 document.documentElement.scrollTop = 0;
             }
-        
+
         $('#TrySubmit')
         .click(function(){
                if (!validateForm()) {
                 return false;
                }
-               
+
                var title = $('#guideForm #title').val();
                var content = $('#guideForm #content').val();
                axios.post('/g/new', {
@@ -107,7 +238,13 @@
                 }).then(function (response) {
                     console.log(response);
                         if (response.status == 'fail') {
-                        
+
+                          $('#alertTest').modal({
+                              backdrop:true,
+                              keyboard:true,
+                              show:true
+                          });
+                          return false;
                         } else {
                         location.href(response.xxxx);
                         }
@@ -118,13 +255,12 @@
                console.log(title);
                return false;
         });
-        
-        
+
+
         </script>
-        
-        <script  type="text/JavaScript" src="index.js"></script>
-        <script type="text/javascript" src="/dist/js/TG.js"></script>
-        
+
+
+
         <script src="http://code.jquery.com/jquery-3.3.1.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </body>

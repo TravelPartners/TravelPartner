@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/Comment/css/formstyle.css" />
 <nav class="navbar navbar-inverse navbar-fixed-top">
 <div class="container">
 <div class="navbar-header">
@@ -30,30 +31,31 @@
 
 </div>
 <div class="container">
-<div style="background-image: url(newBos4.jpg)"， class="jumbotron" >
+<div  class="jumbotron" >
 <h2 class="headCenterText"> Ball, Beers, and Boston! </h2>
 <h4 class="headCenterText"> by Mkilburn9, Cold Lake, Canada</h4>
 </div>
 
 <div class="row" style="background-color:white;">
 <div class="col-sm-11" >
-<h4 style="color:#5c8cd5;">{{CommTitle}}</h4>
+{{#with comment}}
+<h4 style="color:#5c8cd5;">{{title}}</h4>
 <div >
-{{#each features}}
-<code style="color:#5c8cd5">{{feature}}</code>
+{{#each keyword}}
+<code style="color:#5c8cd5">{{this}}</code>
 {{/each}}
 </div>
 </div>
 <div class="col-sm-1" >
-<h4 >{{view}}</h4>
+<h4 >{{views}}</h4>
 VIEWS
 </div>
 <div class="col-sm-12" ><br><br></div>
 <div class="col-sm-1" ><img class="img-circle" src="{{titleImg}}" height="50" width="50" ></div>
 <div class="col-sm-11" >
-<div style="float: left;">by</div><div class="user">{{userName}}</div>
-<p>{{date}}</p>
-<p style="font-size:110%;">{{commContents}}</p>
+<div style="float: left;">by</div><div class="user">{{author}}</div>
+<p>{{modified_at}}</p>
+<p style="font-size:110%;">{{commentBody}}</p>
 </div>
 <div class="col-sm-11" ></div>
 <div class="col-sm-1" >
@@ -61,19 +63,19 @@ VIEWS
 <p >Like it!</p>
 </div>
 </div><br>
+{{/with}}
 
 
-
-{{#each guestComm}}
+{{#each reply}}
 <div class="row" style="background-color:white;">
 <div class="col-sm-1" ><img class="img-circle" src="{{userImg}}" height="50" width="50" ></div>
 <div class="col-sm-11" >
-<div style="float: left;">by</div><div class="user">{{guestUserName}}</div>
-<p>{{guestTime}}</p>
-<p><em>{{CommConents}}</em></p>
+<div style="float: left;">by</div><div class="user">{{replier}}</div>
+<p>{{replyTime}}</p>
+<p><em>{{replyBody}}</em></p>
 </div>
 </div><br>
-</each>
+{{/each}}
 
 
 <br><br><h4><em>Please write a comment!</em></h4>
@@ -85,8 +87,7 @@ VIEWS
 <br><br>
 </div><br><br>
 
-<button onclick="topFunction()" id="myBtn" type="button" class="btn btn-primary" style="position: fixed; bottom: 20px;
-right: 30px;">Top</button>
+<button onclick="topFunction()" id="myBtn" type="button" class="btn btn-primary" style="position: fixed; bottom: 20px;right: 30px;">Top</button>
 
 <script typet="text/javascript" src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
 <script>
@@ -119,7 +120,7 @@ return false;
 
 
 var content = $('#commentForm #content').val();
-axios.post('/g/new', {
+axios.post('/c/new', {
 title: title,
 content: content
 }).then(function (response) {
@@ -139,8 +140,7 @@ return false;
 
 </script>
 
-<script  type="text/JavaScript" src="index.js"></script>
-<script type="text/javascript" src="/dist/js/TG.js"></script>
+
 
 <script src="http://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

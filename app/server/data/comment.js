@@ -11,8 +11,8 @@ let CommentSchema = new Schema({
 
   title: {
       type: String,
-      required: true
-
+      required: true,
+      unique: true
   },
   author: {
       type: String,
@@ -29,7 +29,10 @@ let CommentSchema = new Schema({
     {
       replier: String,
       replyBody: String,
-      replyTime: Date
+      replyTime: {
+        type: Date,
+        default: Date.now
+      }
     }
   ],
   keyword:{
