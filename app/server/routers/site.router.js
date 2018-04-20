@@ -140,11 +140,11 @@ router.post('/signin', (req, res, next) => {
         .then((result) => {
             if (result == true) {
                 return token.get(content.username).then((token) => {
-                    let res = { "data": { "status": "ok", "token": token }};
+                    let res = { "status": "success", "token": token };
                     return res;
                 });
             } else {
-                let res = { "data": { "status": "fail", "msg": "Invalid username or password."}};
+                let res = { "status": "err", "msg": "Invalid username or password." };
                 return res;
             }
         })
