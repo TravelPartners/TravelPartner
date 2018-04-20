@@ -2,10 +2,17 @@
 
 const router = require('express').Router();
 
-router.get("/", function(req, res, next){
+router.get("/:city", function(req, res, next){
 	let Food = req.app.locals.db.model('Food');
+	let Place = req.app.locals.db.model('Place');
+	let cityId = (req.params.city.split("-"))[1];
 
-	Food.find({}, function(err, allResults){
+	Place.findById(cityId, function(err, foodIds){
+		if(err){
+			console.log(err);
+		}else{
+
+		Food.find({_id: {$in: foodIds}}, function(err, allResults){
 		if(err){
 			console.log(err);
 		}else{
@@ -130,6 +137,12 @@ router.get("/", function(req, res, next){
 				                     localFood: localFood});
 		}
 	})
+
+		}
+	})
+
+
+
 } )
 
 module.exports = router;

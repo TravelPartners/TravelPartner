@@ -46,7 +46,6 @@ router.post("/new", function(req, res, next){
 	let tags = req.body.tags;
 	let content = req.body.content;
 	let image = req.body.image;
-	let banner = req.body.image[0];
 	let newGuide = {title: title, user: user, tags: tags, content: content, image: image, banner: banner};
 	// Create a new Guide to the DB
 	Guide.create(newGuide, function(err, newGuide){
@@ -60,10 +59,12 @@ router.post("/new", function(req, res, next){
 			});
 		}else{
 		    //let ret = {};
+		    res.redirect("/" + newGuide.title.split(' ').join('-'));
 		    res.json({
 		      status: 'succeess',
 		      url: '/' + newGuide.title.split(' ').join('-')
 		    });
+
 		}
 	})
 });
