@@ -5,21 +5,24 @@ const router = require('express').Router();
 router.get('/:place', (req, res, next)=>{
   let Place = req.app.locals.db.model('Place');
   let Spot = req.app.locals.db.model('Spot');
-  let place = req.params.place.split('-');
 
+  let place = req.params.place.split('-');
   let placeName = place[0];
   let placeId = place[1];
 
   Place.findById(placeId, function(err, place){
-    if (!err){
+    if (err){console.log(err);}
+    else{
+
       let spots = place.spots;
-      // console.log(spots);
+      console.log(spots);
 
       Spot.find({'_id': {$in: spots }}).exec(function(err, result1){
-        // console.log(result1);
+
+        console.log(result1);
 
         let top = [];
-        let regular =[];
+        //let regular =[];
         for (let result of result1){
 
           top.push({
@@ -46,15 +49,16 @@ router.get('/:place', (req, res, next)=>{
         //
         // });
         //
-  res.render('entertainment/entertainment', { top3: top});
+        console.log(top[0]);
+        res.render('entertainment/entertainment', { top3 : top});
 
       });
 //1st
-}else{console.log(err);
-console.log(12312);}
+}
 
   });
 
 
 });
+
 module.exports = router;
