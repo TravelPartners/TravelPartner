@@ -25,7 +25,11 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-8024bf9e", __vue__options__)
   } else {
+<<<<<<< HEAD
     hotAPI.reload("data-v-8024bf9e", __vue__options__)
+=======
+    hotAPI.rerender("data-v-769742b4", __vue__options__)
+>>>>>>> upstream/master
   }
 })()}
 
