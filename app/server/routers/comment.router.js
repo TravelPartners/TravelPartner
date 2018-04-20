@@ -2,10 +2,11 @@
 
 const router = require('express').Router();
 
+
 router.get("/",function(req, res, next) {
     let COMMENT = req.app.locals.db.model('Comment');
     let summary = [];
-    COMMENT.find({}, function(err, allResult){
+    COMMENT.find( {}, function(err, allResult){
         if(err){
             console.log(err);
         }else{
@@ -20,12 +21,11 @@ router.get("/",function(req, res, next) {
      				title: result.title,
      				author: result.author,
      				commentBody: result.commentBody,
-     				//reply: result.reply,
-     				keyword: result.keyword,
-     		//		url: '/c/' + result.title.split(' ').join('-'),
+            keyword: result.keyword,
      				modified_at: result.modified_at,
             votes: result.votes.length,
-            views: result.views
+            views: result.views,
+            url: '/c/' + result.title.split(' ').join('-'),
      			}
         )
      		}
@@ -33,39 +33,32 @@ router.get("/",function(req, res, next) {
         }
     })
 });
+//--------------------------------------------------------------------
 
-
-router.get("/: title",function(req, res, next) {
+router.get("/:title",function(req, res, next) {
     let COMMENT = req.app.locals.db.model('Comment');
 
-    let title = req.params.title.split('-');
-    let titleName = title[0];
-    let titleId = title[1];
+    let title = req.params.title.split("-").join(" ");
 
-    COMMENT.findOne({'title': titleName }, function(err, result){
+    COMMENT.find({'title': title }, function(err, results){
         if(err){
             console.log(err);
         }else{
 
-            console.log(result);
+        let result = results[0];
 
-     		let reply = [];
-     		for (let item of result) {
+     		let ret = {
+     				title: result.title,
+     				author: result.author,
+     				commentBody: result.commentBody,
+            keyword: result.keyword,
+            votes: result.votes.length,
+            views: result.views,
+            modified_at: result.modified_at,
+            reply: result.reply
+     			  }
 
-     			reply.push({
-     				title: item.title,
-     				author: item.author,
-     				commentBody: item.commentBody,
-     				reply: item.reply,
-            keyword:item.keyword,
-            votes: item.votes,
-            view:item.views,
-            modified_at:item.modified_at
-
-     			})
-
-     		}
-            res.render("", { commentSpec: reply});
+        res.render("Comment/SingleComm", { comment: ret});
         }
     })
 });
@@ -81,14 +74,13 @@ router.post("/newComment", function(req, res, next){
   let modified_at = req.body.modified_at;
 	let Comment1 = {title: title, author: author, commentBody: commentBody, keyword:keyword, votes:votes, view:view, modified_at:modified_at};
 	// Create a new Guide to the DB
-	COMMENT.create(comment1, function(err, coment1){
+	COMMENT.create(comment1, function(err, comment1){
 		if(err){
 			console.log(err);
 			res.json({
 			    status: 'error',
 			});
 		}else{
-
 		    res.json({
 		      status: 'succeess',
 		      url: '/' + comment1.title.split(' ').join('-')

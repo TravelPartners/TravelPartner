@@ -1,0 +1,100 @@
+
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<!-- The hamburger on the right -->
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-nav-demo" aria-expanded="false">
+	        	<span class="sr-only">Toggle navigation</span>
+	       		<span class="icon-bar"></span>
+	        	<span class="icon-bar"></span>
+	        	<span class="icon-bar"></span>
+	      		</button>
+	      		<a href="#############" class="navbar-brand"><i class="fas fa-home"></i>TravelPartner</a>
+			</div>
+
+			<div class="collapse navbar-collapse" id="bs-nav-demo">
+				<ul class="nav navbar-nav">
+					<li><a href="############">Guide</a></li>
+					<li><a href="############">Food</a></li>
+					<li><a href="############">Accomodation</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="############"><i class="fas fa-users"></i>Sign Up</a></li>
+					<li><a href="############"><i class="fas fa-user-circle"></i>Login</a></li>
+				</ul>
+			</div>
+
+		</div>
+	</nav>
+
+
+	<!-- this is the jumbotron in the top -->
+	
+	<div class="container" >
+		<!-- <div><p>What's Hot</p></div> -->
+		<br><br>
+   		<h1 style="font-family: Indie Flower; font-size: 50px; padding-bottom: 20px; text-transform: uppercase; color: #2c3e50;"> 
+   				Entertainments @ #####BOSTON#####</h1> 
+   		<h3 style="font-family: Indie Flower; color: #2c3e50"><i class="fa fa-camera-retro"></i>
+   				A bunch of entertainment ideas, tips, and recommendations for you for a happier journey!</h3> 
+  		<br><br>
+
+		
+		<div id="container1">
+  	  		<div class="sections" id="pageAll">
+  	  			
+  	  			{{#each top3}}
+       			<div class="section" id="section{{@key}}" onclick="jumpContent('jumpContent{{@key}}','section{{@key}}')" 
+       				style = "background-image: url({{image}})"><h2>{{title}}</h2></div>
+    			<div id="jumpContent{{@key}}"  style="height: 0%; width: 0%;left:50%;top:50%;position: absolute;border: none;background-color: #efefef;opacity: 0;" onclick="jumpBack('jumpContent{{@key}}','section{{@key}}')">
+   	    	 	
+   	    	 	    <div class='caption' align="center" style="font-size: 20px">
+        			<br><br>
+	          		<p>{{details.descrip}}</p>
+	          		<p><strong>When:</strong>{{details.when}}</p>
+	          		<p><strong>Where:</strong>{{details.where}}</p>
+	          		<p><strong>Ticket Discount Code:</strong>  {{ticketInfo.discount}}</p>
+	          		<p><a href="{{ticketInfo.link}}" class="btn btn-primary" role="button">Book Tickets!</a></p>
+	          		</div>
+    			</div>
+       			{{/each}}
+
+    		</div>    		
+		</div>
+		<br><br>
+
+	    <div class="row">
+
+	      {{#each regular}}
+
+	      <div class="col-lg-4 col-sm-6">
+	        <div class="thumbnail">
+	          
+	          <img  src="{{image}}" style="height: 180px; width: 100%;" >
+	          <h3>{{title}}</h3>
+    				<div class="caption">
+        			
+	          			<p>{{details.descrip}}</p>
+	          			<p><strong>When:</strong>{{details.when}}</p>
+	          			<p><strong>Where:</strong>{{details.where}}</p>
+	          			<p><strong>Ticket Discount Code:</strong>  {{ticketInfo.discount}}</p>
+	          			<p><a href="{{ticketInfo.link}}" class="btn btn-primary" role="button">Book Tickets!</a></p>
+	          		</div>
+	        </div>
+	      </div>
+
+	      {{/each}}
+
+		</div>
+
+	</div>
+
+
+
+
+
+<script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
+<script src="pageSwitch.js"></script>
+<script type="text/javascript" src="entertainment.js"></script>

@@ -4,14 +4,20 @@ const router = require('express').Router();
 
 
 //url
+
 router.get('/view/:hotel', function(req, res,next){
  let hotel = req.params.hotel.split('-');
  let hotelName = hotel[0];
  let hotelId = hotel[1];
 
+ let Acco = req.app.locals.db.model('Acco');
+
  Acco.findById(hotelId, function(err, hotel) {
    if (!err) {
-     console.log(hotelId);
+     console.log(hotel.desc);
+     console.log(hotel.address);
+  res.render('accommodation_new/subtest1', { img_source_1: (hotel.img)[1], img_source_2: (hotel.img)[2], img_source_3:(hotel.img)[3],
+                                        name: hotel.name, phone: hotel.phone, price: hotel.price, email: hotel.email});
      }
 
    })
@@ -38,6 +44,10 @@ router.get('/:place',(req, res, next)=>{
           let luxury = [];
           let romantic = [];
           let top = [];
+          let business=[];
+          let family=[];
+          let vote=[];
+
 
           for (let acco of accos) {
             cheap.push({
@@ -45,7 +55,7 @@ router.get('/:place',(req, res, next)=>{
               //imgs: acco.img,
               url: '/a/view/' + acco.name + '-' + acco._id,
               name: acco.name,
-              email: acco.email
+              address: acco.address
             })
           };
 
@@ -56,11 +66,12 @@ router.get('/:place',(req, res, next)=>{
                   url: '/a/view/' + acco.name + '-' + acco._id,
                   //imgs: acco.img,
                   name: acco.name,
-                  email: acco.email
+                  address: acco.address,
+                  desc:acco.desc
                 })
               };
 
-              Acco.find({ '_id': { $in: hotels }} ,{'tags': 'romantic'}).limit(4).exec(function(err, accos) {
+              Acco.find({ '_id': { $in: hotels } ,'tags': 'romantic'}).limit(4).exec(function(err, accos) {
                   //console.log(accos);
                   for (let acco of accos) {
                     romantic.push({
@@ -68,16 +79,71 @@ router.get('/:place',(req, res, next)=>{
                       //imgs: acco.img,
                       url: '/a/view/' + acco.name + '-' + acco._id,
                       name: acco.name,
-                      email: acco.email
+                      address: acco.address,
+                      desc:acco.desc
                     })
                   };
 
+                  Acco.find({ '_id': { $in: hotels } ,'tags': 'business'}).limit(4).exec(function(err, accos) {
+                      //console.log(accos);
+                      for (let acco of accos) {
+                        business.push({
+                          image_source: (acco.img)[0],
+                          //imgs: acco.img,
+                          url: '/a/view/' + acco.name + '-' + acco._id,
+                          name: acco.name,
+                          address: acco.address,
+                          desc:acco.desc
+                        })
+                      };
 
-                      res.render('acco/home', { TopHotel: cheap});
+                      Acco.find({ '_id': { $in: hotels } ,'tags': 'family-friendly'}).limit(4).exec(function(err, accos) {
+                          //console.log(accos);
+                          for (let acco of accos) {
+                            family.push({
+                              image_source: (acco.img)[0],
+                              //imgs: acco.img,
+                              url: '/a/view/' + acco.name + '-' + acco._id,
+                              name: acco.name,
+                              address: acco.address,
+                              desc:acco.desc
+
+                            })
+                          };
+
+                        Acco.aggregate()
+                          .unwind('votes')
+                          .group({ _id: '$_id', votesCount: { $sum: 1 }, name: { $first: '$name' }, email: { $first: '$email' }, img: { $first: '$img' }, votes: { $first: '$vote' }})
+                          .sort({ 'votesCount': 1})
+                          .exec(function(err, accos) {
+                                   if (err) console.log(err);
+                                   console.log('1232313312321313123123');
+                                   console.log(accos);
+                  });
+
+                         Acco.find({ '_id': { $in: hotels } }).limit(4).exec(function(err, accos) {
+
+                                                  for (let acco of accos) {
+                                                                vote.push({
+                                                                     image_source: (acco.img)[0],
+
+                                                                      url: '/a/view/' + acco.name + '-' + acco._id,
+                                                                      name: acco.name,
+                                                                      address: acco.address,
+                                                                      desc:acco.desc
+                                                                      })
+                                                                };
+
+
+
+                      res.render('accommodation_new/test1', { CheapHotel: cheap, LuxuryHotel: luxury, RomanticHotel:romantic, BusinessHotel:business, Family_friendlyHotel:family, TopHotel: vote});
 
                     });
                   });
                 });
+             });
+          });
+        });
 
      }
    });

@@ -34,6 +34,7 @@ let LocationSchema = new Schema({
     accos: [Schema.Types.ObjectId],
     trans: [Schema.Types.ObjectId],
     guides: [Schema.Types.ObjectId],
+    spots: [Schema.Types.ObjectId],
     votes: [String]
 });
 

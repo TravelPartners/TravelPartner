@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Entertainment Main Page</title>
+<!--
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/	font-awesome.min.css">
+-->
+<link rel="stylesheet" href="accommodation_new/accommodation1.css">
+  	<style type="text/css">
+    body { padding-top: 70px; }
+    .jumbotron {
+      color: #fffffe;
+      background: #ecf0f1;
+    }
+    .navbar-inverse {
+      background: #2c3e50;  /*darkblue:  ; light orange:rgb(220, 70, 0), #dc4600*/
+      color: white;
+    }
+    .navbar-inverse .navbar-brand, .navbar-inverse a{
+      color:white;
+    }
+    .navbar-inverse .navbar-nav>li>a {
+      color: white;
+    }
+		.row {
+  height: 150px;
+  font-size: 0;
+}
+.item {
+  box-sizing: border-box;
+  vertical-align: top;
+  height: 100%;
+  overflow-y: visible;
+  overflow-x: hidden;
+  background-color: maroon;
+  box-shadow: 4px 4px 0 #fff, -4px -4px 0 #fff,4px -4px 0 #fff, -4px 4px 0 #fff;
+  display: inline-block;
+  font-size: 20px;
+  color: #FFF;
+  text-align: center;
+  padding: 8px;
+}
+.col-1 {
+  width: 33.3333%;
+}
+.col-2 {
+  width: 66.66666%;
+}
+.row-1 {
+  height: 100%;
+}
+.row-2 {
+  height: 200%;
+}
+.offset-1 {
+  margin-left: 33.3333333%;
+}
+    nav{
+    	border: none;
+    }
+  </style>
+</head>
+<body>
+	<div style="text-align:center" class="container">
+		 <div style="background-image: url(images/hotelbackground2.jpg)"， class="jumbotron" >
+   			<h2>   Finding your perfect hotel to live! </h2> <!-- <i class="fa fa-camera-retro"></i> -->
+   			<p> Recommendation of the local hotel for you for a happier journey!</p>
+			</div>
+
+
+			<br/>
+			<br/>
+
+			<h2> &nbsp;&nbsp;&nbsp;{{name}}</h2>
+			<div class="text-muted ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email:{{email}}&nbsp;&nbsp;Tel:{{phone}}
+				&nbsp;&nbsp;Price:{{price}}
+				</div>
+			<br/>
+			<br/>
+
+				   <style>
+				       .flex-container
+				       {
+				         display: flex;
+				         flex-direction: column;
+				         flex-wrap: wrap;
+				         height: 440px;
+				         width: 660px;
+				       }
+				         .flex-container img
+				         {
+				           box-sizing: border-box;
+				           padding: 1px;
+				           margin: 1px;
+				           width: 400px;
+				           height: 218px;
+				         }
+				           .flex-container img:first-child
+				           {
+				             height: 438px;
+										 width:800px;
+				           }
+				   </style>
+
+ <center>
+					 <div style="text-align: center">
+				   <section class="flex-container headText">
+
+				  	 <img src="{{img_source_1}}">
+
+						 <img src="{{img_source_2}}">
+
+
+						 <img src="{{img_source_3}}" >
+
+				   </section>
+				 </div>
+ </center>
+
+
+</div>
+<!-- Top function-->
+<button onclick="topFunction()" id="myBtn" type="button" class="btn btn-primary" style="position: fixed; bottom: 20px;
+            right: 30px;">Top</button>
+
+<script>
+window.onscroll = function() {scrollFunction()};
+function scrollFunction() {
+if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20)
+{
+		document.getElementById("myBtn").style.display = "block";
+}
+		else {
+		document.getElementById("myBtn").style.display = "none";
+				 }
+}
+function topFunction() {
+		 document.body.scrollTop = 0;
+		 document.documentElement.scrollTop = 0;
+						            }
+</script>
+
+<script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<body/>
+
+
+
+
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<!-- The hamburger on the right -->
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-nav-demo" aria-expanded="false">
+	        	<span class="sr-only">Toggle navigation</span>
+	       		<span class="icon-bar"></span>
+	        	<span class="icon-bar"></span>
+	        	<span class="icon-bar"></span>
+	      		</button>
+	      		<a href="#############" class="navbar-brand">TravelPartner</a>
+			</div>
+
+			<div class="collapse navbar-collapse" id="bs-nav-demo">
+				<ul class="nav navbar-nav">
+					<li><a href="############">Guide</a></li>
+					<li><a href="############">Food</a></li>
+					<li><a href="############">Accomodation</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="############">Sign Up</a></li>
+					<li><a href="############">Login</a></li>
+				</ul>
+			</div>
+
+
+		</div>
+	</nav>
+<html/>
