@@ -86,10 +86,13 @@ router.post('/signup', (req, res, next) => {
     user.save()
         .then((user) => {
             console.log(234456);
-            res.json({
-                status: 'success',
-                username: user.name,
-                url: referer
+            token.get(user.name).then((token) => {
+                res.json({
+                    status: 'success',
+                    username: user.name,
+                    token: token,
+                    url: referer
+                });
             });
         })
         .catch((err) => {
@@ -109,7 +112,7 @@ router.post('/signup', (req, res, next) => {
                     error: { type: 'phone', msg: 'Phone is invalid or already taken.'}
                 });
             else
-                throw err;
+                next(err);
         });
 
     console.log(user);
@@ -124,7 +127,7 @@ router.post('/signin', (req, res, next) => {
         .then(async (users) => {
             return new Promise(async (resolve, reject) => {
                 if (users.length > 0) {
-                    await bcrypt.compare(content.password, users[0].pwd).then((result) => {
+                    await bcrypt.compare(content.pwd, users[0].pwd).then((result) => {
                         resolve(result);
                     }, (err) => {
                         reject(err);
@@ -137,11 +140,11 @@ router.post('/signin', (req, res, next) => {
         .then((result) => {
             if (result == true) {
                 return token.get(content.username).then((token) => {
-                    let res = { "data": { "status": "ok", "token": token }};
+                    let res = { "status": "success", "token": token };
                     return res;
                 });
             } else {
-                let res = { "data": { "status": "fail", "msg": "Invalid username or password."}};
+                let res = { "status": "err", "msg": "Invalid username or password." };
                 return res;
             }
         })
