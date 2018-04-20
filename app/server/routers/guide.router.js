@@ -75,7 +75,6 @@ router.get('/:title', function(req, res, next) {
         }else{
             // res.render(title.handlebar);
             //console.log(result);
-            console.log(1237);
             let result = results[0];
             let ret = {
                 title: result.title,
