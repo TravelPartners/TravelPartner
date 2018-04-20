@@ -31,9 +31,11 @@ price:{
       type:String,
       required:true
    },
+
  img:[String],
  tags: [String],
- locations: String
+ address: String,
+ desc:String
  });
 
  module.exports = mongoose.model('Acco', AccommodationSchema);

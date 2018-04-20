@@ -27,7 +27,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-0668db7a", __vue__options__)
   } else {
-    hotAPI.reload("data-v-0668db7a", __vue__options__)
+    hotAPI.rerender("data-v-0668db7a", __vue__options__)
   }
 })()}
 
@@ -72,7 +72,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-e01a7c46", __vue__options__)
   } else {
-    hotAPI.reload("data-v-e01a7c46", __vue__options__)
+    hotAPI.rerender("data-v-e01a7c46", __vue__options__)
   }
 })()}
 
@@ -104,7 +104,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-cfaf18f6", __vue__options__)
   } else {
-    hotAPI.reload("data-v-cfaf18f6", __vue__options__)
+    hotAPI.rerender("data-v-cfaf18f6", __vue__options__)
   }
 })()}
 

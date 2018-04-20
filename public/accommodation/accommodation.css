@@ -1,6 +1,6 @@
 @import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css);
 @import url(https://fonts.googleapis.com/css?family=Merriweather);
-
+/*css*/
 body { padding-top: 70px; }
 .jumbotron {
   color: #fffffe;
@@ -28,7 +28,7 @@ body { padding-top: 70px; }
 .headCenterText
 {
     text-align:center;
-    color:white
+    color:white;
 }
 
 nav{
