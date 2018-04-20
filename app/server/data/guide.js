@@ -36,7 +36,7 @@ let GuideSchema = new Schema({
     votes: {
         type: [String],
         required: true, 
-        default: []
+        default: [] 
     },
     image: {
     type: [String],
