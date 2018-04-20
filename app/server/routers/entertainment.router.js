@@ -11,14 +11,16 @@ router.get('/:place', (req, res, next)=>{
   let placeId = place[1];
 
   Place.findById(placeId, function(err, place){
-    if (err){console.log(err);}
+    if (err) { console.log(err);}
     else{
 
-      let spots = place.spots;
-      console.log(spots);
+      let spotss = place.spots;
+      console.log(spotss);
 
-      Spot.find({'_id': {$in: spots }}).exec(function(err, result1){
-
+      Spot.find({'_id': {$in: spotss }}).exec(function(err, result1){
+        if (err){console.log(err);}
+        else{
+        console.log('===== Here is spot query result =====');
         console.log(result1);
 
         let top = [];
@@ -49,16 +51,18 @@ router.get('/:place', (req, res, next)=>{
         //
         // });
         //
+        console.log('===== Here is top 1 spot =====');
         console.log(top[0]);
         res.render('entertainment/entertainment', { top3 : top});
+}//spot find else end
 
-      });
-//1st
-}
+      }); //spot find end
 
-  });
+} // place block else end
+
+}); // find place block end
 
 
-});
+}); //get block end
 
 module.exports = router;
