@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 // KEY should be changed if it has been used several times!
 
@@ -41,7 +41,9 @@ module.exports.info = info;
 module.exports.auth = (async (token, username) => {
     try {
         const decoded = await check(token, username);
-        return Promise.resolve(decoded);
+        if (decoded.u != username)
+            return Promise.reject(new Error('Invalid token'));
+        return Promise.resolve(decoded.u);
     } catch (err) {
         return Promise.reject(err);
     }
