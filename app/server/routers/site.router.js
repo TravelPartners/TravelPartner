@@ -85,7 +85,8 @@ router.post('/signup', (req, res, next) => {
     //    user.save();
     user.save()
         .then((user) => {
-            console.log(234456);
+            //console.log(234456);
+
             res.json({
                 status: 'success',
                 username: user.name,
@@ -109,7 +110,7 @@ router.post('/signup', (req, res, next) => {
                     error: { type: 'phone', msg: 'Phone is invalid or already taken.'}
                 });
             else
-                throw err;
+                next(err);
         });
 
     console.log(user);
@@ -124,7 +125,7 @@ router.post('/signin', (req, res, next) => {
         .then(async (users) => {
             return new Promise(async (resolve, reject) => {
                 if (users.length > 0) {
-                    await bcrypt.compare(content.password, users[0].pwd).then((result) => {
+                    await bcrypt.compare(content.pwd, users[0].pwd).then((result) => {
                         resolve(result);
                     }, (err) => {
                         reject(err);
