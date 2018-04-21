@@ -167,7 +167,7 @@ router.get("/view/:name", function(req, res, next){
 			console.log(err);
 		}else{
 			let result = results[0];
-			if (result == undefined ||  == null) {
+			if (result == undefined || result == null) {
 				return next(new Error('Empty record'));
 			}
 			let ret = {
