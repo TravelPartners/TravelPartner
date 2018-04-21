@@ -2,36 +2,46 @@
 
 const router = require('express').Router();
 
-router.get('/TransSearch', (req,res,next)=>{
-
-  let Trans = req.app.locals.db.model('Trans');
-
-  Trans.findOne()
-          .exec()
-          .then((trans) => {
-              let transname = acco.name;
-
-              return Trans.find({ 'name': transname})
-                  .then((transs) => {
-                      let ret = [];
-                      for (let Trans of transs) {
-                          ret.push({
-                              image_source:Trans.img,
-                              name: Trans.name
-                          });
-                      }
-                      return ret;
-                  });
-          }).then((transs) => {
-              console.log(transs);
-              res.render('trans/home', { trans: trans });
-          })
-          .catch((err) => {
-              console.log(err);
-              res.sendStatus(500);
-          });
-
-});
 
 
-module.exports = router;
+
+  // location: "boston"-"_id"
+  router.get('/:place',(req, res, next)=>{
+    let Place = req.app.locals.db.model('Place');
+    let Trans = req.app.locals.db.model('Trans');
+
+    let place = req.params.place.split('-');
+    let placeName = place[0];
+    let placeId = place[1];
+
+    Place.findById(placeId, function(err, place) {
+      if (!err) {
+        console.log(place);
+        let trans = place.trans;
+
+
+
+      Trans.find({ '_id': { $in: trans } }).limit(4).exec(function(err, transs) {
+            console.log(transs);
+            let spot = [];
+
+            for (let iterator of transs) {
+              spot.push({
+                image_source: (iterator.img)[0],
+                name: iterator.name,
+                description: iterator.desc
+              })
+            };
+
+
+
+                        res.render('transportation_new/test1', { attraction: spot});
+
+                      });
+
+       }
+     });
+
+    });
+
+    module.exports = router;

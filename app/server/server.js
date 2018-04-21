@@ -28,12 +28,14 @@ const config = require('./config'),
       routers = require('./routers/routers'),
       token = require('./lib/token');
 
+app.locals.auth = token.auth;
+
 /**
  *  Load database configuration.
  */
 
 const database = ((config) => {
-    let c = config.database[env];
+    let c = config.database[env] || {};
     let db = c.db || 'test',
         port = c.port || '27017',
         host = c.host.join(`:${port},`) || 'localhost',
@@ -55,7 +57,7 @@ const dbConnection = ((db) => {
     let userString = '';
     if (db.user != '' && db.pwd != '')
         userString = `${db.user}:${db.pwd}@`;
-    
+
     let connection = `mongodb://${userString}${db.host}:${db.port}/${db.db}`;
     if (db.extra != '')
         connection += `?${db.extra}`;
@@ -95,8 +97,11 @@ app.use((req, res, next) => {
 
 app.use((req, res, next) => {
     let tokenGet = req.get('Authorization');
+    req.app.locals.token = undefined;
+
     if (tokenGet != undefined && tokenGet.search('Bearer ') === 0) {
         tokenGet = tokenGet.substr(7);
+        req.app.locals.token = tokenGet;
         token.check(tokenGet, '').then((decoded) => {
             let iat = decoded.iat;
             let exp = decoded.exp;
@@ -104,7 +109,7 @@ app.use((req, res, next) => {
 
             return token.get(decoded.u).then((t) => {
                 res.set('Authorization', 'Bearer ' + t);
-                next();
+                return next();
             }, next);
         }, (err) => { next(); });
     } else {
@@ -137,4 +142,3 @@ dbConnection.then((res) => {
 }, (err) => {
     console.log('Cannot connect to the database.');
 });
-

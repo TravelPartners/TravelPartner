@@ -4,15 +4,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let CommentSchema = new Schema({
-  _id: {
-      type: Schema.Types.ObjectId,
-      default: new mongoose.Types.ObjectId
-  },
+//  _id: {
+//      type: Schema.Types.ObjectId,
+//      default: new mongoose.Types.ObjectId
+//  },
 
   title: {
       type: String,
-      required: true
-
+      required: true,
+      unique: true
   },
   author: {
       type: String,
