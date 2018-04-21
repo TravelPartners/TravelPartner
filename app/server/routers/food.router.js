@@ -139,8 +139,8 @@ router.get("/:city", function(req, res, next){
 			console.log("test");
 			console.log(localFood);
 			console.log(lunch);
-			res.render("food/food", {dinner: dinner, 
-				                     lunch: lunch, 
+			res.render("food/food", {dinner: dinner,
+				                     lunch: lunch,
 				                     breakfast: breakfast,
 				                     cheapEat: cheapEat,
 				                     midRange: midRange,
