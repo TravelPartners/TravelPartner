@@ -34,23 +34,24 @@ router.get("/:city", function(req, res, next){
 			for (let result of allResults){
                  if(result.restaurant.isRes == true){
                  	 let isDinner = result.tags.findIndex((value, index, arr) => {
-                 	 	      return (value == dinner)
+                 	 	      return (value == "dinner")
                  	 })
                  	 let isLunch = result.tags.findIndex((value, index, arr) => {
-                 	 	      return (value == lunch)
+                 	 	      return (value == "lunch")
                  	 })
                  	 let isBreak = result.tags.findIndex((value, index, arr) => {
-                 	 	      return (value == breakfast)
+                 	 	      return (value == "breakfast")
                  	 })
                  	 let isCheap = result.tags.findIndex((value, index, arr) => {
-                 	 	      return (value == cheapEat)
+                 	 	      return (value == "cheapEat")
                  	 })
                  	 let isMid = result.tags.findIndex((value, index, arr) => {
-                 	 	      return (value == midRange)
+                 	 	      return (value == "midRange")
                  	 })
                  	 let isLuxury = result.tags.findIndex((value, index, arr) => {
-                 	 	      return (value == luxury)
+                 	 	      return (value == "luxury")
                  	 })
+                 	 console.log(isLunch);
 
                      if(isDinner >= 0){
                      	dinner.push({
@@ -60,7 +61,7 @@ router.get("/:city", function(req, res, next){
                      		image: result.image,
                      		name: result.name,
                      		descript: result.descript,
-                     		url: "/f/" + result.name.split(" ").join("-")
+                     		url: "/f/view/" + result.name.split(" ").join("-")
                      	})
                      }
                      if(isLunch >= 0){
@@ -137,6 +138,7 @@ router.get("/:city", function(req, res, next){
 			}
 			console.log("test");
 			console.log(localFood);
+			console.log(lunch);
 			res.render("food/food", {dinner: dinner, 
 				                     lunch: lunch, 
 				                     breakfast: breakfast,
@@ -173,7 +175,7 @@ router.get("/view/:name", function(req, res, next){
 				email : result.restaurant.email,
 				phone : result.restaurant.phone
 			}
-			res.render("food/??", {restaurant: ret})
+			res.render("food/The Breakfast Club", {restaurant: ret})
 
 		}
 	})
