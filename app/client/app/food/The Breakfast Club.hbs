@@ -31,7 +31,7 @@
 </div>
 <br/>
 <br/>
-{{restaurant}}
+{{#with restaurant}}
 <h2> &nbsp;&nbsp;&nbsp;{{name}}</h2>
 <div class="text-muted ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Addr:{{location}}&nbsp;&nbsp;Tel:{{phone}}
 	&nbsp;&nbsp;E-mail:{{email}}
@@ -80,7 +80,7 @@
 </div>
 <h2>Description</h2>
 <p>{{descript}}</p>
-{{/restaurant}}
+{{/with}}
 
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
