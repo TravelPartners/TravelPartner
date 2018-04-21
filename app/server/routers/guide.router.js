@@ -4,6 +4,7 @@ const router = require('express').Router();
 
 
 router.get("/create", async function(req, res, next){
+  /*
 	let user = req.body.user;
 	if(user == undefined || user == ""){
 		console.log(23445);
@@ -16,60 +17,69 @@ router.get("/create", async function(req, res, next){
 		res.render("TG/upload", {});
 	}catch(errs){
 		console.log(errs);
-		res.sendStatus(403); 
+		res.sendStatus(403);
 
 	}
+  */
+  res.render("TG/upload");
 
 })
 
 router.post("/new", async function(req, res, next){
-
-    let user = req.body.user;
-    if(user == undefined || user == ""){
+    let username = req.body.user;
+    if(username == undefined || username == ""){
     	res.sendStatus(403);
     	return next;
     }
+
     try{
-    	user = await req.app.locals.auth(req.app.locals.token, user);
-    	
-    let Guide = req.app.locals.db.model('Guide');
-	let title = req.body.title;
-	let user = req.body.user;
-	let tags = req.body.tags;
-	let content = req.body.content;
-	let image = req.body.image;
-	let newGuide = {title: title, user: user, tags: tags, content: content, image: image, banner: banner};
-	// Create a new Guide to the DB
-	Guide.create(newGuide, function(err, newGuide){
-		if(err){
-			console.log(err);
-			res.json({
-			    status: 'error',
-			    err: [
-			      { name: "repeat title", msg: "200" },
-			    ]
-			});
-		}else{
-		    //let ret = {};
-		    res.redirect("/" + newGuide.title.split(' ').join('-'));
-		    res.json({
-		      status: 'succeess',
-		      url: '/' + newGuide.title.split(' ').join('-')
-		    });
+    	username = await req.app.locals.auth(req.app.locals.token, username);
 
-		}
-	})
+      let Guide = req.app.locals.db.model('Guide');
+    	let title = req.body.title;
+    	let user = req.body.user;
+    	let tags = req.body.tags;
+    	let content = req.body.content;
+    	let image = req.body.image;
+      let banner = req.body.banner;
+    	//let newGuide = {title: title, user: user, tags: tags, content: content, image: image, banner: banner};
+    	// Create a new Guide to the DB
+    	//Guide.create(newGuide, function(err, newGuide){
+      let newGuide = new Guide({
+        title: title,
+        user: user,
+        tags: tags,
+        content: content,
+        image: image,
+        banner: banner
+      });
+      newGuide.save(function(err, newGuide) {
+    		if(err){
+    			console.log(err);
+    			res.json({
+    			    status: 'error',
+    			    err: [
+    			      { name: "repeat title", msg: "200" },
+    			    ]
+    			});
+    		}else{
+    		    //let ret = {};
+    		    //res.redirect("/g/view/" + newGuide.title.split(' ').join('-'));
+    		    res.json({
+    		      status: 'success',
+    		      url: '/g/view/' + newGuide.title.split(' ').join('-')
+    		    });
 
-    }catch(errs){
+    		}
+    	})
+    } catch(errs){
     	console.log(errs);
     	res.sendStatus(403);
     }
-
-	
 });
 
 router.get("/:city",function(req, res, next) {
-    let Guide = req.app.locals.db.model('Guide'); 
+    let Guide = req.app.locals.db.model('Guide');
     let Place = req.app.locals.db.model('Place');
     let cityParam = req.params.city;
     let cityId = (req.params.city.split("-"))[1];
@@ -77,8 +87,8 @@ router.get("/:city",function(req, res, next) {
 
     Place.findById(cityId, function(err, city){
     	if(err){
-    		console.log(err); 
-    		next(err); 
+    		console.log(err);
+    		next(err);
     	}else{
     		console.log(city);
     		if (city == undefined || city == null) {
@@ -101,13 +111,14 @@ router.get("/:city",function(req, res, next) {
      				user: result.user,
      				tags: result.tags,
      				summary: result.content.substr(0,20),
-     				url: '/g/' + cityParam + "/" + result.title.split(' ').join('-'),
+     				//url: '/g/' + cityParam + "/" + result.title.split(' ').join('-'),
+            url: '/g/view/' + result.title.split(' ').join('-'),
      				updated_at: result.updated_at,
      				votes: result.votes.length,
      			})
 
      		}
-     		let create= '/g/' + 'create'; 	
+     		let create= '/g/' + 'create';
             res.render("TG/tg", { guide: ret, create: create, place: cityName});
 
         }
@@ -122,7 +133,8 @@ router.get("/:city",function(req, res, next) {
 
 
 
-router.get('/:city/:title', function(req, res, next) {
+//router.get('/:city/:title', function(req, res, next) {
+router.get('/view/:title', function(req, res, next) {
     let Guide = req.app.locals.db.model('Guide');
     let title = req.params.title.split("-").join(" ");
 
