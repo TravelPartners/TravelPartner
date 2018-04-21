@@ -53,6 +53,12 @@ router.post("/new", async function(req, res, next){
         image: image,
         banner: banner
       });
+        
+        //console.log(newGuide.isNew);
+        //console.log(123566666);
+        //console.log(newGuide);
+        //console.log(23390080);
+
       newGuide.save(function(err, newGuide) {
     		if(err){
     			console.log(err);
@@ -69,9 +75,8 @@ router.post("/new", async function(req, res, next){
     		      status: 'success',
     		      url: '/g/view/' + newGuide.title.split(' ').join('-')
     		    });
-
     		}
-    	})
+    	});
     } catch(errs){
     	console.log(errs);
     	res.sendStatus(403);
@@ -114,21 +119,18 @@ router.get("/:city",function(req, res, next) {
      				//url: '/g/' + cityParam + "/" + result.title.split(' ').join('-'),
             url: '/g/view/' + result.title.split(' ').join('-'),
      				updated_at: result.updated_at,
-     				votes: result.votes.length,
-     			})
-
+     				votes: result.votes.length
+     			});
      		}
      		let create= '/g/' + 'create';
             res.render("TG/tg", { guide: ret, create: create, place: cityName});
 
         }
-    })
+        });
 
     	}
-    })
-
-
-})
+    });
+});
 
 
 

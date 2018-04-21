@@ -54,62 +54,67 @@
 
 <button onclick="topFunction()" id="myBtn" type="button" class="btn btn-primary" style="position: fixed; bottom: 20px;right: 30px;">Top</button>
 <script>
-window.onscroll = function() {scrollFunction()};
+ $(document).ready(function(){
+     window.onscroll = function() {scrollFunction()};
 
-function scrollFunction() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    document.getElementById("myBtn").style.display = "block";
-  } else {
-    document.getElementById("myBtn").style.display = "none";
-  }
-}
+     function scrollFunction() {
+         if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+             document.getElementById("myBtn").style.display = "block";
+         } else {
+             document.getElementById("myBtn").style.display = "none";
+         }
+     }
 
-function topFunction() {
-  document.body.scrollTop = 0;
-  document.documentElement.scrollTop = 0;
-}
+     function topFunction() {
+         document.body.scrollTop = 0;
+         document.documentElement.scrollTop = 0;
+     }
 
-$('#TrySubmit')
-  .click(function(){
-    if (!validateForm()) {
-      return false;
-    }
- 
-    var title = $('#guideForm #title').val();
-    var keyword=$('#guideForm #keyword').val();
-    var content = $('#guideForm #content').val();
-    var banner=$('#guideForm #banner').val();
-    axios.post('/g/new', {
-      user: window.localStorage.getItem('username'),
-      title: title,
-      keyword: keyword,
-      content: content,
-      banner:banner
-      }, {
-        headers: { Authorization: 'Bearer ' + window.localStorage.getItem('token') }
-      }).then(function (response) {
-        console.log(response);
-        if(response.status==403)
-        {
-          $('#sign-in-modal').modal('show');
-        //  return false;
-        }
-        if (response.data.status == 'error') {
-          $('#myModal #body').val("Title should not be repeat");
-          $('#myModal').modal('show');
-        } else if (response.data.status == 'success') {
-          window.location = response.data.url;
-        }
-        else {
-        //  location.href(response.xxxx); response.status==403
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-      console.log(title);
-      return false;
-});
+     $('#TrySubmit')
+         .click(function(){
+             if (!validateForm()) {
+                 return false;
+             }
+             
+             var title = $('#guideForm #title').val();
+             var keyword=$('#guideForm #keyword').val();
+             var content = $('#guideForm #content').val();
+             var banner=$('#guideForm #banner').val();
+             axios.post('/g/new', {
+                 user: window.localStorage.getItem('username'),
+                 title: title,
+                 keyword: keyword,
+                 content: content,
+                 banner:banner
+             }, {
+                 headers: { Authorization: 'Bearer ' + window.localStorage.getItem('token') }
+             }).then(function (response) {
+                 console.log(response);
+                 if(response.status==403)
+                     {
+                         console.log(12345);
+                         $('#sign-in-modal').modal('show');
+                         //  return false;
+                     }
+                 if (response.data.status == 'error') {
+                     $('#myModal #body').val("Title should not be repeat");
+                     $('#myModal').modal('show');
+                 } else if (response.data.status == 'success') {
+                     window.location = response.data.url;
+                 }
+                 else {
+                     //  location.href(response.xxxx); response.status==403
+                 }
+             }).catch(function (error) {
+                 if (error.response.status == 403) {
+                     $('#sign-in-modal').modal('toggle');
+                 }
+                 console.log(error);
+             });
+             console.log(title);
+             return false;
+         });
+ });
 
 
 </script>
