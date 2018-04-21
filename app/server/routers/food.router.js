@@ -13,6 +13,10 @@ router.get("/:city", function(req, res, next){
 		if(err){
 			console.log(err);
 		}else{
+			console.log(city);
+    		if (city == undefined || city == null) {
+    			return next(new Error('Empty record'));
+    		}
 			let foodIds = city.foods;
 			console.log(foodIds);
 		Food.find({_id: {$in: foodIds}}, function(err, allResults){
