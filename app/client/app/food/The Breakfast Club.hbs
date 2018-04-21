@@ -68,12 +68,11 @@
 <center>
 		 <div style="text-align: center">
 		 <section class="flex-container headText">
+			 {{#each image}}
+			 <img src="{{this}}">
 
-			 <img src="{{image[0]}}">
 
-			 <img src="{{image[1]}}">
-
-			 <img src="{{image[2]}}" >
+			 {{/each}}
 
 		 </section>
 	 </div>
