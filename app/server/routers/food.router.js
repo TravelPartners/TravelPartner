@@ -139,8 +139,8 @@ router.get("/:city", function(req, res, next){
 			console.log("test");
 			console.log(localFood);
 			console.log(lunch);
-			res.render("food/food", {dinner: dinner, 
-				                     lunch: lunch, 
+			res.render("food/food", {dinner: dinner,
+				                     lunch: lunch,
 				                     breakfast: breakfast,
 				                     cheapEat: cheapEat,
 				                     midRange: midRange,
@@ -167,6 +167,9 @@ router.get("/view/:name", function(req, res, next){
 			console.log(err);
 		}else{
 			let result = results[0];
+			if (result == undefined ||  == null) {
+				return next(new Error('Empty record'));
+			}
 			let ret = {
 				name : result.name,
 				descript : result.descript,
