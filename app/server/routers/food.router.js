@@ -5,7 +5,9 @@ const router = require('express').Router();
 router.get("/:city", function(req, res, next){
 	let Food = req.app.locals.db.model('Food');
 	let Place = req.app.locals.db.model('Place');
-	let cityId = (req.params.city.split("-"))[1];
+	let cityParam = req.params.city;
+    let cityId = (req.params.city.split("-"))[1];
+    let cityName = (req.params.city.split("-"))[0];
 
 	Place.findById(cityId, function(err, city){
 		if(err){
@@ -65,7 +67,7 @@ router.get("/:city", function(req, res, next){
                      		image: result.image,
                      		name: result.name,
                      		descript: result.descript,
-                     		url: "/f/" + result.name.split(" ").join("-")
+                     		url: "/f/view/" + result.name.split(" ").join("-")
                      	})
                      }
                      if(isBreak >= 0){
@@ -76,7 +78,7 @@ router.get("/:city", function(req, res, next){
                      		image: result.image,
                      		name: result.name,
                      		descript: result.descript,
-                     		url: "/f/" + result.name.split(" ").join("-")
+                     		url: "/f/view/" + result.name.split(" ").join("-")
                      	})
                      }
                      if(isCheap >= 0){
@@ -87,7 +89,7 @@ router.get("/:city", function(req, res, next){
                      		image: result.image,
                      		name: result.name,
                      		descript: result.descript,
-                     		url: "/f/" + result.name.split(" ").join("-")
+                     		url: "/f/view/" + result.name.split(" ").join("-")
                      	})
                      }
                      if(isMid >= 0){
@@ -98,7 +100,7 @@ router.get("/:city", function(req, res, next){
                      		image: result.image,
                      		name: result.name,
                      		descript: result.descript,
-                     		url: "/f/" + result.name.split(" ").join("-")
+                     		url: "/f/view/" + result.name.split(" ").join("-")
                      	})
                      }
                      if(isLuxury >= 0){
@@ -109,7 +111,7 @@ router.get("/:city", function(req, res, next){
                      		image: result.image,
                      		name: result.name,
                      		descript: result.descript,
-                     		url: "/f/" + result.name.split(" ").join("-")
+                     		url: "/f/view/" + result.name.split(" ").join("-")
                      	})
                      }
 
@@ -129,6 +131,8 @@ router.get("/:city", function(req, res, next){
 				// 	descript: result.descript
 				// })
 			}
+			console.log("test");
+			console.log(localFood);
 			res.render("food/food", {dinner: dinner, 
 				                     lunch: lunch, 
 				                     breakfast: breakfast,
@@ -149,7 +153,7 @@ router.get("/:city", function(req, res, next){
 module.exports = router;
 
 
-router.get("/f/:name", function(req, res, next){
+router.get("/view/:name", function(req, res, next){
 	let Food = req.app.locals.db.model('Food');
 	let name = req.params.name.split("-").join(" ");
 	Food.find({"name": name}, function(err, results){
