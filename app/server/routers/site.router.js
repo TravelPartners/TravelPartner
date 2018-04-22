@@ -93,6 +93,7 @@ router.post('/signup', (req, res, next) => {
                     status: 'success',
                     username: user.name,
                     token: token,
+                    avatar: user.avatar,
                     url: referer
                 });
             });
