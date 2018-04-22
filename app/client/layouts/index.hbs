@@ -92,7 +92,7 @@
                                 </div>
                                 <div class="row for-sign-up" style="margin:1em 0">
                                     <div class="col-md-8 col-md-offset-2">
-                                        <input type="text" class="form-control" id="email" placeholder="Email" >
+                                        <input type="text" class="form-control" id="inputEmail" placeholder="Email" >
                                     </div>
                                 </div>
                                 <div class="row" style="margin:1em 0">
@@ -102,7 +102,7 @@
                                 </div>
                                 <div class="row for-sign-up" style="margin:1em 0">
                                     <div class="col-md-8 col-md-offset-2">
-                                        <input type="password" class="form-control" id="retypedPassword" placeholder="Retype your password" >
+                                        <input type="password" class="form-control" id="inputRetypedPassword" placeholder="Retype your password" >
                                     </div>
                                 </div>
                                 <div class="row" style="margin:1em 0">
@@ -129,7 +129,7 @@
             {{{ body }}}
         </div>
     </body>
-    <script>
+    <script type="text/javascript">
      $(document).ready(function() {
          // TODO: Change it. Check status each time listener is triggered.
          // var lastScroll = 0;
@@ -159,37 +159,90 @@
              var name = $('#inputName').val();
              var pwd = $('#inputPassword').val();
 
+             var signInErrorText = '';
+             $('#signInError').text('');
+
              if (name == undefined || name == '')
-                 console.log(123);
+                 signInErrorText += 'Name cannot be blank. <br/>';
 
-             if (pwd == undefined || name == '')
-                 console.log(123);
+             if (pwd == undefined || pwd == '')
+                 signInErrorText += 'Password cannot be blank. <br>';
 
-             axios.post('/s/signin', {
-                 username: name,
-                 pwd: pwd
-             }).then(function (resp) {
-                 console.log(resp);
-                 if (resp.data.status == 'success') {
-                     console.log(resp);
-                     localStorage.setItem('token', resp.data.token);
-                     localStorage.setItem('avatar', resp.data.avatar);
-                     localStorage.setItem('username', name);
-
-                     $('#userInfoArea #userName').text(name);
-                     $('#beforeLogin').hide();
-                     $('#signInError').hide();
-                     $('#afterLogin').show();
-                     $('#sign-in-modal').modal('hide');
-
-                 } else if (resp.data.status == 'err') {
-                     //console.log(err);
-                     $('#signInError').text(resp.data.msg);
+             if (islogin) {
+                 if (signInErrorText != '') {
+                     $('#signInError').html(signInErrorText);
                      $('#signInError').show();
+                     return false;
                  }
-             }).catch(function(err) {
-                 console.log(err);
-             });
+                 axios.post('/s/signin', {
+                     username: name,
+                     pwd: pwd
+                 }).then(function (resp) {
+                     console.log(resp);
+                     if (resp.data.status == 'success') {
+                         console.log(resp);
+                         localStorage.setItem('token', resp.data.token);
+                         localStorage.setItem('avatar', resp.data.avatar);
+                         localStorage.setItem('username', name);
+
+                         $('#userInfoArea #userName').text(name);
+                         $('#beforeLogin').hide();
+                         $('#signInError').hide();
+                         $('#afterLogin').show();
+                         $('#sign-in-modal').modal('hide');
+
+                     } else if (resp.data.status == 'err') {
+                         //console.log(err);
+                         $('#signInError').text(resp.data.msg);
+                         $('#signInError').show();
+                     }
+                 }).catch(function(err) {
+                     console.log(err);
+                 });
+             } else {
+                 var email = $('#inputEmail').val();
+                 var retypedPwd = $('#inputRetypedPassword').val();
+
+                 if (email == undefined || email == '')
+                     signInErrorText += 'Email cannot be blank. <br>';
+                 if (retypedPwd == undefined || retypedPwd == '')
+                     signInErrorText += 'Retyped password cannot be blank. <br>';
+
+                 if (pwd != undefined && retypedPwd != undefined && pwd != '' && retypedPwd != '' && pwd != retypedPwd)
+                     signInErrorText += 'Retyped password did not match the password.';
+
+                 if (signInErrorText != '') {
+                     $('#signInError').html(signInErrorText);
+                     $('#signInError').show();
+                     return false;
+                 }
+
+                 axios.post('/s/signup', {
+                     username: name,
+                     pwd: pwd,
+                     email: email
+                 }).then(function (resp) {
+                     console.log(resp);
+                     if (resp.data.status == 'success') {
+                         console.log(resp);
+                         localStorage.setItem('token', resp.data.token);
+                         localStorage.setItem('avatar', resp.data.avatar);
+                         localStorage.setItem('username', resp.data.username);
+
+                         $('#userInfoArea #userName').text(name);
+                         $('#beforeLogin').hide();
+                         $('#signInError').hide();
+                         $('#afterLogin').show();
+                         $('#sign-in-modal').modal('hide');
+                     } else if (resp.data.status == 'err') {
+                         //console.log(err);
+                         $('#signInError').text(resp.data.error.msg);
+                         $('#signInError').show();
+                     }
+                 }).catch(function(err) {
+                     console.log(err);
+                 });
+             }
          });
 
          $('#btn-signout').click(function(event){
@@ -204,25 +257,6 @@
              localStorage.removeItem('username');
              localStorage.removeItem('token');
              localStorage.removeItem('avatar');
-
-        /*     axios.post('/s/logout', {
-
-             }).then(function (resp) {
-                 console.log(resp);
-                 if (resp.data.status == 'success') {
-                     console.log(resp);
-
-                     $('#userInfoArea #userName').val(name);
-                     $('#beforeLogin').show();
-                     $('#signInError').hide();
-                     $('#afterLogin').hide();
-                     $('#sign-in-modal').modal('hide');
-                 } else if (resp.data.status == 'err') {
-                     //console.log(err);
-                 }
-             }).catch(function(err) {
-                 console.log(err);
-             });*/
          });
 
          $('#to-register').click(function(event) {
@@ -230,11 +264,11 @@
 
              islogin = (islogin == true ? false : true);
              if (islogin) {
-                 $('#inputName').attr('attr', 'Username/email');
+                 $('#inputName').attr('placeholder', 'Username/email');
                  $('.for-sign-up').hide();
                  $('#btn-signin').html('Sign in');
              } else {
-                 $('#inputName').attr('attr', 'Username');
+                 $('#inputName').attr('placeholder', 'Username');
                  $('.for-sign-up').show();
                  $('#btn-signin').html('Register');
              }
