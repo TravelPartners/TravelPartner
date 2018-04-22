@@ -21,7 +21,8 @@ router.get('/', (req, res, next) => {
                     for (let place of places) {
                         ret.push({
                             name: place.name,
-                            geo: place.geo
+                            geo: place.geo,
+                            url: `/p/${place.name}-${place._id}`
                         });
                     }
                     return ret;

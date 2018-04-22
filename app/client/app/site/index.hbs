@@ -117,29 +117,30 @@
 
 </div>
 <button onclick="topFunction()" id="myBtn" type="button" class="btn btn-primary" style="position: fixed; bottom: 20px;right: 30px;">Top</button>
-    <!-- <iframe src="https://www.google.com/maps/embed?pb=!4v1523932571025!6m8!1m7!1sCAoSLEFGMVFpcE5ibVVMa0FfSzhYWXlocGZSY282UjBvTVV4MlVGMUR1R1BJNG5B!2m2!1d42.3583044!2d-71.0598753!3f240.35!4f-10.400000000000006!5f1.1924812503605784" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe> -->
+<!-- <iframe src="https://www.google.com/maps/embed?pb=!4v1523932571025!6m8!1m7!1sCAoSLEFGMVFpcE5ibVVMa0FfSzhYWXlocGZSY282UjBvTVV4MlVGMUR1R1BJNG5B!2m2!1d42.3583044!2d-71.0598753!3f240.35!4f-10.400000000000006!5f1.1924812503605784" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe> -->
 </div>
 
 <script type="text/javascript">
-window.onscroll = function() {scrollFunction()};
+ window.onscroll = function() {scrollFunction()};
 
-function scrollFunction() {
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        document.getElementById("myBtn").style.display = "block";
-    } else {
-        document.getElementById("myBtn").style.display = "none";
-    }
-}
+ function scrollFunction() {
+     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+         document.getElementById("myBtn").style.display = "block";
+     } else {
+         document.getElementById("myBtn").style.display = "none";
+     }
+ }
 
-function topFunction() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-}
-
+ function topFunction() {
+     document.body.scrollTop = 0;
+     document.documentElement.scrollTop = 0;
+ }
+ 
 
  function initMap() {
      var places = [];
      var placesNames = [];
+     var placesUrls = [];
      var markers = [];
 
      /**
@@ -151,6 +152,7 @@ function topFunction() {
 
      places.push({ lat: {{ geo.lat }}, lng: {{ geo.lng }} });
      placesNames.push("{{ name }}");
+     placesUrls.push("{{ url }}");
 
      {{/each}}
 
@@ -161,6 +163,9 @@ function topFunction() {
 
      for (var i = 0; i < places.length; ++i) {
          markers.push(new google.maps.Marker({ position: places[i], map: googleMap}));
+         markers[i].addListener('click', function () {
+             window.location = placesUrls[i];
+         });
      }
  }
 </script>
