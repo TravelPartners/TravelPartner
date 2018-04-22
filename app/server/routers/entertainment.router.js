@@ -9,7 +9,7 @@ router.get('/:place', (req, res, next)=>{
   let place = req.params.place.split('-');
   let placeName = place[0];
   let placeId = place[1];
-
+  console.log(placeName);
   Place.findById(placeId, function(err, place){
     if (err) { console.log(err);}
     else{
@@ -48,19 +48,21 @@ router.get('/:place', (req, res, next)=>{
 
             })
           };
-            res.render('entertainment/entertainment', {city: placeName, top3: top, regular: regular3});
+            res.render('entertainment/entertainment',
+             {
+               city: placeName,
+               top3: top,
+               regular: regular3,
+             });
 
-        });
+        }); //2st find spot end
 
-        //console.log('===== Here is top 1 spot =====');
-        //console.log(top[0]);
 
-        //res.render('entertainment/entertainment', { top3 : top});
-}//spot find else end
+}//1st spot find else end
 
-}); //find spot end
+}); //1st find spot end
 
-} // place block else end
+} // find place else end
 
 }); // find place block end
 
