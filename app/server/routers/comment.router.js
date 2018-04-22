@@ -30,39 +30,14 @@ router.get("/",function(req, res, next) {
      			}
         )
      		}
-            res.render("Comment/comm", { comment: ret });
+        let create= '/c/' + 'create';
+        res.render("Comment/comm", { comment: ret, create: create });
         }
     })
 });
 //--------------------------------------------------------------------
 
-router.get("/:title",function(req, res, next) {
-    let COMMENT = req.app.locals.db.model('Comment');
 
-    let title = req.params.title.split("-").join(" ");
-
-    COMMENT.find({'title': title }, function(err, results){
-        if(err){
-            console.log(err);
-        }else{
-
-        let result = results[0];
-
-     		let ret = {
-     				title: result.title,
-     				author: result.author,
-     				commentBody: result.commentBody,
-            keyword: result.keyword,
-            votes: result.votes.length,
-            views: result.views,
-            modified_at: result.modified_at,
-            reply: result.reply
-     			  }
-
-        res.render("Comment/SingleComm", { comment: ret});
-        }
-    })
-});
 //---------------------------------------------------------------------
 router.get("/create", async function(req, res, next){
   /*
@@ -104,7 +79,7 @@ router.post("/new", async function(req, res, next){
     //  let views= req.body.views;
     //  let modified_at = req.body.modified_at;
 
-      let newComment = new Comment({
+      let newComment = new COMMENT({
         title: title,
         user: user,
         commentBody: commentBody,
@@ -126,7 +101,7 @@ router.post("/new", async function(req, res, next){
         }else{
           res.json({
             status: 'success',
-            url: '/Comment/SingleComm' + newComment.title.split(' ').join('-')
+            url: '/c/view' + newComment.title.split(' ').join('-')
           });
         }
 
@@ -139,6 +114,33 @@ router.post("/new", async function(req, res, next){
 
 
 });
+//------------------------
+router.get("/:title",function(req, res, next) {
+    let COMMENT = req.app.locals.db.model('Comment');
 
+    let title = req.params.title.split("-").join(" ");
+
+    COMMENT.find({'title': title }, function(err, results){
+        if(err){
+            console.log(err);
+        }else{
+
+        let result = results[0];
+
+     		let ret = {
+     				title: result.title,
+     				author: result.author,
+     				commentBody: result.commentBody,
+            keyword: result.keyword,
+            votes: result.votes.length,
+            views: result.views,
+            modified_at: result.modified_at,
+            reply: result.reply
+     			  }
+
+        res.render("Comment/SingleComm", { comment: ret, });
+        }
+    })
+});
 
 module.exports = router;
