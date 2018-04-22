@@ -17,7 +17,7 @@ router.get('/:place', (req, res, next)=>{
       let spotss = place.spots;
       console.log(spotss);
 
-      Spot.find({'_id': {$in : spotss }}).exec(function(err, result1){
+      Spot.find({'_id': {$in : spotss }}).limit(3).exec(function(err, result1){
         if (err){console.log(err);}
         else{
         console.log('===== Here is spot query result =====');
@@ -29,7 +29,7 @@ router.get('/:place', (req, res, next)=>{
 
           top.push({
             img : result.img,
-            url : '/e/' + result.name + '-' + result._id,
+            //url : '/e/' + result.name + '-' + result._id,
             title: result.title,
             details: result.details,
             ticketInfo: result.ticketInfo,
@@ -41,14 +41,14 @@ router.get('/:place', (req, res, next)=>{
 
             regular3.push({
               img : result.img,
-              url : '/e/' + result.name + '-' + result._id,
+              //url : '/e/' + result.name + '-' + result._id,
               title: result.title,
               details: result.details,
               ticketInfo: result.ticketInfo,
 
             })
           };
-            res.render('entertainment/entertainment', { top3: top, regular: regular3});
+            res.render('entertainment/entertainment', {city: placeName, top3: top, regular: regular3});
 
         });
 
