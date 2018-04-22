@@ -142,7 +142,7 @@ router.post('/signin', (req, res, next) => {
         .then((result) => {
             if (result == true) {
                 return token.get(content.username).then((token) => {
-                    let res = { "status": "success", "token": token };
+                    let res = { "status": "success", "token": token, "avatar": content.avatar || '' };
                     return res;
                 });
             } else {
