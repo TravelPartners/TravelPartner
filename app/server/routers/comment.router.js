@@ -64,7 +64,29 @@ router.get("/:title",function(req, res, next) {
     })
 });
 //---------------------------------------------------------------------
-router.post("/SingleComm", async function(req, res, next){
+router.get("/create", async function(req, res, next){
+  /*
+	let user = req.body.user;
+	if(user == undefined || user == ""){
+		console.log(23445);
+		res.sendStatus(403);
+		return next;
+	}
+
+	try{
+		user = await req.app.locals.auth(req.app.locals.token, user);
+		res.render("TG/upload", {});
+	}catch(errs){
+		console.log(errs);
+		res.sendStatus(403);
+
+	}
+  */
+  res.render("Comment/upload");
+
+})
+//---------------------------------------------------------------------
+router.post("/new", async function(req, res, next){
   let username = req.body.user;
   if(username == undefined || username == ""){
     res.sendStatus(403);
@@ -75,21 +97,21 @@ router.post("/SingleComm", async function(req, res, next){
     	username = await req.app.locals.auth(req.app.locals.token, username);
       let COMMENT = req.app.locals.db.model('Comment');
       let title = req.body.title;
-      let author = req.body.author;
+      let user = req.body.user;
       let commentBody = req.body.commentBody;
       let keyword = req.body.keyword;
-      let votes = req.body.votes;
-      let views= req.body.views;
-      let modified_at = req.body.modified_at;
+    //  let votes = req.body.votes;
+    //  let views= req.body.views;
+    //  let modified_at = req.body.modified_at;
 
       let newComment = new Comment({
         title: title,
-        author: author,
+        user: user,
         commentBody: commentBody,
         keyword: keyword,
-        votes: votes,
-        views: views,
-        modified_at: modified_at,
+        //votes: votes,
+        //views: views,
+        //modified_at: modified_at,
       });
 
       newComment.save(function(err,newComment){
