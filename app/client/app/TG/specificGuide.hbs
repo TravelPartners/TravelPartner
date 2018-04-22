@@ -13,14 +13,13 @@
   <h4 class="headCenterText"> by {{user}}</h4>
 </div>
 
-<div style="float: left;"> Feature</div>
+<div style="float: left;color:#5c8cd5"> Feature</div>
 <div class="user">
-  {{#each tags}}
-  <code style="color:#5c8cd5">{{this}}</code>
-  {{/each}}
+
+  <code style="color:#5c8cd5">{{tag}}</code>
 </div>
 <p>{{updated_at}}</p>
-<p style="font-size:19px">{{content}}</p>
+<p style="font-size:18px;font-family:Arial;text-indent:20px;">{{content}}</p>
 {{/with}}
 
 </div>
