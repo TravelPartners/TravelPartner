@@ -25,7 +25,7 @@ router.get("/",function(req, res, next) {
      				modified_at: result.modified_at,
             votes: result.votes.length,
             views: result.views,
-            image: result.image,
+            userImg: result.userImg,
             url: '/c/' + result.title.split(' ').join('-'),
      			}
         )
