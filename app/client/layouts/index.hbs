@@ -265,10 +265,12 @@
 
              islogin = (islogin == true ? false : true);
              if (islogin) {
+                 $('#sign-in-modal #myModalLabel').html('Log with');
                  $('#inputName').attr('placeholder', 'Username/email');
                  $('.for-sign-up').hide();
                  $('#btn-signin').html('Sign in');
              } else {
+                 $('#sign-in-modal #myModalLabel').html('Register');
                  $('#inputName').attr('placeholder', 'Username');
                  $('.for-sign-up').show();
                  $('#btn-signin').html('Register');
