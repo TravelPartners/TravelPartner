@@ -9,7 +9,7 @@ router.get('/:place', (req, res, next)=>{
   let place = req.params.place.split('-');
   let placeName = place[0];
   let placeId = place[1];
-
+  console.log(placeName);
   Place.findById(placeId, function(err, place){
     if (err) { console.log(err);}
     else{
@@ -17,7 +17,7 @@ router.get('/:place', (req, res, next)=>{
       let spotss = place.spots;
       console.log(spotss);
 
-      Spot.find({'_id': {$in : spotss }}).exec(function(err, result1){
+      Spot.find({'_id': {$in : spotss }}).limit(3).exec(function(err, result1){
         if (err){console.log(err);}
         else{
         console.log('===== Here is spot query result =====');
@@ -29,7 +29,7 @@ router.get('/:place', (req, res, next)=>{
 
           top.push({
             img : result.img,
-            url : '/e/' + result.name + '-' + result._id,
+            //url : '/e/' + result.name + '-' + result._id,
             title: result.title,
             details: result.details,
             ticketInfo: result.ticketInfo,
@@ -41,26 +41,28 @@ router.get('/:place', (req, res, next)=>{
 
             regular3.push({
               img : result.img,
-              url : '/e/' + result.name + '-' + result._id,
+              //url : '/e/' + result.name + '-' + result._id,
               title: result.title,
               details: result.details,
               ticketInfo: result.ticketInfo,
 
             })
           };
-            res.render('entertainment/entertainment', { top3: top, regular: regular3});
+            res.render('entertainment/entertainment',
+             {
+               city: placeName,
+               top3: top,
+               regular: regular3,
+             });
 
-        });
+        }); //2st find spot end
 
-        //console.log('===== Here is top 1 spot =====');
-        //console.log(top[0]);
 
-        //res.render('entertainment/entertainment', { top3 : top});
-}//spot find else end
+}//1st spot find else end
 
-}); //find spot end
+}); //1st find spot end
 
-} // place block else end
+} // find place else end
 
 }); // find place block end
 
