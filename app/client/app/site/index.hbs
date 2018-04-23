@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="/site/site.css" />
 <link href="https://fonts.googleapis.com/css?family=Gamja+Flower" rel="stylesheet">
 
-<div id="myCarousel" class="carousel slide" style="height:300px">
+<div id="myCarousel" class="carousel slide" style="height:32em; margin:-1.35em;">
 <!-- 轮播（Carousel）指标 -->
 <ol class="carousel-indicators">
   <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -162,7 +162,7 @@
      placesUrls.push("{{ url }}");
 
      {{/each}}
-
+console.log(placesUrls);
      var googleMap = new google.maps.Map(document.getElementById('google-map'), {
          zoom: 4,
          center: places[0]
@@ -170,9 +170,13 @@
 
      for (var i = 0; i < places.length; ++i) {
          markers.push(new google.maps.Marker({ position: places[i], map: googleMap}));
-         markers[i].addListener('click', function () {
-             window.location = placesUrls[i];
-         });
+         markers[i].addListener('click', ((i)=>{
+             return function () {
+//                 console.log(i);
+//                 console.log(placesUrls[i]);
+                 window.location = placesUrls[i];
+             };
+         })(i));
      }
  }
 </script>
