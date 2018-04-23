@@ -162,7 +162,7 @@
      placesUrls.push("{{ url }}");
 
      {{/each}}
-
+console.log(placesUrls);
      var googleMap = new google.maps.Map(document.getElementById('google-map'), {
          zoom: 4,
          center: places[0]
@@ -170,9 +170,13 @@
 
      for (var i = 0; i < places.length; ++i) {
          markers.push(new google.maps.Marker({ position: places[i], map: googleMap}));
-         markers[i].addListener('click', function () {
-             window.location = placesUrls[i];
-         });
+         markers[i].addListener('click', ((i)=>{
+             return function () {
+//                 console.log(i);
+//                 console.log(placesUrls[i]);
+                 window.location = placesUrls[i];
+             };
+         })(i));
      }
  }
 </script>

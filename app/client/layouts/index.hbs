@@ -47,6 +47,7 @@
 
                     <div class="collapse navbar-collapse" id="bs-nav-demo">
                         <ul class="nav navbar-nav">
+                            <li><a href="/c"><i class="fas fa-comment-alt"></i> &nbsp; Comment </a></li>
                             <li><a href="############">Guide</a></li>
                             <li><a href="############">Food</a></li>
                             <li><a href="############">Accomodation</a></li>
@@ -264,10 +265,12 @@
 
              islogin = (islogin == true ? false : true);
              if (islogin) {
+                 $('#sign-in-modal #myModalLabel').html('Log with');
                  $('#inputName').attr('placeholder', 'Username/email');
                  $('.for-sign-up').hide();
                  $('#btn-signin').html('Sign in');
              } else {
+                 $('#sign-in-modal #myModalLabel').html('Register');
                  $('#inputName').attr('placeholder', 'Username');
                  $('.for-sign-up').show();
                  $('#btn-signin').html('Register');
