@@ -9,6 +9,8 @@ const token = require('../lib/token');
 router.get('/', (req, res, next) => {
     let Site = req.app.locals.db.model('Site');
     let Place = req.app.locals.db.model('Place');
+    let Guide = req.app.locals.db.model('Guide');
+    let User = req.app.locals.db.model('User');
 
     Site.findOne()
         .exec()
@@ -29,7 +31,51 @@ router.get('/', (req, res, next) => {
                 });
         }).then((places) => {
             console.log(places);
-            res.render('site/index', { places: places });
+            return Guide
+                .find()
+                .limit(3)
+                .exec()
+                .then((guides) => {
+                    console.log(guides);
+                    let guideUsers = [];
+                    for (let guide of guides)
+                        guideUsers.push(guide.user);
+
+                    User
+                        .where('name').in(guideUsers)
+                        .exec()
+                        .then((users) => {
+                            let userInfo = {};
+                            for (let user of users) {
+                                userInfo[user.name] = user.avatar;
+                            }
+
+                            let firstGuide = {
+                                user: guides[0].user,
+                                image: userInfo[guides[0].user],
+                                avatar: userInfo[guides[0].user],
+                                title: guides[0].title,
+                                url: '/g/view/' + guides[0].title.split(' ').join('-'),
+                                updated_at: guides[0].created_at,
+                                summary: guides[0].content.substr(0, 50) + '...',
+                                tags: guides[0].tags
+                            };
+
+                            let secondGuide = {
+                                user: guides[1].user,
+                                image: userInfo[guides[1].user],
+                                avatar: userInfo[guides[1].user],
+                                title: guides[1].title,
+                                url: '/g/view/' + guides[1].title.split(' ').join('-'),
+                                updated_at: guides[1].created_at,
+                                summary: guides[1].content.substr(0, 50) + '...',
+                                tags: guides[1].tags
+                            };
+
+
+                            res.render('site/index', { places: places, firstGuide: firstGuide, secondGuide: secondGuide });
+                        });
+                });
         })
         .catch((err) => {
             console.log(err);
