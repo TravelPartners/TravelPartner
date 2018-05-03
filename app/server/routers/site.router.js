@@ -52,7 +52,7 @@ router.get('/', (req, res, next) => {
 
                             let firstGuide = {
                                 user: guides[0].user,
-                                image: userInfo[guides[0].user],
+                                image: guides[0].image[0],
                                 avatar: userInfo[guides[0].user],
                                 title: guides[0].title,
                                 url: '/g/view/' + guides[0].title.split(' ').join('-'),
@@ -63,7 +63,7 @@ router.get('/', (req, res, next) => {
 
                             let secondGuide = {
                                 user: guides[1].user,
-                                image: userInfo[guides[1].user],
+                                image: guides[1].image[0],
                                 avatar: userInfo[guides[1].user],
                                 title: guides[1].title,
                                 url: '/g/view/' + guides[1].title.split(' ').join('-'),
@@ -72,8 +72,18 @@ router.get('/', (req, res, next) => {
                                 tags: guides[1].tags
                             };
 
+                            let thirdGuide = {
+                                user: guides[2].user,
+                                image: guides[2].image[0],
+                                avatar: userInfo[guides[2].user],
+                                title: guides[2].title,
+                                url: '/g/view/' + guides[2].title.split(' ').join('-'),
+                                updated_at: guides[2].created_at,
+                                summary: guides[2].content.substr(0, 50) + '...',
+                                tags: guides[2].tags
+                            };
 
-                            res.render('site/index', { places: places, firstGuide: firstGuide, secondGuide: secondGuide });
+                            res.render('site/index', { places: places, firstGuide: firstGuide, secondGuide: secondGuide,thirdGuide: thirdGuide });
                         });
                 });
         })
@@ -207,7 +217,7 @@ router.post('/signin', (req, res, next) => {
 });
 
 router.post('/logout', (req, res, next) => {
-    
+
 });
 
 module.exports = router;

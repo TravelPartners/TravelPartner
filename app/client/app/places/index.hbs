@@ -26,6 +26,9 @@
   left: 1em;
   font-size: 1.5em;
   }
+  .tabcontent {
+    height:476px;
+  }
 </style>
 
 <div class="container">
@@ -37,17 +40,18 @@
 
     <!-- *************Vertical Tab************ -->
 
-	  <div class="tab">
+	  <div class="tab" style="height:476px;">
   		  <button class="tablinks" onclick="openTab(event, 'Introduction')" id="defaultOpen"><i class="fas fa-book"></i> Introduction</button>
   		  <button class="tablinks" onclick="openTab(event, 'Guide')"><i class="fas fa-globe"></i> Travel Guide</button>
   		  <button class="tablinks" onclick="openTab(event, 'Accomodation')"><i class="fas fa-bed"></i> Accomodation</button>
  		    <button class="tablinks" onclick="openTab(event, 'Food')"><i class="fas fa-utensils"></i> Local Food</button>
   		  <button class="tablinks" onclick="openTab(event, 'Entertainment')"><i class="fas fa-music"></i> Entertainment</button>
-	  </div>
+        <button class="tablinks" onclick="openTab(event, 'Transportation')"><i class="fas fa-bus"></i> Transportation</button>
+    </div>
 
     <!-- *****coresponding pages********* -->
 	  <div id="Introduction" class="tabcontent" >
-	      <iframe style="right: 0; bottom: 0; width:100%; height: 95%" src="{{ city_intro }}"></iframe>
+	      <iframe style="right: 0; bottom: 0; width:100%; height: 100%" src="{{ city_intro }}"></iframe>
 		    <!--<p style="text-align:right">Video By: No Hesitations-Youtube</p>-->
 	  </div>
 
@@ -79,6 +83,13 @@
       </div>
   	</div>
 
+    <div id="Transportation" class="tabcontent">
+      <div class="sub-con">
+        <img class="sub-img" style="width:100%;height:100%;" src="{{ sub.trans.banner }}">
+        <div class= "sub-title"> <a href="{{ sub.trans.listUrl }}">{{ sub.trans.title }}</a></div>
+      </div>
+    </div>
+
     <div class="row" style="margin-top:30em;"> </div>
     <div class="row" style="margin-top:2em;">
       <hr>
@@ -99,14 +110,14 @@
 	        	    <div class="thumbnail">
 	        		      <img src="{{ this }}" id="section{{@key}}" onclick="jumpContent('jumpContent','section{{@key}}')">
 				        </div>
-			      </div>	      	
+			      </div>
 			  {{/each}}
       </div>
 			  <div class="col-lg-3 col-sm-4">
 	        	<div class="thumbnail">
 	        		  <img src="https://images.unsplash.com/photo-1478987447929-0f12b4d56d71?ixlib=rb-0.3.5&s=1557dd138272f08faaa8788e01e8bff3&auto=format&fit=crop&w=1350&q=80">
 				    </div>
-			  </div>	      	
+			  </div>
 		</div>
     <div>
         <div style="float:right;font-size:1.5em">Panoramas</div>
@@ -182,4 +193,3 @@ console.log(outerWrap.html());
 <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 <script type="text/javascript" src="/places/place.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAsmrS2NY9Ld9Yn4LAdgdH0hRxIIfI7AeI&callback=initMap" type="text/javascript"></script>
-
