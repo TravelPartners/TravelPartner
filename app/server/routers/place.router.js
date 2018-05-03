@@ -17,13 +17,15 @@ router.get('/:place', (req, res, next) => {
             let Acco = req.app.locals.db.model('Acco');
             let Spot = req.app.locals.db.model('Spot');
             let Guide = req.app.locals.db.model('Guide');
+            let Trans=req.app.locals.db.model('Trans');
 
             let sub = {
                 intro: '',
                 guide: {},
                 food: {},
                 acco: {},
-                spot: {}
+                spot: {},
+                trans:{}
             };
 
             Guide.findById((place.guides)[0]).then((guide) => {
@@ -48,11 +50,25 @@ router.get('/:place', (req, res, next) => {
                         resolve(sub);
                     }).catch(reject);
                 }).then((sub) => {
+
+                  return new Promise((resolve, reject) => {
+                      Trans.findById((place.trans)[0]).then((trans) => {
+                          sub.trans = {
+                              title: trans.name,
+                              banner: trans.img,
+                              url: '/t/' + place.name + '-' + place._id,
+                              listUrl: '/t/' + place.name + '-' + place._id
+                          };
+                          resolve(sub);
+                      }).catch(reject);
+                  });
+                }).then((sub) => {
+
                     return new Promise((resolve, reject) => {
                         Spot.findById((place.spots)[0]).then((spot) => {
                             sub.spot = {
                                 title: spot.title,
-                                img: spot.img,
+                                banner: spot.img,
                                 url: '/e/' + place.name + '-' + place._id,
                                 listUrl: '/e/' + place.name + '-' + place._id
                             };
@@ -68,7 +84,7 @@ router.get('/:place', (req, res, next) => {
                             .exec()
                             .then((food) => {
                                 sub.food = {
-                                    title: 'Best food in ' + place.name + '!', 
+                                    title: 'Best food in ' + place.name + '!',
                                     name: food[0].name,
                                     location: food[0].restaurant.location,
                                     banner: (food[0].image)[0],

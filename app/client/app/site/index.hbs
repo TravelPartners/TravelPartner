@@ -58,69 +58,86 @@
     <div>
         {{#with firstGuide}}
             <div class="sender">
-            <div>
-                <img src="{{ avatar }}">
-            </div>
+              <div class="col-sm-1">
+                  <img class="img-circle" style="width:100%; float: left;" src="{{ avatar }}">
+              </div>
             <div>
                 <div class="left_triangle"></div>
                 <span>
-                    <div class="container" style="width:500px;">
-                        <div class="row">
+                    <div class="container" style="width:500px; background-color:transparent;">
                             <div class="">
                                 <br><br>
-                                <p class="paragraph text-info">
-                                    <a href={{url}} target="_blank">{{title}}</a>
+                                <p class="paragraph text-info" style="text-align:left;">
+                                    <a  target="_blank" href={{url}} >{{title}}</a>
                                 </p>
-                                <div style="float: left;">by</div><div class="user">{{user}} </div>
-                                <p>{{updated_at}}</p>
-                                <div style="float: left;" class="text-info">Tags:</div>
-                                {{#each tags}}
-                                    <div>{{this}}</div>
-                                {{/each}}
-                                <br>
-                                <p><em>{{summary}}<a class="text-info" href={{url}} target="_blank">view more.</em></a></p>p
+                                <div style="float: left;">by</div> <p ><i><b>&nbsp{{user}}</i></b> </p>
+                                <div>  <img style="width:100%; height:100%;" src="{{image }}" > </div>
+                                <p><em>{{summary}}<a class="text-info" href={{url}} target="_blank">view more.</em></a></p>
                             </div>
-                        </div>
                     </div>
                 </span>
-            </div>
+              </div>
             </div>
         {{/with}}
 
         {{#with secondGuide}}
         <!-- Right -->
-        <div class="receiver">
-            <div>
-                <img src="{{ avatar }}">
+         <div class="receiver">
+            <div class="col-sm-1" style="text-align:right;">
+                <img class="img-circle" style="width:100%;" src="{{ avatar }}">
             </div>
             <div>
                 <div class="right_triangle"></div>
                 <span>
-                    <div class="container" style="width:500px;">
-                        <div class="row">
+                    <div  style="width:500px; background-color:transparent;">
                             <div class="">
-                                <br><br><p class="paragraph text-info"><a href={{url}} target="_blank">{{title}}</a></p>
-                                <div style="float: left;">by</div><div class="user">{{user}} </div>
-                                <p style="clear:both;">{{updated_at}}</p>
-                                <div style="float: left;" class="text-info":>Tags:</div>
-                                {{#each tags}}
-                                    <div>{{this}}</div>
-                                {{/each}}
-                                <br>
+                                <br><br>
+                                <div style="text-align:right;">
+                                <p class="paragraph text-info" style="text-align:right;">
+                                    <a href={{url}} target="_blank" >{{title}}</a>
+                                </p>
+                                <div style="text-align:right;">
+                                 <p >by <i><b>&nbsp{{user}}</i></b> </p>
+                              </div>
+                                <div>  <img style="width:100%; height:100%;" src="{{ image }}" > </div>
                                 <p><em>{{summary}}<a class="text-info" href={{url}} target="_blank">view more.</em></a></p>
+                              </div>
                             </div>
-                        </div>
                     </div>
                 </span>
             </div>
         </div>
         {{/with}}
+
+
+        {{#with thirdGuide}}
+            <div class="sender">
+              <div class="col-sm-1">
+                  <img class="img-circle" style="width:100%; float: left;" src="{{ avatar }}">
+              </div>
+            <div>
+                <div class="left_triangle"></div>
+                <span>
+                    <div class="container" style="width:500px; background-color:transparent;">
+                            <div class="">
+                                <br><br>
+                                <p class="paragraph text-info" style="text-align:left;">
+                                    <a  target="_blank" href={{url}} >{{title}}</a>
+                                </p>
+                                <div style="float: left;">by</div> <p ><i><b>&nbsp{{user}}</i></b> </p>
+                                <div>  <img style="width:100%; height:100%;" src="{{image }}" > </div>
+                                <p><em>{{summary}}<a class="text-info" href={{url}} target="_blank">view more.</em></a></p>
+                            </div>
+                    </div>
+                </span>
+              </div>
+            </div>
+        {{/with}}
+
     </div>
   </div>
 </div>
 
-<div class="row" style="background-color:white;">
-</div>
 
 
 

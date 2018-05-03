@@ -3,6 +3,7 @@
 
 
 /* general text formatting */
+
 body { padding-top: 70px; }
 .jumbotron {
     color: #2c3e50;
@@ -12,7 +13,6 @@ body { padding-top: 70px; }
 
 .row  {
     margin:10px 0px;
-    background-color: #f1f1ed;
     border: 0.4px #f1f9ea;
     text-align:left;
 }
@@ -107,8 +107,8 @@ fieldset {
 
         .receiver div:first-child img,
         .sender div:first-child img{
-            width:50px;
-            height: 50px;
+          width:50px;
+           height: 50px;
         }
 
         .receiver{
