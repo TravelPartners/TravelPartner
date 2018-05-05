@@ -81,7 +81,7 @@ router.post("/new", async function(req, res, next){
 
       let newComment = new COMMENT({
         title: title,
-        user: user,
+        author: user,
         commentBody: commentBody,
         keyword: keyword,
         //votes: votes,
@@ -101,7 +101,7 @@ router.post("/new", async function(req, res, next){
         }else{
           res.json({
             status: 'success',
-            url: '/c/view' + newComment.title.split(' ').join('-')
+            url: '/c/' + newComment.title.split(' ').join('-')
           });
         }
 
@@ -114,6 +114,18 @@ router.post("/new", async function(req, res, next){
 
 
 });
+
+
+router.post("/reply", async function(req, res, next){
+  let username = req.body.user;
+  if(username == undefined || username == ""){
+    res.sendStatus(403);
+    return next;
+  }
+
+
+});
+
 //------------------------
 router.get("/:title",function(req, res, next) {
     let COMMENT = req.app.locals.db.model('Comment');

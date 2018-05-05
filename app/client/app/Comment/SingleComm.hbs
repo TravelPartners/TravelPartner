@@ -14,7 +14,7 @@
 <div class="row" style="background-color:white;">
 <div class="col-sm-11" >
 {{#with comment}}
-<h4 style="color:#5c8cd5;">{{title}}</h4>
+<h4 id="title" style="color:#5c8cd5;">{{title}}</h4>
 <div >
 {{#each keyword}}
 <code style="color:#5c8cd5">{{this}}</code>
@@ -123,15 +123,18 @@ $('#post')
     return false;
   }
     var content = $('#commentForm #content').val();
-    axios.post('/c/new', {
-      content: content
+    var title= $('#title').val();
+    axios.post('/c/reply', {
+      user: window.localStorage.getItem('username'),
+      content: content,
+      title:title
     }).then(function (response) {
     console.log(response);
     if (response.status == 'fail') {
       $('#warningModal').modal('show')
       return false;
-    } else {
-      location.href(response.xxxx);
+    } else if (response.data.status == 'success') {
+        window.location = response.data.url;
     }
   })
   .catch(function (error) {
