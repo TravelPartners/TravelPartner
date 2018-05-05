@@ -29,12 +29,7 @@ router.get('/:place', (req, res, next)=>{
 
           top.push({
             img : result.img,
-<<<<<<< HEAD
-            //city: result.name,
             url : '/e/' + result.name + '-' + result._id,
-=======
-      `
->>>>>>> upstream/master
             title: result.title,
             details: result.details,
             ticketInfo: result.ticketInfo,
@@ -46,12 +41,9 @@ router.get('/:place', (req, res, next)=>{
 
             regular3.push({
               img : result.img,
-<<<<<<< HEAD
               //city: result.name,
               url : '/e/' + result.name + '-' + result._id,
-=======
-   
->>>>>>> upstream/master
+
               title: result.title,
               details: result.details,
               ticketInfo: result.ticketInfo,
