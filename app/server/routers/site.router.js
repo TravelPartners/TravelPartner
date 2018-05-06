@@ -57,7 +57,7 @@ router.get('/', (req, res, next) => {
                                 title: guides[0].title,
                                 url: '/g/view/' + guides[0].title.split(' ').join('-'),
                                 updated_at: guides[0].created_at,
-                                summary: guides[0].content.substr(0, 50) + '...',
+                                summary: guides[0].content.substr(0, 150) + '...',
                                 tags: guides[0].tags
                             };
 
@@ -68,7 +68,7 @@ router.get('/', (req, res, next) => {
                                 title: guides[1].title,
                                 url: '/g/view/' + guides[1].title.split(' ').join('-'),
                                 updated_at: guides[1].created_at,
-                                summary: guides[1].content.substr(0, 50) + '...',
+                                summary: guides[1].content.substr(0, 150) + '...',
                                 tags: guides[1].tags
                             };
 
@@ -79,7 +79,7 @@ router.get('/', (req, res, next) => {
                                 title: guides[2].title,
                                 url: '/g/view/' + guides[2].title.split(' ').join('-'),
                                 updated_at: guides[2].created_at,
-                                summary: guides[2].content.substr(0, 50) + '...',
+                                summary: guides[2].content.substr(0, 150) + '...',
                                 tags: guides[2].tags
                             };
 
