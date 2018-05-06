@@ -31,7 +31,7 @@ router.get('/:place', (req, res, next) => {
             // find the first guide in the database place object
             Guide.findById((place.guides)[0]).then((guide) => {
                 sub.guide = {
-                    title: guide.title,
+                    title: guide.title, 
                     tags: guide.tags,
                     banner: guide.banner,
                     url: '/g/' + guide.title.split(' ').join('-'),
