@@ -72,6 +72,11 @@ const dbConnection = ((db) => {
 
 console.log("--------------");
 
+/**
+ * Configure global handlebars variables
+ */
+app.locals.title = "Travel Partner";
+
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
