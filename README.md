@@ -4,9 +4,9 @@ Project travel partner
 ## Install the application
 
 - 1. Clone the repository to somewhere.
-- 2. Copy config.js.default to config.js and fill in your database information.
-- 3. Run npm install to get all dependencies.
-- 4. Run npm run production to build and generate essential files.
+- 2. Copy `config.js.default` to `config.js` and fill in your database information.
+- 3. Run `npm install` to get all dependencies.
+- 4. Run `npm run production` to build and generate essential files.
 
 ## Run the application
 
