@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title> TravelPartner </title>
+        <title> {{ title }} </title>
 
 	      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Material+Icons">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
@@ -63,7 +63,7 @@
                                     <span id="userName"></span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#"><i class="fas fa-book"></i> &nbsp;User profile</a></li>
+                                    <li><a id="dropdown-profile-link" href="#"><i class="fas fa-book"></i> &nbsp;User profile</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="#" id="btn-signout"><i class="fas fa-sign-out-alt"></i> &nbsp;Sign Out </a></li>
                                 </ul>
@@ -148,6 +148,7 @@
 
          let nameInStorage = localStorage.getItem('username');
          if (nameInStorage != undefined) {
+             $('#dropdown-profile-link').attr('href', '/u/profile/' + nameInStorage);
              $('#userInfoArea #userName').text(nameInStorage);
              $('#beforeLogin').hide();
              $('#afterLogin').show();
@@ -192,6 +193,7 @@
                          $('#afterLogin').show();
                          $('#sign-in-modal').modal('hide');
 
+                         location.reload();
                      } else if (resp.data.status == 'err') {
                          //console.log(err);
                          $('#signInError').text(resp.data.msg);
@@ -235,6 +237,8 @@
                          $('#signInError').hide();
                          $('#afterLogin').show();
                          $('#sign-in-modal').modal('hide');
+
+                         location.reload();
                      } else if (resp.data.status == 'err') {
                          //console.log(err);
                          $('#signInError').text(resp.data.error.msg);
@@ -258,6 +262,8 @@
              localStorage.removeItem('username');
              localStorage.removeItem('token');
              localStorage.removeItem('avatar');
+
+             location.reload();
          });
 
          $('#to-register').click(function(event) {

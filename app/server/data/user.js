@@ -34,7 +34,7 @@ let UserSchema = new Schema({
     desc: String,    // Description
     avatar: String,
     tags: [String],
-    locations: [String],
+    locations: [Schema.Types.ObjectId],
     guides: [Schema.Types.ObjectId],
     status: {
         type: Number,
@@ -51,7 +51,8 @@ let UserSchema = new Schema({
     msg: {
         from: String,
         created_at: Date,
-        content: String
+        content: String,
+        unread: Boolean
     },
     token : {
         s: {
