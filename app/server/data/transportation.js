@@ -1,5 +1,5 @@
 'use strict'
-
+//define the transportation schematypes
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 

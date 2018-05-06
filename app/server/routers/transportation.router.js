@@ -4,7 +4,7 @@ const router = require('express').Router();
 
 
 
-
+//the main site of transportion part url definition
   // location: "boston"-"_id"
   router.get('/:place',(req, res, next)=>{
     let Place = req.app.locals.db.model('Place');
@@ -20,7 +20,7 @@ const router = require('express').Router();
         let trans = place.trans;
 
 
-
+//find the first four spot of boston
       Trans.find({ '_id': { $in: trans } }).limit(4).exec(function(err, transs) {
             console.log(transs);
             let spot = [];
