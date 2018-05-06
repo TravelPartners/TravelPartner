@@ -66,16 +66,7 @@
 <br/>
 	<h1 style="font-family:Gamja Flower">&nbsp;&nbsp;&nbsp;Local Food Recommendation</h1>
 </br>
-	<!--
-	<style>
-	img{
-		width:300px;
-	}
-	div.col-xs-6{
-	text-align:center;
-	}
-</style>
--->
+<!-- section for the local food -->
 	<div class="well">
 	        <div class="row">
 						{{#each localFood}}
@@ -106,6 +97,7 @@
 	<div class="caption">
 	        <h5 style="font-family:Jua">{{name}}</h5>
 					<br/>
+					<!--the style of the word-->
 					<div style="font-family:Jua" class="text-muted">{{location}}</div>
 					<div style="font-family:Jua" class="text-muted">Boston, America</div>
 	        <br>
@@ -148,12 +140,14 @@
 	</br>
 	<div class="container">
 	<div class="row">
+		<!--each row has for breakfast-->
 		{{#each breakfast}}
 		<div class="col-xs-3 headText" >
 			<a href="{{url}}" class="thumbnail">
 				<img src="{{image}}" style="height: 180px" alt="The Breakfast Club">
 			</a>
 	<div class="caption">
+		<!--the style of the word-->
 					<h5 style="font-family:Jua">{{name}}</h5>
 					<br/>
 					<div style="font-family:Jua" class="text-muted">{{location}}</div>
@@ -181,6 +175,7 @@
 	<div class="caption">
 					<h5 style="font-family:Jua">{{name}}</h5>
 					<br/>
+					<!--the style of the word-->
 					<div style="font-family:Jua" class="text-muted">{{location}}</div>
 					<div style="font-family:Jua" class="text-muted">Boston, America</div>
 					<br>
@@ -207,6 +202,7 @@
 	<div class="caption">
 					<h5 style="font-family:Jua">{{name}}</h5>
 					<br/>
+					<!--the style of the word-->
 					<div style="font-family:Jua" class="text-muted">{{location}}</div>
 					<div style="font-family:Jua" class="text-muted">Boston, America</div>
 					<br>
@@ -230,6 +226,7 @@ width:300px;
 <button onclick="topFunction()" id="myBtn" type="button" class="btn btn-primary" style="position: fixed; bottom: 20px;
             right: 30px;">Top</button>
 
+<!--the function to move to the beginning of the website-->
 <script>
 window.onscroll = function() {scrollFunction()};
 
