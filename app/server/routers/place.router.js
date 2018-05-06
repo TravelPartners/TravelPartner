@@ -2,22 +2,24 @@
 
 const router = require('express').Router();
 
+//get function
 router.get('/:place', (req, res, next) => {
     let placeInfo = req.params.place.split('-');
     let placeName = placeInfo[0];
     let placeId = placeInfo[1];
-
+    //define Place object
     let Place = req.app.locals.db.model('Place');
     Place
         .findById(placeId)
         .exec()
         .then((place) => {
+            //define Food object
             let Food = req.app.locals.db.model('Food');
             let Acco = req.app.locals.db.model('Acco');
             let Spot = req.app.locals.db.model('Spot');
             let Guide = req.app.locals.db.model('Guide');
             let Trans=req.app.locals.db.model('Trans');
-
+            //define sub object
             let sub = {
                 intro: '',
                 guide: {},
@@ -26,7 +28,7 @@ router.get('/:place', (req, res, next) => {
                 spot: {},
                 trans:{}
             };
-
+            // find the first guide in the database place object
             Guide.findById((place.guides)[0]).then((guide) => {
                 sub.guide = {
                     title: guide.title,
@@ -37,6 +39,7 @@ router.get('/:place', (req, res, next) => {
                 };
 
                 return new Promise((resolve, reject) => {
+                  // find the first hotel object in the database place object
                     Acco.findById((place.hotels)[0]).then((hotel) => {
                         sub.acco = {
                             title: 'Best hotels in ' + place.name + '!',
@@ -49,7 +52,7 @@ router.get('/:place', (req, res, next) => {
                         resolve(sub);
                     }).catch(reject);
                 }).then((sub) => {
-
+                  // find the first trans in the database place object
                   return new Promise((resolve, reject) => {
                       Trans.findById((place.trans)[0]).then((trans) => {
                           sub.trans = {
@@ -62,7 +65,7 @@ router.get('/:place', (req, res, next) => {
                       }).catch(reject);
                   });
                 }).then((sub) => {
-
+                  // find the first spot object in the database place object
                     return new Promise((resolve, reject) => {
                         Spot.findById((place.spots)[0]).then((spot) => {
                             sub.spot = {
@@ -75,6 +78,7 @@ router.get('/:place', (req, res, next) => {
                         }).catch(reject);
                     });
                 }).then((sub) => {
+                  // get the food isobject in the database place object
                     return new Promise((resolve, reject) => {
                         Food
                             .where('_id').in(place.foods)
@@ -94,7 +98,7 @@ router.get('/:place', (req, res, next) => {
                             }).catch(reject);
                     });
                 }).then((sub) => {
-                    //console.log(place.panoramas.length);
+                    //render several object
                     res.render('places/index', {
                         city_name: place.name,
                         city_banner: place.meta.banner,
