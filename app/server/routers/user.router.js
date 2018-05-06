@@ -4,10 +4,169 @@ const bcrypt = require('bcrypt');
 
 const router = require('express').Router();
 
+const recommendation = require('../lib/recommendation');
+
 router.get('/profile/:name', (req, res, next) => {
     let name = req.params.name;
+    let results = {};
 
-    res.json({ data: name });
+    let User = req.app.locals.db.model('User');
+
+    User
+        .where('name')
+        .equals(name)
+        .then((userList) => {
+            if (userList.length <= 0) {
+                return Promise.reject(new Error('nouser'));
+            } else {
+                results["user"] = userList[0];
+                return Promise.resolve(results);
+            }
+        })
+        .then(async (result) => {
+            let placeId = results.user.locations;
+            let placeModel = req.app.locals.db.model('Place');
+
+            try {
+                let places = await placeModel.where('_id').in(placeId).exec();
+                let placesInResults = [];
+
+                for (let each of places) {
+                    placesInResults.push({
+                        name: each.name,
+                        url: '/p/' + each.name + '-' + each._id
+                    });
+                }
+
+                results.locations = placesInResults;
+                return Promise.resolve(results);
+            } catch (err) {
+                return Promise.reject(err);
+            }
+        })
+        .then((result) => {
+            console.log(results);
+
+            if(results.user.phone == "") results.user.phone = "Empty Now";
+            results.user.profileUrl = `/u/profile/${results.user.name}`;
+
+            res.render('user/profile', {
+                'user': results.user,
+                'places': results.locations
+            });
+        })
+        .catch((err) => {
+            next(err);
+        });
+
+//    console.log(userPlaceRank);
+//    res.json({ data: userPlaceRank });
+});
+
+router.post('/recommendation/:name', (req, res, next) => {
+    let name = req.params.name;
+    let results = {};
+
+    let User = req.app.locals.db.model('User');
+
+    req.app.locals.auth(req.app.locals.token, name)
+        .then((username) => {
+            if (name != username) {
+                return Promise.reject('403');
+            } else{
+                return Promise.resolve(username);
+            }
+        })
+        .then((username) => {
+            return User
+                .where('name')
+                .equals(name)
+                .then((userList) => {
+                    if (userList.length <= 0) {
+                        return Promise.reject(new Error('nouser'));
+                    } else {
+                        results["user"] = userList[0];
+                        return Promise.resolve(results);
+                    }
+                })
+                .catch((err) => {
+                    return Promise.reject(err);
+                });
+        })
+        .then((result) => {
+            return recommendation
+                .userUserMatch(name, req.app.locals.db.model('User'))
+                .then((users) => {
+                    for (let i=0;i < users.length; i++) {
+                        (users[i]).url = '/u/profile/' + users[i].name;
+                    }
+
+                    result["users"] = users
+                        .filter((user) => {
+                            return (user.prop > 0.3) && (user.name != result.user.name);
+                        })
+                        .sort((l, r) => {
+                            return parseFloat(r.prop) - parseFloat(l.prop);
+                        })
+                        .slice(0, 5);
+
+                    return Promise.resolve(results);
+                })
+                .catch((err) => {
+                    return Promise.reject(err);
+                });
+        })
+        .then((result) => {
+            return recommendation
+                .userPlaceMatch(
+                    name,
+                    req.app.locals.db.model('User'),
+                    req.app.locals.db.model('Place'))
+                .then((places) => {
+                    results["places"] = places
+                        .filter((place) => {
+                            let arr = result.user.locations;
+                            let f = true;
+
+                            for (let a of arr) {
+                                if (place.id == a.toString()) {
+                                    f = false;
+                                    break;
+                                }
+                            }
+
+                            return f && (place.prop > 0.3);
+                        })
+                        .sort((l, r) => {
+                            return parseFloat(r.prop) - parseFloat(l.prop);
+                        })
+                        .slice(0, 5);
+
+                    return Promise.resolve(results);
+                }).catch((err) => {
+                    return Promise.reject(err);
+                });
+        })
+        .then((result) => {
+            console.log(results);
+
+            results.user.profileUrl = `/u/profile/${results.user.name}`;
+
+            res.json({
+                status: 'success',
+                data: {
+                    results: results
+                }
+            });
+        })
+        .catch((err) => {
+            res.json({
+                status: 'err'
+            });
+
+            next(err);
+        });
+    
 });
 
 router.post('/changepwd', async (req, res, next) => {
