@@ -4,10 +4,10 @@
 <link href="https://fonts.googleapis.com/css?family=Anton|Do+Hyeon|Indie+Flower|Gamja+Flower" rel="stylesheet">
 
 <link rel="stylesheet" type="text/css" href="/entertainment/iconfont.css">
-<!-- <link rel="stylesheet" type="text/css" href="/entertainment/pageSwitch.css"> -->
+<!-- <link rel="stylesheet" type="text/css" href="/entertainment/pageSwitch.min.css"> -->
 <link rel="stylesheet" type="text/css" href="/entertainment/entertainment.css">
 
-
+{{!-- 
 	<nav class="navbar navbar-inverse navbar-fixed-top" style="display: none">
 		<div class="container">
 			<div class="navbar-header">
@@ -18,30 +18,32 @@
 	        	<span class="icon-bar"></span>
 	        	<span class="icon-bar"></span>
 	      		</button>
-	      		<a href="#############" class="navbar-brand"><i class="fas fa-home"></i>TravelPartner</a>
+	      		<a href="##" class="navbar-brand"><i class="fas fa-home"></i>TravelPartner</a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-nav-demo">
 				<ul class="nav navbar-nav">
-					<li><a href="############">Guide</a></li>
-					<li><a href="############">Food</a></li>
-					<li><a href="############">Accomodation</a></li>
+					<li><a href="#">Guide</a></li>
+					<li><a href="#">Food</a></li>
+					<li><a href="#">Accomodation</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="############"><i class="fas fa-users"></i>Sign Up</a></li>
-					<li><a href="############"><i class="fas fa-user-circle"></i>Login</a></li>
+					<li><a href="#"><i class="fas fa-users"></i>Sign Up</a></li>
+					<li><a href="#"><i class="fas fa-user-circle"></i>Login</a></li>
 				</ul>
 			</div>
 
 		</div>
 	</nav>
+--}}
 
-<!-- <link rel="stylesheet" type="text/css" href="/entertainment/entertainment.css"> -->
-	<!-- this is the jumbotron in the top -->
+
+{{!<link rel="stylesheet" type="text/css" href="/entertainment/entertainment.css">}}
+	{{!this is the jumbotron in the top}} 
 
 	<div class="container" >
-		<!-- <div><p>What's Hot</p></div> -->
-
+    {{!these are some brief intrdcution of the page and city}}
+		
    		<h1 style="font-family: Gamja Flower; font-size: 50px; padding-bottom: 20px; text-transform: uppercase; color: #2c3e50;">
    				Entertainments @ {{city}}</h1>
    		<h3 style="font-family: Gamja Flower; color: #2c3e50 font-size: 50px"><i class="fa fa-camera-retro"></i>
@@ -49,14 +51,20 @@
   		<br><br>
 
 
+{{!--this container1 is used to hold the pageSwitch pattern, with use of some function defined in javaScript file--}}
 		<div id="container1">
   	  		<div class="sections" id="pageAll">
 
   	  			{{#each top3}}
 				<div style="width: 100%; height= 30%">
-					<img  class="section" id="section{{@key}}" onclick="jumpContent('jumpContent{{@key}}','section{{@key}}')" src = "{{img}}" style="width: 100%; height= 150%">
+					<img  class="section" id="section{{@key}}" onclick="jumpContent('jumpContent{{@key}}','section{{@key}}')" 
+					src = "{{img}}" style="width: 100%; height= 150%">
 
-    			 	<div id="jumpContent{{@key}}"style="height: 0%; width: 0%; left:50%; top:50%; position: absolute; border: none; background-color: #efefef; opacity: 0； font-size: 20px; display: none" onclick="jumpBack('jumpContent{{@key}}','section{{@key}}')">
+					{{!this is the jump part which is hidden before user click onto the picture}}
+					{{!the display option was controlled by the function jumpContent() and jumpBack() defined in the javaScript file}}
+
+    			 	<div id="jumpContent{{@key}}"style="height: 0%; width: 0%; left:50%; top:50%; position: absolute; border: none; 
+    			 	background-color: #efefef; opacity: 0； font-size: 20px; display: none" onclick="jumpBack('jumpContent{{@key}}','section{{@key}}')">
 
    	    	 	    	<div id="show{{@key}}"  class='caption' align="center" style="font-family: Gamja Flower;">
         					<h3>{{title}}</h3>
@@ -66,7 +74,7 @@
 	          				<p><strong>Ticket Info:</strong> {{ticketInfo.discount}}</p>
 	          				<p><a href="{{ticketInfo.link}}" class="btn btn-primary" role="button">Book Tickets!</a></p>
 	          			</div>
-
+	          			
     				</div>
 
 				</div>
@@ -76,6 +84,8 @@
 		</div>
 		<br><br>
 
+
+{{!this is the template of the general blocks to provide the information of entertainments}}
 	    <div class="row">
 
 	      {{#each regular}}
@@ -85,6 +95,7 @@
 
 	          <img  src="{{img}}" style="height: 180px; width: 100%;" >
 	          <h3>{{title}}</h3>
+	          		{{!block information taken from the data base}}
     				<div class="caption">
 
 	          			<p>{{details.descrip}}</p>
@@ -101,120 +112,6 @@
 		</div>
 
 	</div>
-
-
-
-<script src="http://code.jquery.com/jquery-3.3.1.js"></script>
-<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="/entertainment/pageSwitch.js"></script>
-<script type="text/javascript" src="/entertainment/entertainment.js"></script>
-
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-<link href="https://fonts.googleapis.com/css?family=Anton|Do+Hyeon|Indie+Flower|Gamja+Flower" rel="stylesheet">
-
-<link rel="stylesheet" type="text/css" href="/entertainment/iconfont.css">
-<!-- <link rel="stylesheet" type="text/css" href="/entertainment/pageSwitch.css"> -->
-<link rel="stylesheet" type="text/css" href="/entertainment/entertainment.css">
-
-
-	<nav class="navbar navbar-inverse navbar-fixed-top" style="display: none">
-		<div class="container">
-			<div class="navbar-header">
-				<!-- The hamburger on the right -->
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-nav-demo" aria-expanded="false">
-	        	<span class="sr-only">Toggle navigation</span>
-	       		<span class="icon-bar"></span>
-	        	<span class="icon-bar"></span>
-	        	<span class="icon-bar"></span>
-	      		</button>
-	      		<a href="#############" class="navbar-brand"><i class="fas fa-home"></i>TravelPartner</a>
-			</div>
-
-			<div class="collapse navbar-collapse" id="bs-nav-demo">
-				<ul class="nav navbar-nav">
-					<li><a href="############">Guide</a></li>
-					<li><a href="############">Food</a></li>
-					<li><a href="############">Accomodation</a></li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="############"><i class="fas fa-users"></i>Sign Up</a></li>
-					<li><a href="############"><i class="fas fa-user-circle"></i>Login</a></li>
-				</ul>
-			</div>
-
-		</div>
-	</nav>
-
-<!-- <link rel="stylesheet" type="text/css" href="/entertainment/entertainment.css"> -->
-	<!-- this is the jumbotron in the top -->
-
-	<div class="container" >
-		<!-- <div><p>What's Hot</p></div> -->
-
-   		<h1 style="font-family: Gamja Flower; font-size: 50px; padding-bottom: 20px; text-transform: uppercase; color: #2c3e50;">
-   				Entertainments @ {{city}}</h1>
-   		<h3 style="font-family: Gamja Flower; color: #2c3e50 font-size: 50px"><i class="fa fa-camera-retro"></i>
-   				A bunch of entertainment ideas, tips, and recommendations for you for a happier journey!</h3>
-  		<br><br>
-
-
-		<div id="container1">
-  	  		<div class="sections" id="pageAll">
-
-  	  			{{#each top3}}
-				<div style="width: 100%; height= 30%">
-					<img  class="section" id="section{{@key}}" onclick="jumpContent('jumpContent{{@key}}','section{{@key}}')" src = "{{img}}" style="width: 100%; height= 150%">
-
-    			 	<div id="jumpContent{{@key}}"style="height: 0%; width: 0%; left:50%; top:50%; position: absolute; border: none; background-color: #efefef; opacity: 0； font-size: 20px; display: none" onclick="jumpBack('jumpContent{{@key}}','section{{@key}}')">
-
-   	    	 	    	<div id="show{{@key}}"  class='caption' align="center" style="font-family: Gamja Flower;">
-        					<h3>{{title}}</h3>
-	          				<p>{{details.descrip}}</p>
-	          				<p><strong>When:</strong> {{details.when}}</p>
-	          				<p><strong>Where:</strong> {{details.where}}</p>
-	          				<p><strong>Ticket Info:</strong> {{ticketInfo.discount}}</p>
-	          				<p><a href="{{ticketInfo.link}}" class="btn btn-primary" role="button">Book Tickets!</a></p>
-	          			</div>
-
-    				</div>
-
-				</div>
-       			{{/each}}
-
-    		</div>
-		</div>
-		<br><br>
-
-	    <div class="row">
-
-	      {{#each regular}}
-
-	      <div class="col-lg-4 col-sm-6">
-	        <div class="thumbnail">
-
-	          <img  src="{{img}}" style="height: 180px; width: 100%;" >
-	          <h3>{{title}}</h3>
-    				<div class="caption">
-
-	          			<p>{{details.descrip}}</p>
-	          			<p><strong>When:</strong> {{details.when}}</p>
-	          			<p><strong>Where:</strong> {{details.where}}</p>
-	          			<p><strong>Ticket Info:</strong> {{ticketInfo.discount}}</p>
-	          			<p><a href="{{ticketInfo.link}}" class="btn btn-primary" role="button">Book Tickets!</a></p>
-	          		</div>
-	        </div>
-	      </div>
-
-	      {{/each}}
-
-		</div>
-
-	</div>
-
-
 
 <script src="http://code.jquery.com/jquery-3.3.1.js"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>

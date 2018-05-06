@@ -1,7 +1,7 @@
 
 
 // ******VerticleTab********
-
+// This funciton is used to open the corresponding tab when clicked in it
 function openTab(evt, cityName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");

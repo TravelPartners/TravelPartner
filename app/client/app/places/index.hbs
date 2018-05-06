@@ -50,11 +50,15 @@
     </div>
 
     <!-- *****coresponding pages********* -->
+    <!-- *****menu bar of each sub-block in each city********* -->
+    <!-- *****menu bar of introdcution, placing a video of the city********* -->
 	  <div id="Introduction" class="tabcontent" >
 	      <iframe style="right: 0; bottom: 0; width:100%; height: 100%" src="{{ city_intro }}"></iframe>
 		    <!--<p style="text-align:right">Video By: No Hesitations-Youtube</p>-->
 	  </div>
 
+
+    <!-- *****menu bar of Travel Guide block, placing an example post********* -->
 	  <div id="Guide" class="tabcontent">
       <div class="sub-con">
         <img class="sub-img" style="width:100%;height:100%;" src="{{ sub.guide.banner }}">
@@ -62,6 +66,7 @@
       </div>
 	  </div>
 
+    <!-- *****menu bar of Accomadation block, placing an example post********* -->
 	  <div id="Accomodation" class="tabcontent">
       <div class="sub-con">
         <img class="sub-img" style="width:100%;height:100%;" src="{{ sub.acco.banner }}">
@@ -69,6 +74,8 @@
       </div>
 	  </div>
 
+
+    <!-- *****menu bar of Local Food block, placing an example post********* -->
 	  <div id="Food" class="tabcontent">
       <div class="sub-con">
         <img class="sub-img" style="width:100%;height:100%;" src="{{ sub.food.banner }}">
@@ -76,6 +83,7 @@
       </div>
 	  </div>
 
+    <!-- *****menu bar of Entertainment block, placing an example post********* -->
 	  <div id="Entertainment" class="tabcontent">
       <div class="sub-con">
         <img class="sub-img" style="width:100%;height:100%;" src="{{ sub.spot.banner }}">
@@ -83,12 +91,16 @@
       </div>
   	</div>
 
+    <!-- *****menu bar of Transportation block, placing an example post********* -->
     <div id="Transportation" class="tabcontent">
       <div class="sub-con">
         <img class="sub-img" style="width:100%;height:100%;" src="{{ sub.trans.banner }}">
         <div class= "sub-title"> <a href="{{ sub.trans.listUrl }}">{{ sub.trans.title }}</a></div>
       </div>
     </div>
+
+{{! image gallery to hold for the pictures in this city}}
+{{! place 4 pictures in each row}}
 
     <div class="row" style="margin-top:30em;"> </div>
     <div class="row" style="margin-top:2em;">
@@ -119,6 +131,10 @@
 				    </div>
 			  </div>
 		</div>
+
+
+
+    {{!This is the Panoramas of than example tourist of interests}}
     <div>
         <div style="float:right;font-size:1.5em">Panoramas</div>
         <hr style="clear:both;">
@@ -130,6 +146,8 @@
 </div><!--for class= container -->
 
 <script type="text/javascript">
+
+/* here is the function for the illustration of the panoramas   */
 
  function initMap() {
      var position = {
