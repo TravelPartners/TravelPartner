@@ -39,17 +39,33 @@
    to temporarily forget me,but in order to let others be able to think of me.</em></h2>
 <br>
 <br>
-  <p class="paragraph" style="font-size:25px;">{{introduction}}</p>
+<p class="paragraph" style="font-size:25px;">{{introduction}}</p>
 
-  <div style="color:#666699;" >Begin Your Travel!</div>
+
+<div style="margin-bottom:5em;">
+  <div style="text-align:center;" >
+      <h2>
+          Begin Your Travel Here
+      </h2>
+  </div>
+  <div style="text-align:center;margin: 1em 0 1.5em 0;font-size:1.5em;color: #868383c9;">
+      <span>
+          Pick your dream city from the map and it will take you a tour to that place.
+      </span>
+  </div>
   <div id="google-map"  style="width:100%;height:500px; ">
   </div>
-<br><br>
+</div>
 
 
 <div>
-  <div>
-    <h3 style="color:#666699;">Share Your Travel Stories</h3>
+  <div style="text-align:center;">
+    <h2>Share Your Travel Stories</h2>
+  </div>
+  <div style="text-align:center;margin: 1em 0 1.5em 0;font-size:1.5em;color:#868383c9;">
+      <span>
+          Write a guide to share your experiences with your friends.
+      </span>
   </div>
   <div class="row" style="background-color: white;">
     <div>
@@ -58,7 +74,7 @@
             <div class="sender">
               <!--avatar takes 1/12 of the row-->
               <div class="col-sm-1">
-                  <img class="img-circle" style="width:100%; float: left;" src="{{ avatar }}">
+                  <img class="img-circle" style="width:100%;width:60px;height:60px;float: left;" src="{{ avatar }}">
               </div>
             <div>
                 <div class="left_triangle"></div>
@@ -66,9 +82,8 @@
                     <div class="container" style="width:500px; background-color:transparent;">
                       <!-- in the bubble of sender contains information of a travel-->
                             <div class="">
-                                <br><br>
                                 <p class="paragraph text-info" style="text-align:left;">
-                                    <a  target="_blank" href={{url}} >{{title}}</a>
+                                    <a target="_blank" href={{url}} >{{title}}</a>
                                 </p>
                                 <div style="float: left;">by</div> <p ><i><b>&nbsp{{user}}</i></b> </p>
                                 <div>  <img style="width:100%; height:100%;" src="{{image }}" > </div>
@@ -85,21 +100,19 @@
          <div class="receiver">
             <div class="col-sm-1" style="text-align:right;">
               <!--avatar takes 1/12 of the row-->
-
-                <img class="img-circle" style="width:100%;" src="{{ avatar }}">
+                <img class="img-circle" style="width:100%;width:60px;height:60px" src="{{ avatar }}">
             </div>
             <div>
                 <div class="right_triangle"></div>
                 <span>
                     <div  style="width:500px; background-color:transparent;">
                             <div class="">
-                                <br><br>
                                 <div style="text-align:right;">
                                   <!-- in the bubble of receiver contains information of a travel-->
-                                <p class="paragraph text-info" style="text-align:right;">
+                                <p class="paragraph text-info" style="text-align:right;padding-right:0.8em">
                                     <a href={{url}} target="_blank" >{{title}}</a>
                                 </p>
-                                <div style="text-align:right;">
+                                <div style="text-align:right;padding-right:0.8em">
                                  <p >by <i><b>&nbsp{{user}}</i></b> </p>
                               </div>
                                 <div>  <img style="width:100%; height:100%;" src="{{ image }}" > </div>
@@ -117,14 +130,13 @@
             <div class="sender">
               <div class="col-sm-1">
                 <!--avatar takes 1/12 of the row-->
-                  <img class="img-circle" style="width:100%; float: left;" src="{{ avatar }}">
+                  <img class="img-circle" style="width:100%;width:60px;height:60px;float: left;" src="{{ avatar }}">
               </div>
             <div>
                 <div class="left_triangle"></div>
                 <span>
                     <div class="container" style="width:500px; background-color:transparent;">
                             <div class="">
-                                <br><br>
                                 <!-- in the bubble of sender contains information of a travel-->
                                 <p class="paragraph text-info" style="text-align:left;">
                                     <a  target="_blank" href={{url}} >{{title}}</a>
