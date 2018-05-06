@@ -1,5 +1,5 @@
 'use strict';
-
+//define the accommodation part schematypes
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 

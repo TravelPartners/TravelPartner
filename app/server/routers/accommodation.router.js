@@ -2,9 +2,7 @@
 
 const router = require('express').Router();
 
-
-//url
-
+//the second level site of accommodation url definition
 router.get('/view/:hotel', function(req, res,next){
  let hotel = req.params.hotel.split('-');
  let hotelName = hotel[0];
@@ -23,7 +21,7 @@ router.get('/view/:hotel', function(req, res,next){
    })
  });
 
-
+//the main site of accommodation url definition
 // location: "boston"-"_id"
 router.get('/:place',(req, res, next)=>{
   let Place = req.app.locals.db.model('Place');
@@ -37,7 +35,7 @@ router.get('/:place',(req, res, next)=>{
     if (!err) {
       let hotels = place.hotels;
 
-
+//find the first four cheap hotels
     Acco.find({ '_id': { $in: hotels } }).sort({ 'price': '-1' }).limit(4).exec(function(err, accos) {
         console.log(accos);
           let cheap = [];
@@ -58,7 +56,7 @@ router.get('/:place',(req, res, next)=>{
               address: acco.address
             })
           };
-
+//find the first four luxury hotels
       Acco.find({ '_id': { $in: hotels } }).sort({ 'price': '1' }).limit(4).exec(function(err, accos) {
               for (let acco of accos) {
                 luxury.push({
@@ -70,7 +68,7 @@ router.get('/:place',(req, res, next)=>{
                   desc:acco.desc
                 })
               };
-
+//find the first four romantic hotels
               Acco.find({ '_id': { $in: hotels } ,'tags': 'romantic'}).limit(4).exec(function(err, accos) {
                   //console.log(accos);
                   for (let acco of accos) {
@@ -83,7 +81,7 @@ router.get('/:place',(req, res, next)=>{
                       desc:acco.desc
                     })
                   };
-
+//find the first four business hotels
                   Acco.find({ '_id': { $in: hotels } ,'tags': 'business'}).limit(4).exec(function(err, accos) {
                       //console.log(accos);
                       for (let acco of accos) {
@@ -96,7 +94,7 @@ router.get('/:place',(req, res, next)=>{
                           desc:acco.desc
                         })
                       };
-
+//find the first four family-friendly hotels
                       Acco.find({ '_id': { $in: hotels } ,'tags': 'family-friendly'}).limit(4).exec(function(err, accos) {
                           //console.log(accos);
                           for (let acco of accos) {
@@ -110,7 +108,7 @@ router.get('/:place',(req, res, next)=>{
 
                             })
                           };
-
+//find the first four top hotels
                         Acco.aggregate()
                           .unwind('votes')
                           .group({ _id: '$_id', votesCount: { $sum: 1 }, name: { $first: '$name' }, email: { $first: '$email' }, img: { $first: '$img' }, votes: { $first: '$vote' }})
