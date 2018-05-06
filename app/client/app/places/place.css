@@ -1,3 +1,5 @@
+/*Setting the body of the whole page*/
+
 body { padding-top: 70px; }
 body,html{
         margin:0px;
@@ -5,6 +7,7 @@ body,html{
         font-family: sans-serif;
 }
 
+/*Navigation bar */
 .navbar-inverse {
       background: #2c3e50;  /*darkblue:#4dffdb  ; light orange:rgb(220, 70, 0), #dc4600*/
       color: white;
@@ -32,7 +35,7 @@ nav{
 
 
 
-
+/*Setting the Jumnotrun class*/
 
 
 .jumbotron {
@@ -73,6 +76,7 @@ button{
 
 
 /***********Vertical Tab*************/
+
 * {box-sizing: border-box}
 /* Style the tab */
 .tab {

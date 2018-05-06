@@ -9,18 +9,41 @@
 //     });
 
 var pS = new pageSwitch('pageAll', {
-            duration: 1000,//int 页面过渡时间
-            direction: 0,//int 页面切换方向，0横向，1纵向
-            start: 0,//int 默认显示页面
-            loop: true,//bool 是否循环切换
-            ease: 'ease',//string|function 过渡曲线动画，详见下方说明
-            transition: 'scroll',//string|function转场方式，详见下方说明
-            freeze: false,//bool 是否冻结页面（冻结后不可响应用户操作，可以通过 `.freeze(false)` 方法来解冻）
-            mouse: true,//bool 是否启用鼠标拖拽
-            mousewheel: false,//bool 是否启用鼠标滚轮切换
-            arrowkey: false,//bool 是否启用键盘方向切换
-            autoplay: true,    //bool 是否自动播放幻灯 新增
-            interval: 5000//bool 幻灯播放时间间隔 新增
+            duration: 1000,
+            //int, page switch time
+
+            direction: 0,
+            //int, page switch direction，0-horizental，1-verticle
+
+            start: 0,
+            //int, default display page
+
+            loop: true,
+            //bool, rolling display or not
+
+            ease: 'ease',
+            //string|function Transition curve animation，details in below
+
+            transition: 'scroll',
+            //string|function, transition mode
+
+            freeze: false,
+            //bool, freeze the page or not（no response to the user after freezing，defreeze with  `.freeze(false)`）
+
+            mouse: true,
+            //bool, use mouse or not
+
+            mousewheel: false,
+            //bool, use mouse wheel or not
+
+            arrowkey: false,
+            //bool, use keyboard arrow or not
+
+            autoplay: true,   
+            //bool, aotuplay or not
+            
+            interval: 5000
+            //bool, time interval of each page
 });
 
     //action
@@ -36,15 +59,19 @@ var pS = new pageSwitch('pageAll', {
     function hideContent(obj){
         $("#"+obj).fadeOut("slow");
     }
-    // fontsize 控制字体大小 vh 是特殊单位，代表把整个窗口高度的1%，vw 是特殊单位，代表把整个窗口宽度的1%，
-    function jumpContent(obj,img){
-        var win_height = $("#"+img).height();
+
+    //fontsize: text size, 
+    //vh:special unit，1% of window height ，
+    //vw: special unit，1% of window width
+
+    //this is the funciton that control jump animation when user click on the picture in the Rolling Screen
         var win_width = $("#"+img).width();
         $("#"+obj).animate({opacity: 0.9,height: win_height+"px",width:win_width+"px",top:0 +"px",left:0 +"px",fontSize:"3vh"},"fast");
         $("#"+obj).fadeIn(100);
         pS.pause();
 	}
 
+    //this is the funciton that control jump back animation when user click on the content in the Rolling Screen
     function jumpBack(obj,img){
         var win_height = $("#"+img).height();
         var win_width = $(window).width();
