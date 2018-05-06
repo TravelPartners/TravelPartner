@@ -9,7 +9,9 @@
     "initproddb": "NODE_ENV=production node ./app/server/migration/initdb.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "PORT=4000 gulp dev",
-    "windev": "set PORT=4000 && gulp dev"
+    "windev": "set PORT=4000 && gulp dev",
+    "production": "gulp production",
+    "start": "npm run production && node app/server/server.js"
   },
   "repository": {
     "type": "git",

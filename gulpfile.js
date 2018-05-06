@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 var gulp = require('gulp');
 
@@ -87,6 +87,11 @@ gulp.task('dev', ['build:vue', 'build:libs', 'build:template', 'build:css'], () 
     gulp.watch(['app/client/index.html', 'app/client/**/index.html'], ['build:template']);
     gulp.watch('public/**', browserSync.reload);
 });
+
+/**
+ * Production Server
+ */
+gulp.task('production', ['build:vue', 'build:libs', 'build:template', 'build:css'], () => {});
 
 /**
  * Clean scripts
