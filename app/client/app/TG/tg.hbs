@@ -7,18 +7,23 @@
 
 
 <div class="container">
+  <!-- define banner-->
   <div style="background: #c2c2d6;height:200%; font-family: 'Gaegu', cursive; background-image: url('https://images.unsplash.com/photo-1505485493171-fde25bd8313f?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=1dc63e2028486fd5ca6648ab0a239ce1&auto=format&fit=crop&w=2100&q=80')"， class="jumbotron" >
       <h1  style="text-align: center;font-family: 'Gaegu', cursive;color:white"> {{place}} </h1>
       <h2 style="text-align: center;font-family: 'Gaegu', cursive;color:white"> A bunch of travel guides give useful recommendations for you!</h2>
   </div>
     <div>
+      <!-- each guide object contains several members-->
         {{#each guide}}
         <div class="row">
             <div class="col-xs-6 ">
+              <!--image of the travel guide-->
                 <img src="{{image}}" alt="Lights" style="width:80%;">
                     </div>
             <div class="col-xs-6 ">
+              <!-- user can get into specified guide website by click the title-->
                 <br><br><p class="paragraph text-info"><a href={{url}} target="_blank">{{title}}</a></p>
+                <!-- in the div, uploaded time, username, tags will be included-->
                 <div style="float: left;">by</div><div class="user">{{user}} </div>
                 <p>{{updated_at}}</p>
                 <div>Votes:{{votes}}</div>
@@ -27,6 +32,7 @@
                 <div>{{this}}</div>
                 {{/each}}
                 <br>
+                <!-- user can click the view more and also jump into the new website of specific guide-->
                 <p><em>{{summary}}<a class="text-info" href={{url}} target="_blank">...view more.</em></a></p>
             </div>
         </div>
@@ -60,17 +66,5 @@
     }
 
 
-/*    $(document).ready(function() {
-      $('#write')
-        .click(function(){
-          if (localStorage.getItem('token')==null) {
-            $('#sign-in-modal').modal('show');
-            return false;
-          }
-          var url = $('#canwrite').val();
-          location.href(url);
-          return true;
-      });
-    });*/
 
     </script>
