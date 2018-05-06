@@ -6,6 +6,7 @@
 
 </div>
 <div class="container">
+  <!--add banner-->
 <div style="background: #c2c2d6;height:200%; font-family: 'Gaegu', cursive; background-image: url('https://images.unsplash.com/photo-1500381692567-10b711044b5d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a3b6a465c2df1be7e3b57355ef8cdc93&auto=format&fit=crop&w=2076&q=80')"， class="jumbotron" >
   <h1 style="color:white"> Comments </h1>
   <h2 style="color:white"> Find friends with similar interests!</h2>
@@ -13,23 +14,27 @@
 
 <div class="row" style="background-color:white;">
 <div class="col-sm-11" >
+  <!--define comment structure-->
 {{#with comment}}
-<h4 style="color:#5c8cd5;">{{title}}</h4>
+<h4 id="title" style="color:#5c8cd5;">{{title}}</h4>
 <div >
 {{#each keyword}}
 <code style="color:#5c8cd5">{{this}}</code>
 {{/each}}
 </div>
 </div>
+<!-- views part takes less part-->
 <div class="col-sm-1" >
 <h4 >{{views}}</h4>
 VIEWS
 </div>
 <div class="col-sm-12" ><br><br></div>
+<!-- avatar and the author contents are at the same row with grid system-->
 <div class="col-sm-1" > <img class="img-circle" src="https://images.unsplash.com/photo-1484442944992-ae6aefae0e1e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=901d0b5a59c6c7af0415caa6b8c0b916&auto=format&fit=crop&w=2100&q=80" height="50" width="50" ></div>
 <div class="col-sm-11" >
 <div style="float: left;">by</div><div class="user">{{author}}</div>
 <p>{{modified_at}}</p>
+<!-- content of comment-->
 <p style="font-size:110%;">{{commentBody}}</p>
 </div>
 <div class="col-sm-11" ></div>
@@ -40,7 +45,7 @@ VIEWS
 </div><br>
 
 
-
+<!--replies to the comment-->
 {{#each reply}}
 <div class="row" style="background-color:white;">
 <div class="col-sm-1" ><img class="img-circle" src="https://images.unsplash.com/photo-1517483141275-296bb15890b2?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f6fb898eac03ab9abd1137fa691ebe82&auto=format&fit=crop&w=1651&q=80" height="50" width="50" ></div>
@@ -80,10 +85,11 @@ VIEWS
 
 
 <br><br><h4><em>Please write a comment!</em></h4>
-
+<!--reply form-->
 <form method="post" action="" id="commentForm">
 <div class="col-sm-12" ><textarea id="content" class="form-control" rows="2" placeholder="Please Input Your Comment!"></textarea><br></div>
 </form>
+<!--post button-->
 <div class="col-sm-1" ><button  id="post" type="submit" class="btn btn-primary" >Post</button></div>
 
 <br><br>
@@ -93,6 +99,7 @@ VIEWS
 
 <script typet="text/javascript" src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
 <script>
+//like button
 $(function () {
   $(".like").click(function () {
     $(this).toggleClass('cs');
@@ -115,23 +122,28 @@ document.documentElement.scrollTop = 0;
 }
 
 
-
+//post method
 $('#post')
 .click(function(){
+  // if author doesn't sign-in, sign-in-modal will show
   if (localStorage.getItem('token')==null) {
     $('#sign-in-modal').modal('show');
     return false;
   }
     var content = $('#commentForm #content').val();
-    axios.post('/c/new', {
-      content: content
+    var title= $('#title').val();
+    axios.post('/c/reply', {
+      user: window.localStorage.getItem('username'),
+      content: content,
+      title:title
     }).then(function (response) {
     console.log(response);
+    //if post failure, warningModal will show
     if (response.status == 'fail') {
       $('#warningModal').modal('show')
       return false;
-    } else {
-      location.href(response.xxxx);
+    } else if (response.data.status == 'success') {
+        window.location = response.data.url;
     }
   })
   .catch(function (error) {

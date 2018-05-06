@@ -3,6 +3,7 @@
 <div id ="TG">
 </div>
 <div class="container">
+  <!-- define banner-->
 <div style="background: #c2c2d6;height:200%; font-family: 'Gaegu', cursive; background-image: url('https://images.unsplash.com/photo-1501979376754-2ff867a4f659?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=e8a08c6e9ecaf5fcfdd7cca7feff9ea3&auto=format&fit=crop&w=900&q=60')"， class="jumbotron" >
           <h1 style="text-algin:center; color:white"> Comments</h1> <!-- <i class="fa fa-camera-retro"></i> -->
         <p style="text-algin:center;color:white">Find friends with similar interests!</p>
@@ -10,12 +11,14 @@
 
 
 
-
+<!--table records the comments user uploaded-->
 <table class="table table-hover">
     <tbody>
+      <!--each row is a record-->
         {{#each comment}}
         <tr>
             <td>
+              <!--each row has for colums-->
                 <h4><a class="text-info" href={{url}} target="_blank" style="color:#5c8cd5">{{title}}</h4></a>
 
                 <div >
@@ -25,18 +28,22 @@
                 </div>
             </td>
             <td>
-              <!-- <img class="img-circle" src="{{userImg}}" height="50" width="50" >-->
             </td>
             <td>
+              <!-- author and upload time-->
                 <h4>{{author}}</h4>
                  <div style="float: left;">{{modified_at}}</div>
             </td>
             <td>
+              <!-- number of votes-->
+
                 <h4>{{votes}}</h4>
                 VOTES
             </td>
 
             <td>
+              <!-- number of views -->
+
                 <h4>{{views}}</h4>
                 VIEWS
             </td>
@@ -45,9 +52,9 @@
     </tbody>
 </table>
 
+<!-- create button to create a new comment-->
 <button id="write" onClick="location.href='{{create}}'"  class="btn btn-primary" >Write a comment!</button>
 
-<!--<button onclick="window.location='file:///Users/xiaohanzhang/Desktop/syr2018spring/686/TP/TravelPartner/app/client/app/TG/Write.html '"  class="btn btn-success" >Write a Guide!</button>-->
 <button onclick="topFunction()" id="myBtn" type="button" class="btn btn-primary" style="position: fixed; bottom: 20px;right: 30px;">Top</button>
  </div>
 <script>
@@ -56,6 +63,8 @@
     $(document).ready(function() {
       $('#write')
         .click(function(){
+          //if user has not sign in first,
+          // sign-in-modal will show
           if (localStorage.getItem('token')==null) {
         $('#sign-in-modal').modal('show');
             return false;
@@ -66,6 +75,7 @@
       });
     });
 
+    //define the function of top button
     function scrollFunction() {
         if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
             document.getElementById("myBtn").style.display = "block";
