@@ -194,14 +194,14 @@ console.log(placesUrls);
          center: places[0]
      });
 //for the markers in the map, addListener to each marker,
-//when the marker is clicked, new web site will be jumped to 
+//when the marker is clicked, new web site will be jumped to
      for (var i = 0; i < places.length; ++i) {
          markers.push(new google.maps.Marker({ position: places[i], map: googleMap}));
          markers[i].addListener('click', ((i)=>{
              return function () {
                  window.location = placesUrls[i];
              };
-         })(i));
+         })(i)); 
      }
  }
 </script>
