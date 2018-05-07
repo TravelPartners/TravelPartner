@@ -2,7 +2,7 @@
 
 const router = require('express').Router();
 
-
+//Creat new guides 
 router.get("/create", async function(req, res, next){
   /*
 	let user = req.body.user;
@@ -25,6 +25,8 @@ router.get("/create", async function(req, res, next){
 
 })
 
+
+//Write new guide to the database
 router.post("/new", async function(req, res, next){
     let username = req.body.user;
     if(username == undefined || username == ""){
@@ -54,10 +56,7 @@ router.post("/new", async function(req, res, next){
         banner: banner
       });
         
-        //console.log(newGuide.isNew);
-        //console.log(123566666);
-        //console.log(newGuide);
-        //console.log(23390080);
+
 
       newGuide.save(function(err, newGuide) {
     		if(err){
@@ -83,6 +82,8 @@ router.post("/new", async function(req, res, next){
     }
 });
 
+
+// Get Travel Guides related to a specific city
 router.get("/:city",function(req, res, next) {
     let Guide = req.app.locals.db.model('Guide');
     let Place = req.app.locals.db.model('Place');
@@ -134,7 +135,7 @@ router.get("/:city",function(req, res, next) {
 
 
 
-
+//Get the content of a specific guide
 //router.get('/:city/:title', function(req, res, next) {
 router.get('/view/:title', function(req, res, next) {
     let Guide = req.app.locals.db.model('Guide');

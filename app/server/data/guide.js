@@ -3,6 +3,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+
+//Define Guide data structure
 let GuideSchema = new Schema({
 //    _id: {
 //      type: Schema.Types.ObjectId,
