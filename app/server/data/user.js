@@ -69,6 +69,9 @@ let UserSchema = new Schema({
     }
 });
 
+// Triggers that will be executed before save operation.
+// It will validate required field and unique field.
+
 UserSchema.pre('save', async function (next) {
     let User = mongoose.model('User');
 
@@ -89,6 +92,9 @@ UserSchema.pre('save', async function (next) {
     next();
 });
 
+// Triggers that will be executed before save operation.
+// It will change plaintext password to bcrypt format.
+
 UserSchema.pre('save', async function (next) {
     if (this.isModified('pwd')) {
         let self = this;
@@ -104,6 +110,9 @@ UserSchema.pre('save', async function (next) {
         next();
     }
 });
+
+// Triggers that will be executed before update operation.
+// It will change plaintext password to bcrypt format.
 
 UserSchema.pre('update', async function (next) {
     //console.log(this);

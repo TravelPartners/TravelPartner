@@ -6,17 +6,29 @@ const router = require('express').Router();
 const token = require('../lib/token');
 
 //router.use((req, res, next) => { next(); });
+
+/**
+ *  Router get /s
+ *
+ *  Render file site/index
+ *
+ *  Render site home page.
+ *
+ */
+
 router.get('/', (req, res, next) => {
     let Site = req.app.locals.db.model('Site');
     let Place = req.app.locals.db.model('Place');
     let Guide = req.app.locals.db.model('Guide');
     let User = req.app.locals.db.model('User');
 
+    // Get site records.
     Site.findOne()
         .exec()
         .then((site) => {
             let locations = site.locations;
 
+            // Get place records.
             return Place.find({ '_id': { $in: locations }})
                 .then((places) => {
                     let ret = [];
@@ -31,6 +43,8 @@ router.get('/', (req, res, next) => {
                 });
         }).then((places) => {
             console.log(places);
+
+            // Get guide records.
             return Guide
                 .find()
                 .limit(3)
@@ -93,9 +107,15 @@ router.get('/', (req, res, next) => {
         });
 });
 
-router.get('/info', (req, res, next) => {
-    res.json({ data: 456 });
-});
+/**
+ *  Router post /s/signup
+ *
+ *  Receive user post data
+ *  Send JSON format string back
+ *
+ *  Register a new user
+ *
+ */
 
 router.post('/signup', (req, res, next) => {
     let User = req.app.locals.db.model('User');
@@ -109,6 +129,7 @@ router.post('/signup', (req, res, next) => {
 
     let referer = req.header('Referer') || '';
 
+    // Validations for user input.
     if (username == undefined || username == '') {
         res.json({
             status: 'err',
@@ -141,9 +162,12 @@ router.post('/signup', (req, res, next) => {
     });
 
     //    user.save();
+    // Save user record to database.
     user.save()
         .then((user) => {
-            console.log(234456);
+            //console.log(234456);
+
+            // Send success information to user.
             token.get(user.name).then((token) => {
                 res.json({
                     status: 'success',
@@ -155,6 +179,7 @@ router.post('/signup', (req, res, next) => {
             });
         })
         .catch((err) => {
+            // Send error message to user.
             if (err.message == 'Name Dup')
                 res.json({
                     status: 'err',
@@ -177,15 +202,27 @@ router.post('/signup', (req, res, next) => {
     console.log(user);
 });
 
+/**
+ *  Router post /s/signin
+ *
+ *  Receive user post data
+ *  Send a JSON format string back to user
+ *
+ *  Sign-in operation. If passed then return token.
+ *
+ */
+
 router.post('/signin', (req, res, next) => {
     let User = req.app.locals.db.model('User');
     let content = req.body;
 
+    // Retrieve user whose name matches name inside post data.
     User.find({ 'name': content.username })
         .exec()
         .then(async (users) => {
             return new Promise(async (resolve, reject) => {
                 if (users.length > 0) {
+                    // Compare post password with user password.
                     await bcrypt.compare(content.pwd, users[0].pwd).then((result) => {
                         resolve(result);
                     }, (err) => {
@@ -198,11 +235,13 @@ router.post('/signin', (req, res, next) => {
         })
         .then((result) => {
             if (result == true) {
+                // Send success back to the client
                 return token.get(content.username).then((token) => {
                     let res = { "status": "success", "token": token, "avatar": content.avatar || '' };
                     return res;
                 });
             } else {
+                // Send error message back to the client
                 let res = { "status": "err", "msg": "Invalid username or password." };
                 return res;
             }

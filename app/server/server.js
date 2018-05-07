@@ -12,6 +12,10 @@ const express = require('express'),
       env = app.get('env'),
       viewPath = path.join(__dirname, '../client/app/');
 
+/**
+ *  Load data models.
+ */
+
 const mongoose = require('mongoose'),
       AccommodationModel = require('./data/accommodation'),    // Model 'Acco'
       EntertainmentModel = require('./data/entertainment'),    // Model 'Spot'
@@ -23,7 +27,9 @@ const mongoose = require('mongoose'),
       SiteModel = require('./data/site'),                      // Model 'Site'
       LocationModel = require('./data/location');              // Model 'Place'
 
-
+/**
+ *  Load configuration, routers, and library token
+ */
 const config = require('./config'),
       routers = require('./routers/routers'),
       token = require('./lib/token');
@@ -65,10 +71,6 @@ const dbConnection = ((db) => {
     //console.log(connection);
     return mongoose.connect(connection);
 })(database);
-
-/**
- *  Load data models.
- */
 
 console.log("--------------");
 
@@ -132,8 +134,20 @@ if (config.server.staticFile) {
     let path = config.server.staticPath;
     if (path === undefined || !fs.existsSync(path)) path = __dirname + "/../../public";
     app.use(express.static(path));
-    app.use('*', (req, res) => { res.sendFile('index.html', { root: path }); });
+    //app.use('*', (req, res) => { res.sendFile('index.html', { root: path }); });
 }
+
+/**
+ *  Middleware to process unknown router
+ */
+
+app.use('*', (req, res) => {
+    res.status(404).end('404 NOT FOUND');
+});
+
+/**
+ *  Default error handler.
+ */
 
 app.use(function(err, req, res, next) {
     console.log(err);
