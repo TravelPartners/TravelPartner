@@ -2,6 +2,8 @@
 
 const router = require('express').Router();
 
+//Get the Food information about a specific city
+//And also classify it by its tags
 router.get("/:city", function(req, res, next){
 	let Food = req.app.locals.db.model('Food');
 	let Place = req.app.locals.db.model('Place');
@@ -159,6 +161,7 @@ router.get("/:city", function(req, res, next){
 module.exports = router;
 
 
+//Get more information about a specific restaurant
 router.get("/view/:name", function(req, res, next){
 	let Food = req.app.locals.db.model('Food');
 	let name = req.params.name.split("-").join(" ");

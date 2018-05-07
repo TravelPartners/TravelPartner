@@ -3,6 +3,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+
+//Define Food data structure
 let FoodSchema = new Schema({
 //    _id: {
 //        type: Schema.Types.ObjectId,
