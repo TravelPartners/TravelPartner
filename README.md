@@ -1,6 +1,8 @@
 # TravelPartner
 Project travel partner
 
+> __NOTE:__ This project is only an archive for the course project from CSE686 Internet Programming, Spring 2018, Syracuse University. No one is maintaining this project. To build and run this project, you may update the packages first to get rid of all the vulnerabilities. You also need revise the code, especially the Gulp file (if you want to use Gulp4 instead of Gulp3), to ensure the entire project works perfectly with the latest packages.
+
 ## Install the application
 
 1. Clone the repository to somewhere.
