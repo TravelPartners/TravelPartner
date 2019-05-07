@@ -109,7 +109,7 @@
                                 <div class="row" style="margin:1em 0">
                                     <div class="col-md-8 col-md-offset-2" style="padding:0 2em;font-size:0.6em;">
                                     <a href="" id="to-register" class="under-form" style="float:left"> No account? Register </a>
-                                    <a href="" id="to-forget-password" class="under-form" style="float:right"> Forgot password</a>
+                                    <a href="" id="to-forget-password" class="under-form" style="float:right;display:none;"> Forgot password</a>
                                     </div>
                                 </div>
                                 <div class="row" style="text-algin:center;margin:1em 0;clear:both;">
@@ -282,13 +282,15 @@
                  $('#inputName').attr('placeholder', 'Username/email');
                  $('.for-sign-up').hide();
                  $('#btn-signin').html('Sign in');
+                 $('#to-register').text('No account? Register');
              } else {
                  $('#sign-in-modal #myModalLabel').html('Register');
                  $('#inputName').attr('placeholder', 'Username');
                  $('.for-sign-up').show();
                  $('#btn-signin').html('Register');
+                 $('#to-register').text('Already have an account? Sign In');
              }
-        });
+         });
 
      });
     </script>
